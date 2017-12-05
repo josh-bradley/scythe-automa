@@ -1,5 +1,5 @@
-<template>
-  <img width='300' :src='image' @click='dealNextCard'/> 
+<template lang='pug'>
+  img(width='200' :src='image' @click='dealNextCard')
 </template>
 
 <script>
