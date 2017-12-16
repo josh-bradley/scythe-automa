@@ -1,5 +1,31 @@
 export default
 {
+  "starCards":[
+    {
+      "id": 0,
+      "riverCrossingPos":5,
+      "level2Pos":10,
+      "starPositions":[10,15,18,20,22,23]
+    },
+    {
+      "id": 1,
+      "riverCrossingPos":4,
+      "level2Pos":9,
+      "starPositions":[9,14,17,19,20,21]
+    },
+    {
+      "id": 2,
+      "riverCrossingPos":3,
+      "level2Pos":9,
+      "starPositions":[9,12,14,16,17,18]
+    },
+    {
+      "id": 3,
+      "riverCrossingPos":0,
+      "level2Pos":8,
+      "starPositions":[9,11,13,15,16,17]
+    }
+  ],
   "cards": [
     {
       "id":1,
