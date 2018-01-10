@@ -1,5 +1,13 @@
 <template lang='pug'>
-  img(width='200' :src='image' @click='dealNextCard')
+  div
+    img(width='200' :src='image' @click='dealNextCard')
+    img(width='200' :src='starCard' @click='dealNextCard')
+    div
+      | Star card position: {{starCardPos}}
+    div
+      | Star count: {{starCount}}
+    div
+      | {{image}}
 </template>
 
 <script>
@@ -16,7 +24,11 @@
 
   export default {  
     data () { return {
-        image: './dist/20.png'
+        image: './dist/20.png',
+        starCard:'./dist/StarCard0.png',
+        starCount:0,
+        starCardId:0,
+        starCardPos:0
       }
     },
     methods: {
@@ -34,7 +46,10 @@
             nextCardNumber = cardNumber;
           }
         }
-        
+        var cardData = data.cards[nextCardNumber];
+        if(cardData && cardData.star) {
+          this.starCardPos++;
+        }
         this.image = `./dist/${nextCardNumber.toString().padStart(2, '0')}.png`
       }
     }

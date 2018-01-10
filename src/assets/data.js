@@ -27,6 +27,7 @@ export default
     }
   ],
   "cards": [
+    {},
     {
       "id":1,
       "star":true,
