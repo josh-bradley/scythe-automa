@@ -13,6 +13,7 @@
 <script>
   import png from './imageImport.js'
   import data from './assets/data.js'
+  import { createStore } from 'redux'
 
   function getRandomInt() {
     var min = 1;
