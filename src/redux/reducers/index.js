@@ -14,10 +14,11 @@ const defaultState = {
   players:[],
   currentTurn:0
 }
+const totalNumberOfCards = 19;
 
 const handlers = {
   [types.ADD_PLAYER]: (state, action) => {
-    if(state.currentTurn === 0){
+    if(state.currentTurn === 0 && state.players.length < 6){
       let players = [...state.players, {
         dealtCards: [],
         level: action.payload.level
@@ -28,10 +29,10 @@ const handlers = {
     return state;
   },
   [types.DEAL_CARD]: (state, action) => {
-    const currentPlayerIdx = state.currentTurn % state.players.length % 2;
+    const currentPlayerIdx = state.currentTurn % state.players.length;
     const newPlayers = state.players.slice();
     const currentPlayer = newPlayers[currentPlayerIdx];
-    const newDealtCards = currentPlayerIdx.dealtCards.length === totalNumberOfCards - 1 ? [] : [...currentPlayer.dealtCards, action.payload.card];
+    const newDealtCards = currentPlayer.dealtCards.length === totalNumberOfCards - 1 ? [] : [...currentPlayer.dealtCards, action.payload.card];
     newPlayers[currentPlayerIdx] = Object.assign({}, currentPlayer, { dealtCards: newDealtCards })    
     return Object.assign({}, state, { players: newPlayers, currentTurn: state.currentTurn + 1});
   }
