@@ -23,6 +23,11 @@ describe('DEAL_CARD reducer tests', () => {
     expect(state.players[0].dealtCards[0]).toBe(11);
   })
 
+  it('should up the turn count by 1 for a sucessful turn', () => {
+    const state = scytheApp(originalState, action);
+    expect(state.currentTurn).toBe(1);
+  })
+
   it('should set the card to the third player on the 6th turn', () => {
     const temp = Object.assign({}, originalState, {currentTurn:5})
     const state = scytheApp(temp, action);

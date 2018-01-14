@@ -3,6 +3,8 @@
     img(width='200' :src='image' @click='dealNextCard')
     img(width='200' :src='starCard' @click='dealNextCard')
     div
+        Current game turn: {{currentTurn}}
+    div
       | Star card position: {{starCardPos}}
     div
       | Star count: {{starCount}}
@@ -34,6 +36,7 @@
       return {
         image: './dist/20.png',
         starCard:'./dist/StarCard0.png',
+        currentTurn:0,
         starCount:0,
         starCardId:0,
         starCardPos:0
@@ -42,6 +45,7 @@
     created: function(){
       let handleChange = (() => {
         const state = store.getState();
+        this.currentTurn = state.currentTurn;
         this.starCardPos = state.players[0].starCardPosition;
       }).bind(this)
       store.subscribe(handleChange)
