@@ -1,5 +1,5 @@
 import * as types from '../actions/types'
-
+import data from '../../assets/data'
 /*
   {
     players:[
@@ -16,11 +16,19 @@ const defaultState = {
 }
 const totalNumberOfCards = 19;
 
+const isStarCard = (card) => {
+  return data
+          .cards
+          .filter(x => x.id === card)[0]
+          .star;
+}
+
 const handlers = {
   [types.ADD_PLAYER]: (state, action) => {
     if(state.currentTurn === 0 && state.players.length < 6){
       let players = [...state.players, {
         dealtCards: [],
+        starCardPosition:0,
         level: action.payload.level
       }]
       return Object.assign({}, state, { players:players })
@@ -38,7 +46,8 @@ const handlers = {
     const newDealtCards =  isReShuffle
                           ? [action.payload.card]
                           : [...currentPlayer.dealtCards, action.payload.card];
-    newPlayers[currentPlayerIdx] = Object.assign({}, currentPlayer, { dealtCards: newDealtCards })    
+    const starCardPosition = isStarCard(action.payload.card) ? currentPlayer.starCardPosition + 1 : currentPlayer.starCardPosition;
+    newPlayers[currentPlayerIdx] = Object.assign({}, currentPlayer, { dealtCards: newDealtCards, starCardPosition:starCardPosition })    
     return Object.assign({}, state, { players: newPlayers, currentTurn: state.currentTurn + 1});
   }
 }

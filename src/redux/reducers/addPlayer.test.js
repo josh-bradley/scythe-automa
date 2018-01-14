@@ -19,6 +19,7 @@ describe('ADD_PLAYER tests', () => {
     const state = scytheApp(undefined, level1UserAction);
     expect(state.players[0].level).toBe(1)
     expect(state.players[0].dealtCards).toEqual([]);
+    expect(state.players[0].starCardPosition).toBe(0);
   })
 
   it('should not add more then 6 players to a game', () => {

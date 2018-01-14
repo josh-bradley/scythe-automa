@@ -10,9 +10,9 @@ const action = {
 
 const originalState = {
   players: [
-    { level: 1, dealtCards: []},
-    { level: 1, dealtCards: []},
-    { level: 1, dealtCards: []},
+    { level: 1, dealtCards: [], starCardPosition:0},
+    { level: 1, dealtCards: [], starCardPosition:0},
+    { level: 1, dealtCards: [], starCardPosition:0},
   ],
   currentTurn:0
 }
@@ -42,5 +42,27 @@ describe('DEAL_CARD reducer tests', () => {
     const state = scytheApp(temp, action);
     expect(state.players[0].dealtCards.length).toBe(1);
     expect(state.players[0].dealtCards[0]).toBe(11);
+  })
+
+  it('should add a star to the player when a star card is dealt', () => {
+    const action = {
+      type: DEAL_CARD,
+      payload: {
+        card:1,
+      }
+    }
+    const state = scytheApp(originalState, action);
+    expect(state.players[0].starCardPosition).toBe(1)
+  })
+
+  it('should not add a star to the player when a non star card is dealt', () => {
+    const action = {
+      type: DEAL_CARD,
+      payload: {
+        card:4,
+      }
+    }
+    const state = scytheApp(originalState, action);
+    expect(state.players[0].starCardPosition).toBe(0)
   })
 })
