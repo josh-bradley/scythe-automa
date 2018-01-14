@@ -32,7 +32,12 @@ const handlers = {
     const currentPlayerIdx = state.currentTurn % state.players.length;
     const newPlayers = state.players.slice();
     const currentPlayer = newPlayers[currentPlayerIdx];
-    const newDealtCards = currentPlayer.dealtCards.length === totalNumberOfCards - 1 ? [] : [...currentPlayer.dealtCards, action.payload.card];
+    const isReShuffle = currentPlayer.dealtCards.length >= totalNumberOfCards - 1;
+    if(!isReShuffle && currentPlayer.dealtCards.some((x) => x === action.payload.card))
+      return state;
+    const newDealtCards =  isReShuffle
+                          ? [action.payload.card]
+                          : [...currentPlayer.dealtCards, action.payload.card];
     newPlayers[currentPlayerIdx] = Object.assign({}, currentPlayer, { dealtCards: newDealtCards })    
     return Object.assign({}, state, { players: newPlayers, currentTurn: state.currentTurn + 1});
   }
