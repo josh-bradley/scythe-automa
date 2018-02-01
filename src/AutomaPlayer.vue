@@ -26,7 +26,7 @@
       return {
         image: './dist/20.png',
         starCard:'./dist/StarCard0.png',
-        starCount:0,
+        starCount:0,  
         starCardId:0,
       }
     },
@@ -38,7 +38,7 @@
     },
     computed: {
       starCardPos () {
-        return this.$store.state.players[0].starCardPosition;
+        return this.$store.state.players[this.playerId].starCardPosition;
       },
       currentTurn () {
         return this.$store.state.currentTurn;
@@ -47,7 +47,7 @@
     methods: {
       dealNextCard: function(){
         var nextCardNumber = 0;
-        const player = this.$store.state.players[0];
+        const player = this.$store.state.players[this.playerId];
         console.log('dealing cards')
         while(nextCardNumber === 0) {
           var cardNumber = getRandomInt();
