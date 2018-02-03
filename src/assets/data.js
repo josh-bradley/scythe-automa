@@ -4,25 +4,25 @@ export default
     {
       "id": 0,
       "riverCrossingPos":5,
-      "level2Pos":10,
+      "schemePosition":10,
       "starPositions":[10,15,18,20,22,23]
     },
     {
       "id": 1,
       "riverCrossingPos":4,
-      "level2Pos":9,
+      "schemePosition":9,
       "starPositions":[9,14,17,19,20,21]
     },
     {
       "id": 2,
       "riverCrossingPos":3,
-      "level2Pos":9,
+      "schemePosition":9,
       "starPositions":[9,12,14,16,17,18]
     },
     {
       "id": 3,
       "riverCrossingPos":0,
-      "level2Pos":8,
+      "schemePosition":8,
       "starPositions":[9,11,13,15,16,17]
     }
   ],
@@ -38,7 +38,7 @@ export default
         7
       ],
       "resources":1,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":1,
         "gold":0,
@@ -66,7 +66,7 @@ export default
         7
       ],
       "resources":2,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":0,
         "gold":1,
@@ -94,7 +94,7 @@ export default
         7
       ],
       "resources":0,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":3,
         "gold":0,
@@ -122,7 +122,7 @@ export default
         2
       ],
       "resources":0,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":0,
         "gold":0,
@@ -150,7 +150,7 @@ export default
         7
       ],
       "resources":4,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":0,
         "gold":1,
@@ -178,7 +178,7 @@ export default
         7
       ],
       "resources":0,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":2,
         "gold":0,
@@ -206,7 +206,7 @@ export default
         7
       ],
       "resources":2,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":0,
         "gold":1,
@@ -234,7 +234,7 @@ export default
         7
       ],
       "resources":1,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":0,
         "gold":0,
@@ -262,7 +262,7 @@ export default
         7
       ],
       "resources":3,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":0,
         "gold":0,
@@ -290,7 +290,7 @@ export default
         0
       ],
       "resources":1,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":2,
         "gold":0,
@@ -318,7 +318,7 @@ export default
         7
       ],
       "resources":0,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":0,
         "gold":1,
@@ -346,7 +346,7 @@ export default
         7
       ],
       "resources":1,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":4,
         "gold":0,
@@ -374,7 +374,7 @@ export default
         7
       ],
       "resources":0,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":0,
         "gold":1,
@@ -402,7 +402,7 @@ export default
         1
       ],
       "resources":0,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":0,
         "gold":0,
@@ -430,7 +430,7 @@ export default
         7
       ],
       "resources":2,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":3,
         "gold":1,
@@ -458,7 +458,7 @@ export default
         7
       ],
       "resources":4,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":0,
         "gold":0,
@@ -486,7 +486,7 @@ export default
         7
       ],
       "resources":2,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":0,
         "gold":2,
@@ -514,7 +514,7 @@ export default
         7
       ],
       "resources":1,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":0,
         "gold":1,
@@ -542,7 +542,7 @@ export default
         7
       ],
       "resources":1,
-      "sideSpecific":[
+      "schemeSpecific":[
       { 
         "power":0,
         "gold":0,

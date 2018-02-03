@@ -31,12 +31,18 @@ export default {
                           ? [payload.card]
                           : [...currentPlayer.dealtCards, payload.card];
     const isStarCard = isCardStarCard(payload.card);
-    const starCardPosition = isStarCard ? currentPlayer.starCardPosition + 1 : currentPlayer.starCardPosition;
-    currentPlayer.dealtCards = newDealtCards;
-    currentPlayer.starCardPosition = starCardPosition;
+    const automaCard = data
+                        .cards
+                        .filter(x => x.id === payload.card)[0];
     const playerLevel = state.players[currentPlayerIdx].level;
     const starCard = data.starCards[playerLevel - 1];
-    currentPlayer.stars = starCard.starPositions.indexOf(starCardPosition) < 0 || !isStarCard ? currentPlayer.stars : currentPlayer.stars + 1;
+    const playerScheme = starCard.schemePosition > currentPlayer.starCardPosition ? 0 : 1;
+    
+    const playTurn = currentPlayer.level > 1 ||  !automaCard.schemeSpecific[playerScheme].noplay;
+    const starCardPosition = isStarCard && playTurn ? currentPlayer.starCardPosition + 1 : currentPlayer.starCardPosition;
+    currentPlayer.dealtCards = newDealtCards;
+    currentPlayer.starCardPosition = starCardPosition;
+    currentPlayer.stars = starCard.starPositions.indexOf(starCardPosition) < 0 || !isStarCard || !playTurn ? currentPlayer.stars : currentPlayer.stars + 1;
     state.currentTurn = state.currentTurn + 1;
   }
 }

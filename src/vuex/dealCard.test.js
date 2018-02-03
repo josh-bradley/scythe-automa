@@ -14,6 +14,10 @@ const getDefaultState = () => ({
   currentTurn:0
 })
 
+const cardWithNoPlayBothSchemesAndStar = 7;
+const cardWithStarNoPlay1 = 8;
+
+
 describe('DEAL_CARD mutation test tests', () => {
   it('should set the card to the first player on the first turn', () => {
     let state = getDefaultState();
@@ -55,7 +59,51 @@ describe('DEAL_CARD mutation test tests', () => {
     
     let state = getDefaultState();
     mutation(state, payload);
-    expect(state.players[0].starCardPosition).toBe(1)
+    expect(state.players[0].starCardPosition).toBe(1);
+  })
+
+  it('should not add a star position to the player when a star card but noplay on current scheme and level 1 automata', () => {
+    const payload = {
+      card:cardWithStarNoPlay1,
+    }
+    
+    let state = getDefaultState();
+    
+    mutation(state, payload);
+    expect(state.players[0].starCardPosition).toBe(0);
+  })
+
+  it('should not add a star position to the player when a star card but noplay on current scheme (2) and level 1 automata', () => {
+    const payload = {
+      card:cardWithNoPlayBothSchemesAndStar,
+    }
+    
+    let state = getDefaultState();
+    state.players[0].starCardPosition = 10;
+    mutation(state, payload);
+    expect(state.players[0].starCardPosition).toBe(10);
+  })
+
+  it('should add a star position to the player when a star card but noplay on current scheme and level 2 or above automata', () => {
+    const payload = {
+      card:cardWithStarNoPlay1,
+    }
+    
+    let state = getDefaultState();
+    state.players[0].level = 2;
+    mutation(state, payload);
+    expect(state.players[0].starCardPosition).toBe(1);
+  })
+
+  it('should add a star position to the player when a star card but noplay on not current scheme and level 1 automata', () => {
+    const payload = {
+      card:cardWithStarNoPlay1,
+    }
+    
+    let state = getDefaultState();
+    state.players[0].starCardPosition = 10;
+    mutation(state, payload);
+    expect(state.players[0].starCardPosition).toBe(11);
   })
 
   it('should not add a star position to the player when a non star card is dealt', () => {
