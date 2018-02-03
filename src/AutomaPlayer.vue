@@ -3,20 +3,13 @@
     img(width='200' :src='image')
     img(width='200' :src='starCard')
     div
-      | Star card position: {{starCardPos}}
+      | Star card position: {{player.starCardPosition}}
     div
-      | Star count: {{starCount}}
+      | Star count: {{player.stars}}
 </template>
 
 <script>
   export default {
-    data () {
-      return {
-        starCard:'./dist/StarCard0.png',
-        starCount:0,  
-        starCardId:0,
-      }
-    },
     props: {
       playerId:{
         type: Number,
@@ -24,9 +17,6 @@
       }
     },
     computed: {
-      starCardPos () {
-        return this.$store.state.players[this.playerId].starCardPosition;
-      },
       currentTurn () {
         return this.$store.state.currentTurn;
       },
@@ -34,6 +24,12 @@
         let dealtCards = this.$store.state.players[this.playerId].dealtCards;
         let nextCardNumber = dealtCards.length > 0 ? dealtCards[dealtCards.length - 1] : '20';
         return `./dist/${nextCardNumber.toString().padStart(2, '0')}.png`
+      },
+      player () {
+        return this.$store.state.players[this.playerId];
+      },
+      starCard () {
+        return `./dist/StarCard${this.$store.state.players[this.playerId].level - 1}.png`;
       }
     },
   }

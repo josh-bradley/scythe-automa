@@ -2,7 +2,7 @@ import * as types from './types'
 import data from '../assets/data'
 
 const totalNumberOfCards = 19;
-const isStarCard = (card) => {
+const isCardStarCard = (card) => {
   return data
           .cards
           .filter(x => x.id === card)[0]
@@ -15,23 +15,28 @@ export default {
       state.players.push({
         dealtCards: [],
         starCardPosition:0,
-        level: payload.level
+        level: payload.level,
+        stars:0
       });
     }           
   },
   [types.DEAL_CARD]: (state, payload) => {
     const currentPlayerIdx = state.currentTurn % state.players.length;
-    const newPlayers = state.players.slice();
-    const currentPlayer = newPlayers[currentPlayerIdx];
+    const currentPlayer = state.players[currentPlayerIdx];
     const isReShuffle = currentPlayer.dealtCards.length >= totalNumberOfCards - 1;
-    if(!isReShuffle && currentPlayer.dealtCards.some((x) => x === payload.card))
+    const cardAlreadyDealt = currentPlayer.dealtCards.some((x) => x === payload.card);
+    if(!isReShuffle && cardAlreadyDealt)
       return;
     const newDealtCards =  isReShuffle
                           ? [payload.card]
                           : [...currentPlayer.dealtCards, payload.card];
-    const starCardPosition = isStarCard(payload.card) ? currentPlayer.starCardPosition + 1 : currentPlayer.starCardPosition;
-    newPlayers[currentPlayerIdx] = Object.assign({}, currentPlayer, { dealtCards: newDealtCards, starCardPosition:starCardPosition })    
-    state.players = newPlayers;
+    const isStarCard = isCardStarCard(payload.card);
+    const starCardPosition = isStarCard ? currentPlayer.starCardPosition + 1 : currentPlayer.starCardPosition;
+    currentPlayer.dealtCards = newDealtCards;
+    currentPlayer.starCardPosition = starCardPosition;
+    const playerLevel = state.players[currentPlayerIdx].level;
+    const starCard = data.starCards[playerLevel - 1];
+    currentPlayer.stars = starCard.starPositions.indexOf(starCardPosition) < 0 || !isStarCard ? currentPlayer.stars : currentPlayer.stars + 1;
     state.currentTurn = state.currentTurn + 1;
   }
 }

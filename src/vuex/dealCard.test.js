@@ -7,14 +7,14 @@ const payload = {
 
 const getDefaultState = () => ({
   players: [
-    { level: 1, dealtCards: [], starCardPosition:0},
-    { level: 1, dealtCards: [], starCardPosition:0},
-    { level: 1, dealtCards: [], starCardPosition:0},
+    { level: 1, dealtCards: [], starCardPosition:0, stars:0},
+    { level: 1, dealtCards: [], starCardPosition:0, stars:0},
+    { level: 1, dealtCards: [], starCardPosition:0, stars:0},
   ],
   currentTurn:0
 })
 
-describe('DEAL_CARD reducer tests', () => {
+describe('DEAL_CARD mutation test tests', () => {
   it('should set the card to the first player on the first turn', () => {
     let state = getDefaultState();
     mutation(state, payload);
@@ -48,22 +48,51 @@ describe('DEAL_CARD reducer tests', () => {
     expect(state.players[0].dealtCards[0]).toBe(11);
   })
 
-  it('should add a star to the player when a star card is dealt', () => {
-    const p = {
+  it('should add a star position to the player when a star card is dealt', () => {
+    const payload = {
       card:1,
     }
     
     let state = getDefaultState();
-    mutation(state, p);
+    mutation(state, payload);
     expect(state.players[0].starCardPosition).toBe(1)
   })
 
-  it('should not add a star to the player when a non star card is dealt', () => {
-    const p ={
+  it('should not add a star position to the player when a non star card is dealt', () => {
+    const payload ={
         card:4,
     }
     let state = getDefaultState();
-    mutation(state, p);
+    mutation(state, payload);
     expect(state.players[0].starCardPosition).toBe(0)
+  })
+
+  it('should not add a star to count when star card position has no star', () => {
+    const payload = {
+      card:1
+    }
+    let state = getDefaultState();
+    mutation(state, payload);
+    expect(state.players[0].stars).toBe(0);
+  })
+
+  it('should add a star to count when star card position has a star', () => {
+    const payload = {
+      card:1
+    }
+    let state = getDefaultState();
+    state.players[0].starCardPosition = 9;
+    mutation(state, payload);
+    expect(state.players[0].stars).toBe(1);
+  })
+
+  it('should not add a star to count when star card card position stays on star', () => {
+    const payload = {
+      card:4
+    }
+    let state = getDefaultState();
+    state.players[0].starCardPosition = 10;
+    mutation(state, payload);
+    expect(state.players[0].stars).toBe(0);
   })
 })
