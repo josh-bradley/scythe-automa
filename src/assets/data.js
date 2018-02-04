@@ -19,26 +19,27 @@ export default
     "Togawa":{ "combatCards": 2, "power":0}
   },
   "starCards":[
+    {},
     {
-      "id": 0,
+      "id": 1,
       "riverCrossingPos":5,
       "schemePosition":10,
       "starPositions":[10,15,18,20,22,23]
     },
     {
-      "id": 1,
+      "id": 2,
       "riverCrossingPos":4,
       "schemePosition":9,
       "starPositions":[9,14,17,19,20,21]
     },
     {
-      "id": 2,
+      "id": 3,
       "riverCrossingPos":3,
       "schemePosition":9,
       "starPositions":[9,12,14,16,17,18]
     },
     {
-      "id": 3,
+      "id": 4,
       "riverCrossingPos":0,
       "schemePosition":8,
       "starPositions":[9,11,13,15,16,17]

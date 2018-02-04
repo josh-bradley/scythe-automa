@@ -45,7 +45,7 @@ export default {
                         .cards
                         .filter(x => x.id === payload.card)[0];
     const playerLevel = state.players[currentPlayerIdx].level;
-    const starCard = data.starCards[playerLevel - 1];
+    const starCard = data.starCards[playerLevel];
     const playerScheme = starCard.schemePosition > currentPlayer.starCardPosition ? 0 : 1;
 
     const playTurn = currentPlayer.level > 1 ||  !automaCard.schemeSpecific[playerScheme].noplay;

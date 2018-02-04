@@ -1,6 +1,6 @@
 <template lang='pug'>
   div
-    div(v-for="(player, index) in players") 
+    div(v-for="(player, index) in players" style="display:inline-block; margin:0 20px") 
       AutomaPlayer(:playerId="index")
     div
       | Current turn {{currentTurn}}
@@ -16,9 +16,12 @@
   import AutomaPlayer from './AutomaPlayer.vue'
   import { mapState } from 'vuex'
   import * as deck from './deck'
+  import './styles/card.css'
 
-  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[2].id });
-  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[2].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[1].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[2].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[3].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[4].id });
 
   var dealtCards = [];
 
@@ -37,8 +40,6 @@
         const player = this.$store.state.players[nextPlayerIndex];
         let nextCardNumber = deck.getNextCardForPlayer(player);
         this.$store.commit(types.DEAL_CARD, { card:nextCardNumber});
-        let cardData = data.cards[nextCardNumber];
-        this.image = `./dist/${nextCardNumber.toString().padStart(2, '0')}.png`
       }
     },
   };

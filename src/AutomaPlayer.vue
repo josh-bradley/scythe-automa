@@ -1,7 +1,6 @@
 <template lang='pug'>
   div
-    img(width='200' :src='image')
-    img(width='200' :src='starCard')
+    img(width='200' :src='image' style='margin-right:10px' v-bind:class='schemeClass')
     img(width='200' :src='combatCardImage')
     div
       | {{factionName}}
@@ -57,6 +56,10 @@
       },
       factionName () {
         return data.factions.filter(x => this.player.faction === x.id)[0].name;
+      },
+      schemeClass () {
+        const starCard = data.starCards[this.player.level];
+        return starCard.schemePosition > this.player.starCardPosition ? 'scheme-one' : 'scheme-two';
       }
     },
   }
