@@ -1,4 +1,5 @@
 import { AUTOMA_CARD_COUNT } from '../../constants'
+import data from '../../assets/data'
 
 export default (state, payload) => {
   const player = state.players[payload.playerId];
@@ -11,4 +12,8 @@ export default (state, payload) => {
     player.dealtCards = [];
     player.dealtCombatCards = [payload.card];
   }
+
+  const rangeId = player.power < 8 ? 0 : player.power < 14 ? 1 : 2;
+  const powerSpend = data.cards[payload.card].combatPoints[rangeId];
+  player.power = Math.max(player.power - powerSpend, 0);
 }

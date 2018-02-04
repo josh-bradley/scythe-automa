@@ -1,7 +1,8 @@
 <template lang='pug'>
   div
     img(width='200' :src='image' style='margin-right:10px' v-bind:class='schemeClass')
-    img(width='200' :src='combatCardImage')
+    div(style='display:inline-block')
+      img(width='200' :src='combatCardImage')
     div
       | {{factionName}}
     div

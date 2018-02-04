@@ -33,4 +33,24 @@ describe('DEAL_COMBAT_CARD mutation tests', () => {
     expect(state.players[0].dealtCombatCards.length).toBe(1);
     expect(state.players[0].dealtCombatCards[0]).toBe(5);
   })
+
+  it('should subtract the correct amount of power points', () => {
+    const payload = { playerId:0, card:1 };
+    const state = getDefaultState();
+    state.players[0].power = 8;
+
+    mutation(state, payload);
+
+    expect(state.players[0].power).toBe(1);
+  });
+
+  it('should bottom power points out at 0', () => {
+    const payload = { playerId:0, card:1 };
+    const state = getDefaultState();
+    state.players[0].power = 4;
+
+    mutation(state, payload);
+
+    expect(state.players[0].power).toBe(0);
+  });
 });
