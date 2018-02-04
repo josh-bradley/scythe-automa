@@ -23,8 +23,8 @@
       return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
   }
 
-  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[0].id });
-  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[1].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[2].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[2].id });
 
   var dealtCards = [];
 

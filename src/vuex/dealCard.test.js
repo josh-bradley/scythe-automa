@@ -21,7 +21,10 @@ const cardWithCoinScheme1 = 15;
 const cardWithCoinsScheme2 = 10;
 const cardWithNoCoinsScheme1 = 6;
 const cardWithNoPlayBothSchemesAndStar = 7;
+const cardWithCoinScheme1NoPlay = 7;
 const cardWithStarNoPlay1 = 8;
+const cardsWithBonusCoinForCrimea = 4;
+const cardWithSpecialPowerRewardForSaxony = 16;
 
 
 describe('DEAL_CARD mutation test tests', () => {
@@ -231,4 +234,80 @@ describe('DEAL_CARD mutation test tests', () => {
     mutation(state, payload);
     expect(state.players[0].coins).toBe(5);
   })
+
+  it('should not increment coins when on card but noplay card.', () => {
+    const payload = {
+      card:cardWithCoinScheme1NoPlay
+    }
+
+    let state = getDefaultState();
+    mutation(state, payload);
+    expect(state.players[0].coins).toBe(5);
+  })
+
+  it('should reward additional coins when faction of player lines up with special reward but a noplay and player level 2 or above', () => {
+    const payload = {
+      card:cardsWithBonusCoinForCrimea
+    }
+
+    let state = getDefaultState();
+    const player = state.players[0];
+    player.faction = "Crimean";
+    player.level = 3;
+    mutation(state, payload);
+
+    expect(state.players[0].coins).toBe(6);
+  });
+
+  it('should not reward additional coins when faction of player lines up with special reward but a noplay', () => {
+    const payload = {
+      card:cardsWithBonusCoinForCrimea
+    }
+
+    let state = getDefaultState();
+    state.players[0].faction = "Crimean";
+    mutation(state, payload);
+
+    expect(state.players[0].coins).toBe(5);
+  });
+
+  it('should not reward additional coins when faction of player does not line up with special reward', () => {
+    const payload = {
+      card:cardsWithBonusCoinForCrimea
+    }
+
+    let state = getDefaultState();
+    state.players[0].faction = "Nordic";
+    mutation(state, payload);
+
+    expect(state.players[0].coins).toBe(5);
+  });
+
+  it('should reward additional power when faction of player lines up with special reward', () => {
+    const payload = {
+      card:cardWithSpecialPowerRewardForSaxony
+    }
+
+    let state = getDefaultState();
+    const player = state.players[0];
+    player.faction = "Saxony";
+    player.starCardPosition = 10;
+    mutation(state, payload);
+
+    expect(state.players[0].power).toBe(4);
+  });
+
+  it('should not reward additional power when faction of player does not line up with special reward', () => {
+    const payload = {
+      card:cardWithSpecialPowerRewardForSaxony
+    }
+
+    let state = getDefaultState();
+    const player = state.players[0];
+    player.faction = "Nordic";
+    player.starCardPosition = 10;
+    mutation(state, payload);
+
+    expect(state.players[0].power).toBe(3);
+  });
 })

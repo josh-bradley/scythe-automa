@@ -46,8 +46,9 @@ export default {
     currentPlayer.dealtCards = newDealtCards;
     currentPlayer.starCardPosition = starCardPosition;
     currentPlayer.stars = starCard.starPositions.indexOf(starCardPosition) < 0 || !isStarCard || !playTurn ? currentPlayer.stars : currentPlayer.stars + 1;
-    currentPlayer.power = automaCard.schemeSpecific[playerScheme].power + currentPlayer.power;
-    currentPlayer.coins = automaCard.schemeSpecific[playerScheme].coins + currentPlayer.coins;
+    const factionSpecific = automaCard.schemeSpecific[playerScheme].factionSpecific[currentPlayer.faction] || { coins:0, power:0};
+    currentPlayer.power = playTurn ? automaCard.schemeSpecific[playerScheme].power + currentPlayer.power + factionSpecific.power : currentPlayer.power;
+    currentPlayer.coins = playTurn ? automaCard.schemeSpecific[playerScheme].coins + currentPlayer.coins + factionSpecific.coins : currentPlayer.coins;
     state.currentTurn = state.currentTurn + 1;
   }
 }
