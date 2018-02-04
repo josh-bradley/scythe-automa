@@ -16,6 +16,8 @@ export default {
         dealtCards: [],
         starCardPosition:0,
         level: payload.level,
+        faction: payload.faction,
+        power: data.factionMats[payload.faction].power,
         stars:0
       });
     }           
@@ -37,12 +39,13 @@ export default {
     const playerLevel = state.players[currentPlayerIdx].level;
     const starCard = data.starCards[playerLevel - 1];
     const playerScheme = starCard.schemePosition > currentPlayer.starCardPosition ? 0 : 1;
-    
+
     const playTurn = currentPlayer.level > 1 ||  !automaCard.schemeSpecific[playerScheme].noplay;
     const starCardPosition = isStarCard && playTurn ? currentPlayer.starCardPosition + 1 : currentPlayer.starCardPosition;
     currentPlayer.dealtCards = newDealtCards;
     currentPlayer.starCardPosition = starCardPosition;
     currentPlayer.stars = starCard.starPositions.indexOf(starCardPosition) < 0 || !isStarCard || !playTurn ? currentPlayer.stars : currentPlayer.stars + 1;
+    currentPlayer.power = automaCard.schemeSpecific[playerScheme].power + currentPlayer.power;
     state.currentTurn = state.currentTurn + 1;
   }
 }

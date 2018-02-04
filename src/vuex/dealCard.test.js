@@ -7,13 +7,16 @@ const payload = {
 
 const getDefaultState = () => ({
   players: [
-    { level: 1, dealtCards: [], starCardPosition:0, stars:0},
-    { level: 1, dealtCards: [], starCardPosition:0, stars:0},
-    { level: 1, dealtCards: [], starCardPosition:0, stars:0},
+    { level: 1, dealtCards: [], starCardPosition:0, stars:0, power:3, faction:"Nordic"},
+    { level: 1, dealtCards: [], starCardPosition:0, stars:0, power:3, faction:"Polonia"},
+    { level: 1, dealtCards: [], starCardPosition:0, stars:0, power:3, faction:"Crimean"},
   ],
   currentTurn:0
 })
 
+const cardWithOnePowerScheme1 = 1;
+const cardWithNoPowerScheme1 = 2;
+const cardWithPowerScheme2 = 19;
 const cardWithNoPlayBothSchemesAndStar = 7;
 const cardWithStarNoPlay1 = 8;
 
@@ -142,5 +145,46 @@ describe('DEAL_CARD mutation test tests', () => {
     state.players[0].starCardPosition = 10;
     mutation(state, payload);
     expect(state.players[0].stars).toBe(0);
+  })
+
+  it('should increment power.', () => {
+    const payload = {
+      card:cardWithOnePowerScheme1
+    }
+
+    let state = getDefaultState();
+    mutation(state, payload);
+    expect(state.players[0].power).toBe(4);
+  })
+
+  it('should not increment power when power on scheme 2 but player in scheme 1.', () => {
+    const payload = {
+      card:cardWithPowerScheme2
+    }
+
+    let state = getDefaultState();
+    mutation(state, payload);
+    expect(state.players[0].power).toBe(3);
+  })
+
+  it('should increment power when power on scheme 2 and player in scheme 2.', () => {
+    const payload = {
+      card:cardWithPowerScheme2
+    }
+
+    let state = getDefaultState();
+    state.players[0].starCardPosition = 10;
+    mutation(state, payload);
+    expect(state.players[0].power).toBe(6);
+  })
+
+  it('should not increment power when not on card.', () => {
+    const payload = {
+      card:cardWithNoPowerScheme1
+    }
+
+    let state = getDefaultState();
+    mutation(state, payload);
+    expect(state.players[0].power).toBe(3);
   })
 })

@@ -2,7 +2,8 @@ import * as types from './types'
 import mutations from './mutations'
 
 const payload = {
-    level: 1
+    level: 1,
+    faction:"Nordic"
 }
 const state = {
   players:[],
@@ -13,8 +14,8 @@ const mutator = mutations[types.ADD_PLAYER];
 
 describe('ADD_PLAYER tests', () => {
   it('should add player to game', () => {
-    mutator(state, payload)
-    expect(state.players.length).toBe(1)
+    mutator(state, payload);
+    expect(state.players.length).toBe(1);
   })
 
 
@@ -38,6 +39,16 @@ describe('ADD_PLAYER tests', () => {
       ]
     }
     mutator(originalState, payload);
-    expect(originalState.players.length).toBe(6)
+    expect(originalState.players.length).toBe(6);
+  })
+
+  it('should set the faction name correctly', () => {
+    mutator(state, payload);
+    expect(state.players[0].faction).toBe("Nordic");
+  })
+
+  it('should set the power appropriate to the faction', () => {
+    mutator(state, payload);
+    expect(state.players[0].power).toBe(4);
   })
 });

@@ -3,12 +3,17 @@
     img(width='200' :src='image')
     img(width='200' :src='starCard')
     div
+      | {{factionName}}
+    div
       | Star card position: {{player.starCardPosition}}
     div
       | Star count: {{player.stars}}
+    div 
+      | Power: {{player.power}}
 </template>
 
 <script>
+  import data from './assets/data'
   export default {
     props: {
       playerId:{
@@ -30,6 +35,9 @@
       },
       starCard () {
         return `./dist/StarCard${this.$store.state.players[this.playerId].level - 1}.png`;
+      },
+      factionName () {
+        return data.factions.filter(x => this.player.faction === x.id)[0].name;
       }
     },
   }
