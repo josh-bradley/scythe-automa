@@ -10,6 +10,8 @@
       | Star count: {{player.stars}}
     div 
       | Power: {{player.power}}
+    div
+      | Coins: {{player.coins}}
 </template>
 
 <script>

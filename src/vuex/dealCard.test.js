@@ -7,9 +7,9 @@ const payload = {
 
 const getDefaultState = () => ({
   players: [
-    { level: 1, dealtCards: [], starCardPosition:0, stars:0, power:3, faction:"Nordic"},
-    { level: 1, dealtCards: [], starCardPosition:0, stars:0, power:3, faction:"Polonia"},
-    { level: 1, dealtCards: [], starCardPosition:0, stars:0, power:3, faction:"Crimean"},
+    { level: 1, dealtCards: [], starCardPosition:0, stars:0, coins:5, power:3, faction:"Nordic"},
+    { level: 1, dealtCards: [], starCardPosition:0, stars:0, coins:5, power:3, faction:"Polonia"},
+    { level: 1, dealtCards: [], starCardPosition:0, stars:0, coins:5, power:3, faction:"Crimean"},
   ],
   currentTurn:0
 })
@@ -17,6 +17,9 @@ const getDefaultState = () => ({
 const cardWithOnePowerScheme1 = 1;
 const cardWithNoPowerScheme1 = 2;
 const cardWithPowerScheme2 = 19;
+const cardWithCoinScheme1 = 15;
+const cardWithCoinsScheme2 = 10;
+const cardWithNoCoinsScheme1 = 6;
 const cardWithNoPlayBothSchemesAndStar = 7;
 const cardWithStarNoPlay1 = 8;
 
@@ -186,5 +189,46 @@ describe('DEAL_CARD mutation test tests', () => {
     let state = getDefaultState();
     mutation(state, payload);
     expect(state.players[0].power).toBe(3);
+  })
+
+  it('should increment coin.', () => {
+    const payload = {
+      card:cardWithCoinScheme1
+    }
+
+    let state = getDefaultState();
+    mutation(state, payload);
+    expect(state.players[0].coins).toBe(6);
+  })
+
+  it('should not increment coins when coins on scheme 2 but player in scheme 1.', () => {
+    const payload = {
+      card:cardWithCoinsScheme2
+    }
+
+    let state = getDefaultState();
+    mutation(state, payload);
+    expect(state.players[0].coins).toBe(5);
+  })
+
+  it('should increment coins when coins on scheme 2 and player in scheme 2.', () => {
+    const payload = {
+      card:cardWithCoinsScheme2
+    }
+
+    let state = getDefaultState();
+    state.players[0].starCardPosition = 10;
+    mutation(state, payload);
+    expect(state.players[0].coins).toBe(7);
+  })
+
+  it('should not increment coins when not on card.', () => {
+    const payload = {
+      card:cardWithNoCoinsScheme1
+    }
+
+    let state = getDefaultState();
+    mutation(state, payload);
+    expect(state.players[0].coins).toBe(5);
   })
 })

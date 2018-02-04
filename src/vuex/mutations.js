@@ -18,7 +18,8 @@ export default {
         level: payload.level,
         faction: payload.faction,
         power: data.factionMats[payload.faction].power,
-        stars:0
+        stars:0,
+        coins:5
       });
     }           
   },
@@ -46,6 +47,7 @@ export default {
     currentPlayer.starCardPosition = starCardPosition;
     currentPlayer.stars = starCard.starPositions.indexOf(starCardPosition) < 0 || !isStarCard || !playTurn ? currentPlayer.stars : currentPlayer.stars + 1;
     currentPlayer.power = automaCard.schemeSpecific[playerScheme].power + currentPlayer.power;
+    currentPlayer.coins = automaCard.schemeSpecific[playerScheme].coins + currentPlayer.coins;
     state.currentTurn = state.currentTurn + 1;
   }
 }

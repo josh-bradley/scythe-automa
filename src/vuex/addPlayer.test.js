@@ -51,4 +51,9 @@ describe('ADD_PLAYER tests', () => {
     mutator(state, payload);
     expect(state.players[0].power).toBe(4);
   })
+
+  it('should set the initial coin correctly', () => {
+    mutator(state, payload);
+    expect(state.players[0].coins).toBe(5);
+  })
 });

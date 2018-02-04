@@ -59,20 +59,20 @@ export default
       "schemeSpecific":[
       { 
         "power":1,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":4,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -89,20 +89,20 @@ export default
       "schemeSpecific":[
       { 
         "power":0,
-        "gold":1,
+        "coins":1,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 1, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":0,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":1,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 1, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -119,20 +119,20 @@ export default
       "schemeSpecific":[
       { 
         "power":3,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":2,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -149,20 +149,20 @@ export default
       "schemeSpecific":[
       { 
         "power":0,
-        "gold":0,
+        "coins":0,
         "noplay":true,
         "powerCards":1,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 1, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":0,
-        "gold":2,
+        "coins":2,
         "noplay":true,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 1, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -179,20 +179,20 @@ export default
       "schemeSpecific":[
       { 
         "power":0,
-        "gold":1,
+        "coins":1,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":4,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -209,20 +209,20 @@ export default
       "schemeSpecific":[
       { 
         "power":2,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":2,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 1, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -239,20 +239,20 @@ export default
       "schemeSpecific":[
       { 
         "power":0,
-        "gold":1,
+        "coins":1,
         "noplay":true,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":0,
-        "gold":0,
+        "coins":0,
         "noplay":true,
         "powerCards":1,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -269,20 +269,20 @@ export default
       "schemeSpecific":[
       { 
         "power":0,
-        "gold":0,
+        "coins":0,
         "noplay":true,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":0,
-        "gold":1,
+        "coins":1,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":1},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":1},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -299,20 +299,20 @@ export default
       "schemeSpecific":[
       { 
         "power":0,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":3,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -329,20 +329,20 @@ export default
       "schemeSpecific":[
       { 
         "power":2,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":0,
-        "gold":2,
+        "coins":2,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -359,20 +359,20 @@ export default
       "schemeSpecific":[
       { 
         "power":0,
-        "gold":1,
+        "coins":1,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":3,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -389,20 +389,20 @@ export default
       "schemeSpecific":[
       { 
         "power":4,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":0,
-        "gold":1,
+        "coins":1,
         "noplay":false,
         "powerCards":1,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -419,20 +419,20 @@ export default
       "schemeSpecific":[
       { 
         "power":0,
-        "gold":1,
+        "coins":1,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":0,
-        "gold":2,
+        "coins":2,
         "noplay":false,
         "powerCards":1,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -449,20 +449,20 @@ export default
       "schemeSpecific":[
       { 
         "power":0,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":1,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":3,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -479,20 +479,20 @@ export default
       "schemeSpecific":[
       { 
         "power":3,
-        "gold":1,
+        "coins":1,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":0,
-        "gold":1,
+        "coins":1,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 1, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -509,20 +509,20 @@ export default
       "schemeSpecific":[
       { 
         "power":0,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":0,
-        "gold":1,
+        "coins":1,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":1},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":1},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -539,20 +539,20 @@ export default
       "schemeSpecific":[
       { 
         "power":0,
-        "gold":2,
+        "coins":2,
         "noplay":true,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":0,
-        "gold":1,
+        "coins":1,
         "noplay":true,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 1, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -569,20 +569,20 @@ export default
       "schemeSpecific":[
       { 
         "power":0,
-        "gold":1,
+        "coins":1,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":0,
-        "gold":2,
+        "coins":2,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     },
@@ -599,20 +599,20 @@ export default
       "schemeSpecific":[
       { 
         "power":0,
-        "gold":0,
+        "coins":0,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       },
       { 
         "power":3,
-        "gold":1,
+        "coins":1,
         "noplay":false,
         "powerCards":0,
         "factionSpecific":{
-          "Polonia":{ "gold": 0, "power":0},"Saxony":{ "gold": 0, "power":0},"Crimean":{ "gold": 0, "power":0},"Nordic":{ "gold": 0, "power":0},"Rusviet":{ "gold": 0, "power":0}
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
         }
       }]  
     }
