@@ -1,0 +1,1 @@
+export const AUTOMA_CARD_COUNT = 19

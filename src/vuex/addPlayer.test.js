@@ -23,6 +23,7 @@ describe('ADD_PLAYER tests', () => {
     mutator(state, payload)
     expect(state.players[0].level).toBe(1)
     expect(state.players[0].dealtCards).toEqual([]);
+    expect(state.players[0].dealtCombatCards).toEqual([]);
     expect(state.players[0].starCardPosition).toBe(0);
   })
 

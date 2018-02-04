@@ -7,9 +7,9 @@ const payload = {
 
 const getDefaultState = () => ({
   players: [
-    { level: 1, dealtCards: [], starCardPosition:0, stars:0, coins:5, power:3, faction:"Nordic"},
-    { level: 1, dealtCards: [], starCardPosition:0, stars:0, coins:5, power:3, faction:"Polonia"},
-    { level: 1, dealtCards: [], starCardPosition:0, stars:0, coins:5, power:3, faction:"Crimean"},
+    { level: 1, dealtCards: [], dealtCombatCards:[], starCardPosition:0, stars:0, coins:5, power:3, faction:"Nordic"},
+    { level: 1, dealtCards: [], dealtCombatCards:[], starCardPosition:0, stars:0, coins:5, power:3, faction:"Polonia"},
+    { level: 1, dealtCards: [], dealtCombatCards:[], starCardPosition:0, stars:0, coins:5, power:3, faction:"Crimean"},
   ],
   currentTurn:0
 })
@@ -53,11 +53,27 @@ describe('DEAL_CARD mutation test tests', () => {
     expect(state.players[0].dealtCards.length).toBe(1);
   })
 
+  it('should not add card if it has been added in dealt as a combat card', () => {
+    const players = [{ level:1, dealtCards:[12],dealtCombatCards:[11]}]
+    const state = Object.assign(getDefaultState(), { currentTurn:2, players:players})
+    mutation(state, payload);
+    expect(state.players[0].dealtCards.length).toBe(1);
+  })
+
   it('should return the card count to 0 once all cards have been dealt', () => {
     const players = [{level:1, dealtCards:[...Array.from(Array(19).keys())].map(x => ++x)}]
     const state = Object.assign(getDefaultState(), {players:players, currentTurn:20});
     mutation(state, payload);
     expect(state.players[0].dealtCards.length).toBe(1);
+    expect(state.players[0].dealtCards[0]).toBe(11);
+  })
+
+  it('should return the card count to 0 once all cards have been dealt across both discard piles', () => {
+    const players = [{level:1, dealtCards:[...Array.from(Array(18).keys())].map(x => ++x),dealtCombatCards:[19]}]
+    const state = Object.assign(getDefaultState(), {players:players, currentTurn:20});
+    mutation(state, payload);
+    expect(state.players[0].dealtCards.length).toBe(1);
+    expect(state.players[0].dealtCombatCards.length).toBe(0);
     expect(state.players[0].dealtCards[0]).toBe(11);
   })
 

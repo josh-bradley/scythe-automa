@@ -1,7 +1,9 @@
 import * as types from './types'
 import data from '../assets/data'
+import { AUTOMA_CARD_COUNT } from '../constants'
+import dealCombatCardMutation from './mutations/dealCombatCard'
 
-const totalNumberOfCards = 19;
+const totalNumberOfCards = AUTOMA_CARD_COUNT;
 const isCardStarCard = (card) => {
   return data
           .cards
@@ -14,6 +16,7 @@ export default {
     if(state.currentTurn === 0 && state.players.length < 6){
       state.players.push({
         dealtCards: [],
+        dealtCombatCards:[],
         starCardPosition:0,
         level: payload.level,
         faction: payload.faction,
@@ -26,13 +29,17 @@ export default {
   [types.DEAL_CARD]: (state, payload) => {
     const currentPlayerIdx = state.currentTurn % state.players.length;
     const currentPlayer = state.players[currentPlayerIdx];
-    const isReShuffle = currentPlayer.dealtCards.length >= totalNumberOfCards - 1;
-    const cardAlreadyDealt = currentPlayer.dealtCards.some((x) => x === payload.card);
+    const discardedCards = currentPlayer.dealtCards.concat(currentPlayer.dealtCombatCards);
+    const isReShuffle = discardedCards.length >= totalNumberOfCards - 1;
+    const cardAlreadyDealt = discardedCards.some((x) => x === payload.card);
     if(!isReShuffle && cardAlreadyDealt)
       return;
-    const newDealtCards =  isReShuffle
+    currentPlayer.dealtCards =  isReShuffle
                           ? [payload.card]
                           : [...currentPlayer.dealtCards, payload.card];
+    currentPlayer.dealtCombatCards = isReShuffle
+                                      ? []
+                                      : currentPlayer.dealtCombatCards;
     const isStarCard = isCardStarCard(payload.card);
     const automaCard = data
                         .cards
@@ -43,12 +50,12 @@ export default {
 
     const playTurn = currentPlayer.level > 1 ||  !automaCard.schemeSpecific[playerScheme].noplay;
     const starCardPosition = isStarCard && playTurn ? currentPlayer.starCardPosition + 1 : currentPlayer.starCardPosition;
-    currentPlayer.dealtCards = newDealtCards;
     currentPlayer.starCardPosition = starCardPosition;
     currentPlayer.stars = starCard.starPositions.indexOf(starCardPosition) < 0 || !isStarCard || !playTurn ? currentPlayer.stars : currentPlayer.stars + 1;
     const factionSpecific = automaCard.schemeSpecific[playerScheme].factionSpecific[currentPlayer.faction] || { coins:0, power:0};
     currentPlayer.power = playTurn ? automaCard.schemeSpecific[playerScheme].power + currentPlayer.power + factionSpecific.power : currentPlayer.power;
     currentPlayer.coins = playTurn ? automaCard.schemeSpecific[playerScheme].coins + currentPlayer.coins + factionSpecific.coins : currentPlayer.coins;
     state.currentTurn = state.currentTurn + 1;
-  }
+  },
+  [types.DEAL_COMBAT_CARD]: dealCombatCardMutation
 }
