@@ -1,11 +1,14 @@
 <template lang='pug'>
   div
-    div(v-for="(player, index) in players" style="display:inline-block; margin:0 20px") 
-      AutomaPlayer(:playerId="index")
+    div(style="display:flex;justify-content:center")
+      div(v-for="(player, index) in players"
+          class="automa-player"
+          :class="{current: currentPlayer === player}")
+        AutomaPlayer(:playerId="index")
     div
       | Current turn {{currentTurn}}
-    button(@click='dealNextCard')
-      | Deal Card
+      button(@click='dealNextCard')
+        | Deal Card
 </template>
 
 <script>
@@ -30,10 +33,13 @@
     components:{ 
       AutomaPlayer
     },
-    computed: mapState([
-      'players',
-      'currentTurn'
-    ]),
+    computed: mapState({
+      'players':'players',
+      'currentTurn':'currentTurn',
+      currentPlayer: function(){
+        return this.players[Math.max(this.currentTurn - 1, 0) % this.players.length];
+      }
+    }),
     methods: {
       dealNextCard: function(){
         let nextPlayerIndex = this.$store.state.currentTurn % this.$store.state.players.length;
