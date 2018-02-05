@@ -40,6 +40,13 @@ describe('DEAL_CARD mutation test tests', () => {
     expect(state.currentTurn).toBe(1);
   })
 
+  it('should set combat to false', () => {
+    let state = getDefaultState();
+    state.players[0].inCombat = true;
+    mutation(state, payload);
+    expect(state.inCombat).toBe(false);
+  })
+
   it('should set the card to the third player on the 6th turn', () => {
     const state = Object.assign(getDefaultState(), {currentTurn:5})
     mutation(state, payload);

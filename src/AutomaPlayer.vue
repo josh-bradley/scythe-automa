@@ -1,8 +1,15 @@
 <template lang='pug'>
   div
-    img(width='200' :src='image' style='margin-right:10px' v-bind:class='schemeClass')
-    div(style='display:inline-block')
-      img(width='200' :src='combatCardImage')
+    img(
+      width='200' 
+      :src='image' 
+      style='margin-right:10px' 
+      v-bind:class='{"scheme-two":!isSchemeOne, hide:inCombat}')
+    div(style='display:inline-block' class='combat-card')
+      img(
+        width='200' 
+        :src='combatCardImage'
+        :class='{hide:!inCombat}')
     div
       | {{factionName}}
     div
@@ -22,6 +29,7 @@
   import data from './assets/data'
   import * as deck from './deck'
   import * as types from './vuex/types'
+  import { mapState } from 'vuex'
   export default {
     props: {
       playerId:{
@@ -35,7 +43,8 @@
         this.$store.commit(types.DEAL_COMBAT_CARD, { card:nextCardNumber, playerId:this.playerId});
       }
     },
-    computed: {
+    computed: mapState({
+      inCombat:'inCombat',
       currentTurn () {
         return this.$store.state.currentTurn;
       },
@@ -58,10 +67,10 @@
       factionName () {
         return data.factions.filter(x => this.player.faction === x.id)[0].name;
       },
-      schemeClass () {
+      isSchemeOne () {
         const starCard = data.starCards[this.player.level];
-        return starCard.schemePosition > this.player.starCardPosition ? 'scheme-one' : 'scheme-two';
+        return starCard.schemePosition > this.player.starCardPosition;
       }
-    },
+    }),
   }
 </script>

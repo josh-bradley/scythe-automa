@@ -56,6 +56,7 @@ export default {
     currentPlayer.power = playTurn ? automaCard.schemeSpecific[playerScheme].power + currentPlayer.power + factionSpecific.power : currentPlayer.power;
     currentPlayer.coins = playTurn ? automaCard.schemeSpecific[playerScheme].coins + currentPlayer.coins + factionSpecific.coins : currentPlayer.coins;
     state.currentTurn = state.currentTurn + 1;
+    state.inCombat = false;
   },
   [types.DEAL_COMBAT_CARD]: dealCombatCardMutation
 }

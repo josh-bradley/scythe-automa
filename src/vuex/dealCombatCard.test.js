@@ -53,4 +53,13 @@ describe('DEAL_COMBAT_CARD mutation tests', () => {
 
     expect(state.players[0].power).toBe(0);
   });
+
+  it('should set inCombat to true for player', () => {
+    const payload = { playerId:0, card:1 };
+    const state = getDefaultState();
+
+    mutation(state, payload);
+
+    expect(state.inCombat).toBe(true);
+  })
 });

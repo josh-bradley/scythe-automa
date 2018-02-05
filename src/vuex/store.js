@@ -6,7 +6,8 @@ Vue.use(Vuex);
 
 const defaultState = {
   players:[],
-  currentTurn:0
+  currentTurn:0,
+  inCombat:false
 }
 
 const isStarCard = (card) => {

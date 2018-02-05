@@ -2,6 +2,10 @@
  transform: rotate(180deg); 
 }
 
+.combat-card {
+  transform:rotate(-90deg);
+}
+
 .automa-player {
   display:none;
 }
@@ -9,4 +13,8 @@
 .automa-player.current {
   display:inline-block;
   margin:0 auto;
+}
+
+.hide {
+  display:none;
 }
