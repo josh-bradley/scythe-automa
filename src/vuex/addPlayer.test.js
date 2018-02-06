@@ -5,19 +5,37 @@ const payload = {
     level: 1,
     faction:"Nordic"
 }
-const state = {
-  players:[],
-  currentTurn:0
+const getDefaultState = () => {
+  return {
+    players:[],
+    currentTurn:0
+  }
 }
 
 const mutator = mutations[types.ADD_PLAYER];
+let state;
 
-describe('ADD_PLAYER tests', () => {
+describe('ADD_PLAYER tests', () => { 
+  beforeEach(() => {
+    state = getDefaultState();
+  })
+
+  it('should add human player to game', () => {
+    mutator(state, { name:'John' });
+    expect(state.players.length).toBe(1);
+  })
+  
   it('should add player to game', () => {
     mutator(state, payload);
     expect(state.players.length).toBe(1);
   })
 
+  it('should set player id correctly', () => {
+    mutator(state, { name:'Jill'});
+    expect(state.players[0].id).toBe(0);
+    mutator(state, payload);
+    expect(state.players[1].id).toBe(1);
+  })
 
   it('should add player to game with correct level', () => {
     mutator(state, payload)

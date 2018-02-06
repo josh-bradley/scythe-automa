@@ -5,13 +5,14 @@ const payload = {
   card: 11
 }
 
-const getDefaultState = () => ({
+const getDefaultState = (turn = 1) => ({
   players: [
+    { name: 'Mary' }, 
     { level: 1, dealtCards: [], dealtCombatCards:[], starCardPosition:0, stars:0, coins:5, power:3, faction:"Nordic"},
     { level: 1, dealtCards: [], dealtCombatCards:[], starCardPosition:0, stars:0, coins:5, power:3, faction:"Polonia"},
     { level: 1, dealtCards: [], dealtCombatCards:[], starCardPosition:0, stars:0, coins:5, power:3, faction:"Crimean"},
   ],
-  currentTurn:0
+  currentTurn:turn
 })
 
 const cardWithOnePowerScheme1 = 1;
@@ -28,27 +29,33 @@ const cardWithSpecialPowerRewardForSaxony = 16;
 
 
 describe('DEAL_CARD mutation test tests', () => {
+  it('should up the turn count by 1 for a human player', () => {
+    const state = getDefaultState(0);
+    mutation(state, {});
+    expect(state.currentTurn).toBe(1);
+  })
+
   it('should set the card to the first player on the first turn', () => {
     let state = getDefaultState();
     mutation(state, payload);
-    expect(state.players[0].dealtCards[0]).toBe(11);
+    expect(state.players[1].dealtCards[0]).toBe(11);
   })
 
   it('should up the turn count by 1 for a sucessful turn', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(1);
     mutation(state, payload);
-    expect(state.currentTurn).toBe(1);
+    expect(state.currentTurn).toBe(2);
   })
 
   it('should set combat to false', () => {
     let state = getDefaultState();
-    state.players[0].inCombat = true;
+    state.players[1].inCombat = true;
     mutation(state, payload);
     expect(state.inCombat).toBe(false);
   })
 
   it('should set the card to the third player on the 6th turn', () => {
-    const state = Object.assign(getDefaultState(), {currentTurn:5})
+    const state = Object.assign(getDefaultState(), {currentTurn:6})
     mutation(state, payload);
     expect(state.players[2].dealtCards[0]).toBe(11);
   })
@@ -91,7 +98,7 @@ describe('DEAL_CARD mutation test tests', () => {
     
     let state = getDefaultState();
     mutation(state, payload);
-    expect(state.players[0].starCardPosition).toBe(1);
+    expect(state.players[1].starCardPosition).toBe(1);
   })
 
   it('should not add a star position to the player when a star card but noplay on current scheme and level 1 automata', () => {
@@ -102,7 +109,7 @@ describe('DEAL_CARD mutation test tests', () => {
     let state = getDefaultState();
     
     mutation(state, payload);
-    expect(state.players[0].starCardPosition).toBe(0);
+    expect(state.players[1].starCardPosition).toBe(0);
   })
 
   it('should not add a star position to the player when a star card but noplay on current scheme (2) and level 1 automata', () => {
@@ -111,9 +118,9 @@ describe('DEAL_CARD mutation test tests', () => {
     }
     
     let state = getDefaultState();
-    state.players[0].starCardPosition = 10;
+    state.players[1].starCardPosition = 10;
     mutation(state, payload);
-    expect(state.players[0].starCardPosition).toBe(10);
+    expect(state.players[1].starCardPosition).toBe(10);
   })
 
   it('should add a star position to the player when a star card but noplay on current scheme and level 2 or above automata', () => {
@@ -122,9 +129,9 @@ describe('DEAL_CARD mutation test tests', () => {
     }
     
     let state = getDefaultState();
-    state.players[0].level = 2;
+    state.players[1].level = 2;
     mutation(state, payload);
-    expect(state.players[0].starCardPosition).toBe(1);
+    expect(state.players[1].starCardPosition).toBe(1);
   })
 
   it('should add a star position to the player when a star card but noplay on not current scheme and level 1 automata', () => {
@@ -133,9 +140,9 @@ describe('DEAL_CARD mutation test tests', () => {
     }
     
     let state = getDefaultState();
-    state.players[0].starCardPosition = 10;
+    state.players[1].starCardPosition = 10;
     mutation(state, payload);
-    expect(state.players[0].starCardPosition).toBe(11);
+    expect(state.players[1].starCardPosition).toBe(11);
   })
 
   it('should not add a star position to the player when a non star card is dealt', () => {
@@ -144,7 +151,7 @@ describe('DEAL_CARD mutation test tests', () => {
     }
     let state = getDefaultState();
     mutation(state, payload);
-    expect(state.players[0].starCardPosition).toBe(0)
+    expect(state.players[1].starCardPosition).toBe(0)
   })
 
   it('should not add a star to count when star card position has no star', () => {
@@ -153,7 +160,7 @@ describe('DEAL_CARD mutation test tests', () => {
     }
     let state = getDefaultState();
     mutation(state, payload);
-    expect(state.players[0].stars).toBe(0);
+    expect(state.players[1].stars).toBe(0);
   })
 
   it('should add a star to count when star card position has a star', () => {
@@ -161,9 +168,9 @@ describe('DEAL_CARD mutation test tests', () => {
       card:1
     }
     let state = getDefaultState();
-    state.players[0].starCardPosition = 9;
+    state.players[1].starCardPosition = 9;
     mutation(state, payload);
-    expect(state.players[0].stars).toBe(1);
+    expect(state.players[1].stars).toBe(1);
   })
 
   it('should not add a star to count when star card card position stays on star', () => {
@@ -171,9 +178,9 @@ describe('DEAL_CARD mutation test tests', () => {
       card:4
     }
     let state = getDefaultState();
-    state.players[0].starCardPosition = 10;
+    state.players[1].starCardPosition = 10;
     mutation(state, payload);
-    expect(state.players[0].stars).toBe(0);
+    expect(state.players[1].stars).toBe(0);
   })
 
   it('should increment power.', () => {
@@ -183,7 +190,7 @@ describe('DEAL_CARD mutation test tests', () => {
 
     let state = getDefaultState();
     mutation(state, payload);
-    expect(state.players[0].power).toBe(4);
+    expect(state.players[1].power).toBe(4);
   })
 
   it('should not increment power when power on scheme 2 but player in scheme 1.', () => {
@@ -193,7 +200,7 @@ describe('DEAL_CARD mutation test tests', () => {
 
     let state = getDefaultState();
     mutation(state, payload);
-    expect(state.players[0].power).toBe(3);
+    expect(state.players[1].power).toBe(3);
   })
 
   it('should increment power when power on scheme 2 and player in scheme 2.', () => {
@@ -202,9 +209,9 @@ describe('DEAL_CARD mutation test tests', () => {
     }
 
     let state = getDefaultState();
-    state.players[0].starCardPosition = 10;
+    state.players[1].starCardPosition = 10;
     mutation(state, payload);
-    expect(state.players[0].power).toBe(6);
+    expect(state.players[1].power).toBe(6);
   })
 
   it('should not increment power when not on card.', () => {
@@ -214,7 +221,7 @@ describe('DEAL_CARD mutation test tests', () => {
 
     let state = getDefaultState();
     mutation(state, payload);
-    expect(state.players[0].power).toBe(3);
+    expect(state.players[1].power).toBe(3);
   })
 
   it('should increment coin.', () => {
@@ -224,7 +231,7 @@ describe('DEAL_CARD mutation test tests', () => {
 
     let state = getDefaultState();
     mutation(state, payload);
-    expect(state.players[0].coins).toBe(6);
+    expect(state.players[1].coins).toBe(6);
   })
 
   it('should not increment coins when coins on scheme 2 but player in scheme 1.', () => {
@@ -234,7 +241,7 @@ describe('DEAL_CARD mutation test tests', () => {
 
     let state = getDefaultState();
     mutation(state, payload);
-    expect(state.players[0].coins).toBe(5);
+    expect(state.players[1].coins).toBe(5);
   })
 
   it('should increment coins when coins on scheme 2 and player in scheme 2.', () => {
@@ -243,9 +250,9 @@ describe('DEAL_CARD mutation test tests', () => {
     }
 
     let state = getDefaultState();
-    state.players[0].starCardPosition = 10;
+    state.players[1].starCardPosition = 10;
     mutation(state, payload);
-    expect(state.players[0].coins).toBe(7);
+    expect(state.players[1].coins).toBe(7);
   })
 
   it('should not increment coins when not on card.', () => {
@@ -255,7 +262,7 @@ describe('DEAL_CARD mutation test tests', () => {
 
     let state = getDefaultState();
     mutation(state, payload);
-    expect(state.players[0].coins).toBe(5);
+    expect(state.players[1].coins).toBe(5);
   })
 
   it('should not increment coins when on card but noplay card.', () => {
@@ -265,7 +272,7 @@ describe('DEAL_CARD mutation test tests', () => {
 
     let state = getDefaultState();
     mutation(state, payload);
-    expect(state.players[0].coins).toBe(5);
+    expect(state.players[1].coins).toBe(5);
   })
 
   it('should reward additional coins when faction of player lines up with special reward but a noplay and player level 2 or above', () => {
@@ -274,12 +281,12 @@ describe('DEAL_CARD mutation test tests', () => {
     }
 
     let state = getDefaultState();
-    const player = state.players[0];
+    const player = state.players[1];
     player.faction = "Crimean";
     player.level = 3;
     mutation(state, payload);
 
-    expect(state.players[0].coins).toBe(6);
+    expect(state.players[1].coins).toBe(6);
   });
 
   it('should not reward additional coins when faction of player lines up with special reward but a noplay', () => {
@@ -288,10 +295,10 @@ describe('DEAL_CARD mutation test tests', () => {
     }
 
     let state = getDefaultState();
-    state.players[0].faction = "Crimean";
+    state.players[1].faction = "Crimean";
     mutation(state, payload);
 
-    expect(state.players[0].coins).toBe(5);
+    expect(state.players[1].coins).toBe(5);
   });
 
   it('should not reward additional coins when faction of player does not line up with special reward', () => {
@@ -300,10 +307,10 @@ describe('DEAL_CARD mutation test tests', () => {
     }
 
     let state = getDefaultState();
-    state.players[0].faction = "Nordic";
+    state.players[1].faction = "Nordic";
     mutation(state, payload);
 
-    expect(state.players[0].coins).toBe(5);
+    expect(state.players[1].coins).toBe(5);
   });
 
   it('should reward additional power when faction of player lines up with special reward', () => {
@@ -312,12 +319,12 @@ describe('DEAL_CARD mutation test tests', () => {
     }
 
     let state = getDefaultState();
-    const player = state.players[0];
+    const player = state.players[1];
     player.faction = "Saxony";
     player.starCardPosition = 10;
     mutation(state, payload);
 
-    expect(state.players[0].power).toBe(4);
+    expect(state.players[1].power).toBe(4);
   });
 
   it('should not reward additional power when faction of player does not line up with special reward', () => {
@@ -326,11 +333,11 @@ describe('DEAL_CARD mutation test tests', () => {
     }
 
     let state = getDefaultState();
-    const player = state.players[0];
+    const player = state.players[1];
     player.faction = "Nordic";
     player.starCardPosition = 10;
     mutation(state, payload);
 
-    expect(state.players[0].power).toBe(3);
+    expect(state.players[1].power).toBe(3);
   });
 })

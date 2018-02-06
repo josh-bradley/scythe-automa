@@ -14,21 +14,34 @@ const isCardStarCard = (card) => {
 export default {
   [types.ADD_PLAYER]: (state, payload) => {
     if(state.currentTurn === 0 && state.players.length < 6){
-      state.players.push({
-        dealtCards: [],
-        dealtCombatCards:[],
-        starCardPosition:0,
-        level: payload.level,
-        faction: payload.faction,
-        power: data.factionMats[payload.faction].power,
-        stars:0,
-        coins:5
-      });
+      const id = state.players.length;
+      if(payload.name){
+        state.players.push({
+          id:id,
+          name:payload.name
+        });
+      } else {
+        state.players.push({
+          id:id,
+          dealtCards: [],
+          dealtCombatCards:[],
+          starCardPosition:0,
+          level: payload.level,
+          faction: payload.faction,
+          power: data.factionMats[payload.faction].power,
+          stars:0,
+          coins:5
+        });
+      }
     }           
   },
   [types.DEAL_CARD]: (state, payload) => {
     const currentPlayerIdx = state.currentTurn % state.players.length;
     const currentPlayer = state.players[currentPlayerIdx];
+    if(currentPlayer.name) {
+      state.currentTurn = state.currentTurn + 1;
+      return;
+    }
     const discardedCards = currentPlayer.dealtCards.concat(currentPlayer.dealtCombatCards);
     const isReShuffle = discardedCards.length >= totalNumberOfCards - 1;
     const cardAlreadyDealt = discardedCards.some((x) => x === payload.card);

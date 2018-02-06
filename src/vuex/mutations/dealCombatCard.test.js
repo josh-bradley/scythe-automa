@@ -1,5 +1,5 @@
-import { DEAL_COMBAT_CARD } from './types'
-import mutations from './mutations'
+import { DEAL_COMBAT_CARD } from '../types'
+import mutations from '../mutations'
 const mutation = mutations[DEAL_COMBAT_CARD]; 
 
 const getDefaultState = () => ({
