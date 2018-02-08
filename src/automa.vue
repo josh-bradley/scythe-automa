@@ -1,6 +1,8 @@
 <template lang='pug'>
   div
     div(style="display:flex;justify-content:center")
+      div
+        | {{message}}
       div(v-for="automa in automas"
           class="automa-player"
           :class="{current: currentPlayer === automa}")
@@ -8,7 +10,7 @@
     div
       | Current turn {{currentTurn}}
       button(@click='dealNextCard')
-        | Deal Card
+        | {{continueButtonText}}
 </template>
 
 <script>
@@ -43,6 +45,18 @@
       },
       automas: function(){
         return this.players.filter(player => player.level)
+      },
+      hasGameStarted: function(){
+        return this.currentTurn > 0;
+      },
+      isHumanPlayer: function(){
+        return this.currentPlayer.name;
+      },
+      message: function(){
+        return !this.hasGameStarted ? 'Start game' : this.isHumanPlayer ? `Play card ${this.currentPlayer.name}` : 'Automas turn.'
+      },
+      continueButtonText: function(){
+        return !this.hasGameStarted ? 'Start game' : this.currentPlayer.name !== undefined ? 'Finished turn' : 'Deal Automa Card';
       }
     }),
     methods: {
