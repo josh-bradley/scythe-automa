@@ -27,7 +27,7 @@
   import { mapState } from 'vuex'
   import * as deck from './deck'
   import './styles/card.css'
-  import { COMBAT_INITIATED } from './vuex/gameStatus'
+  import { COMBAT_INITIATED, COMBAT_INPROGRESS } from './vuex/gameStatus'
 
 
   storeVuex.commit(types.ADD_PLAYER, { name:'Josh' });
@@ -49,7 +49,7 @@
       'currentTurn':'currentTurn',
       'status':'status',
       inCombat: function(){
-        return this.status === COMBAT_INITIATED;
+        return this.status === COMBAT_INITIATED || this.status === COMBAT_INPROGRESS;
       },
       currentPlayer: function(){
         return this.players[Math.max(this.currentTurn - 1, 0) % this.players.length];

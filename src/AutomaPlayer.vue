@@ -4,7 +4,7 @@
       width='200' 
       :src='image' 
       style='margin-right:10px' 
-      v-bind:class='{"scheme-two":!isSchemeOne, hide:inCombat}')
+      v-bind:class='{"scheme-two":!isSchemeOne}')
     div
       | {{factionName}}
     div
@@ -35,13 +35,12 @@
     },
     methods: {
       dealCombatCard: function(){
-        this.$store.commit(types.INITIATE_COMBAT, { playerId: this.playerId});
+        this.$store.commit(types.PROGRESS_COMBAT, { playerId: this.playerId});
         // let nextCardNumber = deck.getNextCardForPlayer(this.player);
         // this.$store.commit(types.DEAL_COMBAT_CARD, { card:nextCardNumber, playerId:this.playerId});
       }
     },
     computed: mapState({
-      inCombat:'inCombat',
       currentTurn () {
         return this.$store.state.currentTurn;
       },

@@ -18,7 +18,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { DEAL_COMBAT_CARD } from './vuex/types'
+import { DEAL_COMBAT_CARD, PROGRESS_COMBAT } from './vuex/types'
 import * as deck from './deck'
 
 export default {
@@ -29,6 +29,7 @@ export default {
   },
   methods:{
     startCombat: function() {
+      this.$store.commit(PROGRESS_COMBAT);
       let nextCardNumber = deck.getNextCardForPlayer(this.$store.state.players[this.$store.state.combatInitiate]);
       this.$store.commit(DEAL_COMBAT_CARD, { card:nextCardNumber, playerId:this.$store.state.combatInitiate});
       let combatantCardNumber = deck.getNextCardForPlayer(this.$store.state.players[this.selectCombatantId]);
