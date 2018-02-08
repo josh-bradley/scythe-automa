@@ -2,6 +2,7 @@ import * as types from './types'
 import data from '../assets/data'
 import { AUTOMA_CARD_COUNT } from '../constants'
 import dealCombatCardMutation from './mutations/dealCombatCard'
+import intiateCombatMutation from './mutations/initiateCombat'
 
 const totalNumberOfCards = AUTOMA_CARD_COUNT;
 const isCardStarCard = (card) => {
@@ -12,6 +13,8 @@ const isCardStarCard = (card) => {
 }
 
 export default {
+  [types.INITIATE_COMBAT]: intiateCombatMutation,
+  [types.DEAL_COMBAT_CARD]: dealCombatCardMutation,
   [types.ADD_PLAYER]: (state, payload) => {
     if(state.currentTurn === 0 && state.players.length < 6){
       const id = state.players.length;
@@ -70,6 +73,5 @@ export default {
     currentPlayer.coins = playTurn ? automaCard.schemeSpecific[playerScheme].coins + currentPlayer.coins + factionSpecific.coins : currentPlayer.coins;
     state.currentTurn = state.currentTurn + 1;
     state.inCombat = false;
-  },
-  [types.DEAL_COMBAT_CARD]: dealCombatCardMutation
+  }
 }

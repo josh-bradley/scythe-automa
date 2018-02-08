@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import mutations from './mutations'
+import { GAME_INITIATED } from './gameStatus'
 
 Vue.use(Vuex);
 
 const defaultState = {
   players:[],
   currentTurn:0,
-  inCombat:false
+  inCombat:false,
+  status: GAME_INITIATED
 }
 
 const isStarCard = (card) => {

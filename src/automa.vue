@@ -3,12 +3,16 @@
     div(style="display:flex;justify-content:center")
       div
         | {{message}}
+      div(v-if="inCombat")
+        Combat
       div(v-for="automa in automas"
+          v-if="!inCombat"
           class="automa-player"
           :class="{current: currentPlayer === automa}")
         AutomaPlayer(:playerId="automa.id")
     div
       | Current turn {{currentTurn}}
+      | {{status}}
       button(@click='dealNextCard')
         | {{continueButtonText}}
 </template>
@@ -19,9 +23,11 @@
   import data from './assets/data.js'
   import * as types from './vuex/types'
   import AutomaPlayer from './AutomaPlayer.vue'
+  import Combat from './Combat.vue'
   import { mapState } from 'vuex'
   import * as deck from './deck'
   import './styles/card.css'
+  import { COMBAT_INITIATED } from './vuex/gameStatus'
 
 
   storeVuex.commit(types.ADD_PLAYER, { name:'Josh' });
@@ -35,11 +41,16 @@
   export default {  
     store: storeVuex,
     components:{ 
-      AutomaPlayer
+      AutomaPlayer,
+      Combat
     },
     computed: mapState({
       'players':'players',
       'currentTurn':'currentTurn',
+      'status':'status',
+      inCombat: function(){
+        return this.status === COMBAT_INITIATED;
+      },
       currentPlayer: function(){
         return this.players[Math.max(this.currentTurn - 1, 0) % this.players.length];
       },

@@ -1,5 +1,6 @@
 import * as types from './types'
 import mutations from './mutations'
+import { GAME_INITIATED } from './gameStatus' 
 
 const payload = {
     level: 1,
@@ -19,7 +20,7 @@ describe('ADD_PLAYER tests', () => {
   beforeEach(() => {
     state = getDefaultState();
   })
-
+  
   it('should add human player to game', () => {
     mutator(state, { name:'John' });
     expect(state.players.length).toBe(1);

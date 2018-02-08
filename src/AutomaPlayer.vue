@@ -5,11 +5,6 @@
       :src='image' 
       style='margin-right:10px' 
       v-bind:class='{"scheme-two":!isSchemeOne, hide:inCombat}')
-    div(style='display:inline-block' class='combat-card')
-      img(
-        width='200' 
-        :src='combatCardImage'
-        :class='{hide:!inCombat}')
     div
       | {{factionName}}
     div
@@ -22,7 +17,7 @@
       | Coins: {{player.coins}}
     div
       button(@click='dealCombatCard')
-        | Deal combat card
+        | Initiate combat
 </template>
 
 <script>
@@ -30,6 +25,7 @@
   import * as deck from './deck'
   import * as types from './vuex/types'
   import { mapState } from 'vuex'
+
   export default {
     props: {
       playerId:{
@@ -39,8 +35,9 @@
     },
     methods: {
       dealCombatCard: function(){
-        let nextCardNumber = deck.getNextCardForPlayer(this.player);
-        this.$store.commit(types.DEAL_COMBAT_CARD, { card:nextCardNumber, playerId:this.playerId});
+        this.$store.commit(types.INITIATE_COMBAT, { playerId: this.playerId});
+        // let nextCardNumber = deck.getNextCardForPlayer(this.player);
+        // this.$store.commit(types.DEAL_COMBAT_CARD, { card:nextCardNumber, playerId:this.playerId});
       }
     },
     computed: mapState({
