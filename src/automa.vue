@@ -50,24 +50,22 @@
         return this.status === COMBAT_INITIATED || this.status === COMBAT_INPROGRESS;
       },
       currentPlayer: function(){
-        return this.players[this.currentTurn % this.players.length];
+        return this.players[Math.max(this.currentTurn -1, 0) % this.players.length];
       },
       hasGameStarted: function(){
         return this.currentTurn > 0;
-      },
-      isHumanPlayer: function(){
-        return this.currentPlayer.name;
       },
       continueButtonText: function(){
         return !this.hasGameStarted ? 'Start game' : this.currentPlayer.name !== undefined ? 'Finished turn' : 'Deal Automa Card';
       }
     }),
     methods: {  
-      dealNextCard: function(){
-        console.log('go')
+      dealNextCard: function(e){
+        e.preventDefault();
         let nextPlayerIndex = this.$store.state.currentTurn % this.$store.state.players.length;
         const player = this.$store.state.players[nextPlayerIndex];
         let nextCardNumber = player.name ? 0 : deck.getNextCardForPlayer(player);
+        console.log(nextCardNumber);
         this.$store.commit(types.DEAL_CARD, { card:nextCardNumber});
       }
     },
