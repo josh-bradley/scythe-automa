@@ -1,15 +1,13 @@
 <template lang='pug'>
   div
     div(style="display:flex;justify-content:center")
-      div
-        | {{message}}
       div(v-if="inCombat")
         Combat
-      div(v-for="automa in automas"
+      div(v-for="player in players"
           v-if="!inCombat"
           class="automa-player"
-          :class="{current: currentPlayer === automa}")
-        AutomaPlayer(:playerId="automa.id")
+          :class="{current: currentPlayer === player}")
+        AutomaPlayer(:playerId="player.id")
     div
       | Current turn {{currentTurn}}
       | {{status}}
@@ -52,10 +50,7 @@
         return this.status === COMBAT_INITIATED || this.status === COMBAT_INPROGRESS;
       },
       currentPlayer: function(){
-        return this.players[Math.max(this.currentTurn - 1, 0) % this.players.length];
-      },
-      automas: function(){
-        return this.players.filter(player => player.level)
+        return this.players[this.currentTurn % this.players.length];
       },
       hasGameStarted: function(){
         return this.currentTurn > 0;
@@ -63,15 +58,13 @@
       isHumanPlayer: function(){
         return this.currentPlayer.name;
       },
-      message: function(){
-        return !this.hasGameStarted ? 'Start game' : this.isHumanPlayer ? `Play card ${this.currentPlayer.name}` : 'Automas turn.'
-      },
       continueButtonText: function(){
         return !this.hasGameStarted ? 'Start game' : this.currentPlayer.name !== undefined ? 'Finished turn' : 'Deal Automa Card';
       }
     }),
-    methods: {
+    methods: {  
       dealNextCard: function(){
+        console.log('go')
         let nextPlayerIndex = this.$store.state.currentTurn % this.$store.state.players.length;
         const player = this.$store.state.players[nextPlayerIndex];
         let nextCardNumber = player.name ? 0 : deck.getNextCardForPlayer(player);

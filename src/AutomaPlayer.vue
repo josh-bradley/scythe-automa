@@ -1,20 +1,23 @@
 <template lang='pug'>
   div
-    img(
-      width='200' 
-      :src='image' 
-      style='margin-right:10px' 
-      v-bind:class='{"scheme-two":!isSchemeOne}')
-    div
-      | {{factionName}}
-    div
-      | Star card position: {{player.starCardPosition}}
-    div
-      | Star count: {{player.stars}}
-    div 
-      | Power: {{player.power}}
-    div
-      | Coins: {{player.coins}}
+    div(v-if='player.name')
+      | {{message}}
+    div(v-if='player.name === undefined')
+      img(
+        width='200' 
+        :src='image' 
+        style='margin-right:10px' 
+        v-bind:class='{"scheme-two":!isSchemeOne}')
+      div
+        | {{factionName}}
+      div
+        | Star card position: {{player.starCardPosition}}
+      div
+        | Star count: {{player.stars}}
+      div 
+        | Power: {{player.power}}
+      div
+        | Coins: {{player.coins}}
     div
       button(@click='dealCombatCard')
         | Initiate combat
@@ -66,6 +69,9 @@
       isSchemeOne () {
         const starCard = data.starCards[this.player.level];
         return starCard.schemePosition > this.player.starCardPosition;
+      },
+      message: function(){
+        return `Play card ${this.player.name}`
       }
     }),
   }

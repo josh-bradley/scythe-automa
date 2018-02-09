@@ -6,9 +6,11 @@
         | {{getCombatantDisplayName(combatantId)}}
     div(style='display:inline-block' class='combat-card')
       img(
+        v-if='!isCombatInitiateHuman'
         width='200' 
         :src='combatCardImage')
       img(
+        v-if='!isOpponentHuman'
         width='200' 
         :src='combatantCombatCardImage')
     button(@click='startCombat')
@@ -20,6 +22,7 @@
 import { mapState } from 'vuex'
 import { DEAL_COMBAT_CARD, PROGRESS_COMBAT } from './vuex/types'
 import * as deck from './deck'
+import { isHuman } from './player'
 
 export default {
   data: function() {
@@ -30,10 +33,14 @@ export default {
   methods:{
     startCombat: function() {
       this.$store.commit(PROGRESS_COMBAT);
-      let nextCardNumber = deck.getNextCardForPlayer(this.$store.state.players[this.$store.state.combatInitiate]);
-      this.$store.commit(DEAL_COMBAT_CARD, { card:nextCardNumber, playerId:this.$store.state.combatInitiate});
-      let combatantCardNumber = deck.getNextCardForPlayer(this.$store.state.players[this.selectCombatantId]);
-      this.$store.commit(DEAL_COMBAT_CARD, { card:combatantCardNumber, playerId:this.selectCombatantId});
+      if(!this.isCombatInitiateHuman){
+        let nextCardNumber = deck.getNextCardForPlayer(this.$store.state.players[this.$store.state.combatInitiate]);
+        this.$store.commit(DEAL_COMBAT_CARD, { card:nextCardNumber, playerId:this.$store.state.combatInitiate});
+      }
+      if(!this.isOpponentHuman) {
+        let opponentCardNumber = deck.getNextCardForPlayer(this.opponent);
+        this.$store.commit(DEAL_COMBAT_CARD, { card:opponentCardNumber, playerId:this.selectCombatantId});
+      }
     },
     getCombatantDisplayName: function(id){
       const player = this.$store.state.players[id];
@@ -41,6 +48,18 @@ export default {
     }
   },
   computed: mapState({
+    combatInitiate () {
+      return this.$store.state.players[this.$store.state.combatInitiate]
+    },
+    isCombatInitiateHuman () {
+      return isHuman(this.combatInitiate);
+    },
+    opponent (){
+      return this.$store.state.players[this.selectCombatantId];
+    },
+    isOpponentHuman (){
+      return this.opponent && isHuman(this.opponent);
+    },
     combatCardImage () {
       let dealtCards = this.$store.state.players[this.$store.state.combatInitiate].dealtCombatCards;
       let nextCardNumber = dealtCards.length > 0 ? dealtCards[dealtCards.length - 1] : '20';
