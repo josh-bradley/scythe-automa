@@ -4,16 +4,10 @@
     select(v-model='selectCombatantId')
       option(v-for="combatantId in combatants" :value="combatantId")
         | {{getCombatantDisplayName(combatantId)}}
-    div(style='display:inline-block' class='combat-card')
-      img(
-        v-if='!isCombatInitiateHuman'
-        width='200' 
-        :src='combatCardImage')
-      img(
-        v-if='!isOpponentHuman'
-        width='200' 
-        :src='combatantCombatCardImage')
-    button(@click='startCombat')
+    div(class='combat-card')
+      PlayerCombat(:player='this.combatInitiate')
+      PlayerCombat(v-if='this.opponent' :player='this.opponent')
+    button(v-if='this.opponent' @click='startCombat')
       | Start Combat
 
 </template>
@@ -23,6 +17,7 @@ import { mapState } from 'vuex'
 import { DEAL_COMBAT_CARD, PROGRESS_COMBAT } from './vuex/types'
 import * as deck from './deck'
 import { isHuman } from './player'
+import PlayerCombat from './PlayerCombat.vue'
 
 export default {
   data: function() {
@@ -30,8 +25,12 @@ export default {
       selectCombatantId:null
     }
   },
+  components: {
+    PlayerCombat
+  },
   methods:{
-    startCombat: function() {
+    startCombat: function(e) {
+      e.preventDefault();
       this.$store.commit(PROGRESS_COMBAT);
       if(!this.isCombatInitiateHuman){
         let nextCardNumber = deck.getNextCardForPlayer(this.$store.state.players[this.$store.state.combatInitiate]);

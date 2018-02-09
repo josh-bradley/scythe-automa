@@ -37,10 +37,11 @@
       }
     },
     methods: {
-      dealCombatCard: function(){
+      dealCombatCard: function(e){
+        e.preventDefault();
         this.$store.commit(types.PROGRESS_COMBAT, { playerId: this.playerId});
         // let nextCardNumber = deck.getNextCardForPlayer(this.player);
-        // this.$store.commit(types.DEAL_COMBAT_CARD, { card:nextCardNumber, playerId:this.playerId});
+        // this.$store.c  ommit(types.DEAL_COMBAT_CARD, { card:nextCardNumber, playerId:this.playerId});
       }
     },
     computed: mapState({
