@@ -10,14 +10,6 @@
         v-bind:class='{"scheme-two":!isSchemeOne}')
       div
         | {{factionName}}
-      div
-        | Star card position: {{player.starCardPosition}}
-      div
-        | Star count: {{player.stars}}
-      div 
-        | Power: {{player.power}}
-      div
-        | Coins: {{player.coins}}
     div
       button(@click='dealCombatCard')
         | Initiate combat
