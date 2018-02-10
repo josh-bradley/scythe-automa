@@ -2,6 +2,9 @@
   div
     div(v-if='player.name')
       | {{message}}
+    div(v-if='canInitiateCombat')
+      button(@click='dealCombatCard')
+        | Initiate combat
     div(v-if='player.name === undefined')
       div(v-if='isMoveInProgress' v-for='moveOption in player.getCurrentMoveOptions()') {{moveOption.description}}
       div(v-if='isBuildInProgress' v-for='buildItem in player.getBuildList()') {{buildItem}}  
@@ -12,9 +15,6 @@
         v-bind:class='{"scheme-two":!isSchemeOne}')
       div
         | {{factionName}}
-    div
-      button(@click='dealCombatCard')
-        | Initiate combat
 </template>
 
 <script>
@@ -40,6 +40,11 @@
       }
     },
     computed: mapState({
+      canInitiateCombat () {
+        return this.player.name ||
+                (this.$store.state.status === AUTOMA_MOVE &&
+                  this.player.getCurrentMoveOptions().filter(move => move.type === "attack").length > 0);
+      },
       currentTurn () {
         return this.$store.state.currentTurn;
       },

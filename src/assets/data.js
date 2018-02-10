@@ -1,12 +1,12 @@
 export default
 {
   "automaMoveData":{
-    "moveWorker": { "description":"Move worker"},
-    "encounter": { "description":"Encounter"},
-    "moveCharacter": { "description":"Move character"},
-    "moveMech": { "description":"Move mech"},
-    "attack": { "description":"Attack move"},
-    "attackWorker": { "description":"Attack worker"},
+    "moveWorker": { "type":"moveWorker", "description":"Move worker"},
+    "encounter": { "type":"encounter", "description":"Encounter"},
+    "moveCharacter": { "type":"moveCharacter", "description":"Move character"},
+    "moveMech": { "type":"moveMech", "description":"Move mech"},
+    "attack": { "type":"attack", "description":"Attack move"},
+    "attackWorker": { "type":"attackWorker", "description":"Attack worker"},
   },
   "factions":[
     { "id":"Polonia", "name": "Polonia"},
