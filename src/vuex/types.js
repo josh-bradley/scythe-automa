@@ -4,3 +4,4 @@ export const ADD_PLAYER = 'ADD_PLAYER';
 export const PROGRESS_COMBAT = 'PROGRESS_COMBAT';
 export const RESET_GAME = 'RESET_GAME';
 export const COMPLETE_MOVE = 'COMPLETE_MOVE';
+export const COMPLETE_BUILD = 'COMPLETE_BUILD';

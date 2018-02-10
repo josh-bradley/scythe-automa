@@ -5,6 +5,7 @@ import dealCombatCardMutation from './mutations/dealCombatCard'
 import intiateCombatMutation from './mutations/progressCombat'
 import resetGame from './mutations/resetGame'
 import completeMove from './mutations/completeMove'
+import completeBuild from './mutations/completeBuild'
 import { AUTOMA_MOVE } from './gameStatus'
 
 const totalNumberOfCards = AUTOMA_CARD_COUNT;
@@ -20,6 +21,7 @@ export default {
   [types.DEAL_COMBAT_CARD]: dealCombatCardMutation,
   [types.RESET_GAME]: resetGame,
   [types.COMPLETE_MOVE]: completeMove,
+  [types.COMPLETE_BUILD]: completeBuild,
   [types.ADD_PLAYER]: (state, payload) => {
     if(state.currentTurn === 0 && state.players.length < 6){
       const id = state.players.length;

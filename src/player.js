@@ -36,6 +36,8 @@ export const getCurrentMoveOptions = function() {
 export const getBuildList = function(){
   const scheme = this.getCurrentScheme();
   const buildList = [];
+  if(this.name || this.dealtCards.length === 0)
+    return buildList;
   const factionSpecificWorkers = scheme.factionSpecific[this.faction].workers || 0;
   if(scheme.workers > 0 || factionSpecificWorkers > 0)
     buildList.push(`Deploy ${scheme.workers + factionSpecificWorkers} workers`);

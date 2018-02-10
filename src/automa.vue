@@ -2,9 +2,9 @@
   div
     div
       ScoreBoard
-    button(@click='dealNextCard' v-if='!inCombat')
-      | {{continueButtonText}}
+    button(@click='dealNextCard' v-if='!inCombat && !isMoveInProgress && !isBuildInProgress') {{continueButtonText}}
     button(@click='completeMove' v-if='isMoveInProgress') Complete Move
+    button(@click='completeBuild' v-if='isBuildInProgress') Complete Deployment
     div(v-if='shouldLoadState')
         | Would you like to load your last game? 
         button(@click='loadSavedGame') Yes
@@ -33,7 +33,7 @@
   import { mapState } from 'vuex'
   import * as deck from './deck'
   import './styles/card.css'
-  import { AUTOMA_MOVE, COMBAT_INITIATED, COMBAT_INPROGRESS } from './vuex/gameStatus'
+  import { AUTOMA_MOVE, AUTOMA_BUILD, COMBAT_INITIATED, COMBAT_INPROGRESS } from './vuex/gameStatus'
 
   storeVuex.commit(types.ADD_PLAYER, { name:'Josh' });
   // storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[1].id });
@@ -61,6 +61,9 @@
       isMoveInProgress: function(){
         return this.status === AUTOMA_MOVE;
       },
+      isBuildInProgress: function(){
+        return this.status === AUTOMA_BUILD;
+      },
       currentPlayer: function(){
         return this.players[Math.max(this.currentTurn -1, 0) % this.players.length];
       },
@@ -82,6 +85,10 @@
       completeMove: function(e){
         e.preventDefault();
         storeVuex.commit(types.COMPLETE_MOVE)
+      },
+      completeBuild: function(e){
+        e.preventDefault();
+        storeVuex.commit(types.COMPLETE_BUILD)
       },
       dealNextCard: function(e){
         e.preventDefault();

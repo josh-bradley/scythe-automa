@@ -35,6 +35,7 @@
     methods: {
       dealCombatCard: function(e){
         e.preventDefault();
+        console.log(`player ${this.playerId} is starting a fight`)
         this.$store.commit(types.PROGRESS_COMBAT, { playerId: this.playerId});
       }
     },
