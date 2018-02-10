@@ -2,6 +2,8 @@ import { COMBAT_INITIATED, GAME_INITIATED, COMBAT_INPROGRESS } from '../gameStat
 import { getCombatPosition, currentCombatCard } from '../../player'
 
 const adjustCombatPoints = (player) => {
+  if(player.name)
+    return;
   const combatPos = getCombatPosition(player);
   const combatCard = currentCombatCard(player);
   player.power = Math.max(player.power - combatCard.combatPoints[combatPos], 0);
