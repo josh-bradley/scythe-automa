@@ -4,6 +4,8 @@
       | {{message}}
     div(v-if='player.name === undefined')
       div(v-if='isMoveInProgress' v-for='moveOption in player.getCurrentMoveOptions()') {{moveOption.description}}
+      div(v-if='isBuildInProgress' v-for='buildItem in player.getBuildList()') {{buildItem}} 
+        | 
       img(
         width='400' 
         :src='image' 
@@ -22,7 +24,7 @@
   import * as types from './vuex/types'
   import { mapState } from 'vuex'
   import * as playerMethods from './player'
-  import { AUTOMA_MOVE } from './vuex/gameStatus'
+  import { AUTOMA_MOVE, AUTOMA_BUILD } from './vuex/gameStatus'
 
   export default {
     props: {
@@ -69,6 +71,9 @@
       },
       isMoveInProgress: function(){
         return this.$store.state.status === AUTOMA_MOVE;
+      },
+      isBuildInProgress: function(){
+        return this.$store.state.status === AUTOMA_BUILD;
       }
     }),
   }

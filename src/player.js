@@ -32,6 +32,19 @@ export const getCurrentMoveOptions = function() {
           .map(move => data.automaMoveData[move.type])
 }
 
+export const getBuildList = function(){
+  const scheme = this.getCurrentScheme();
+  const buildList = [];
+  const factionSpecificWorkers = scheme.factionSpecific[this.faction].workers || 0;
+  if(scheme.workers > 0 || factionSpecificWorkers > 0)
+    buildList.push(`Build ${scheme.workers + factionSpecificWorkers} workers`);
+  const factionSpecificMechs = scheme.factionSpecific[this.faction].mechs || 0;
+  if(scheme.mechs > 0 || factionSpecificMechs > 0)
+    buildList.push(`Build ${scheme.mechs + factionSpecificMechs} mechs`);
+
+  return buildList;
+}
+
 export const getCombatPosition = (player) => {
   return player.power < 8 ? 0 : player.power < 14 ? 1 : 2;
 }
