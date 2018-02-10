@@ -63,18 +63,32 @@ export default
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":1,
+        "mechs":0,
+        "recruitBonus":"power",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveWorker", "faction":"Nordic"},
+          { "type": "encounter"},
+          { "type": "moveCharacter"}
+        ]
       },
       { 
         "power":4,
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"power",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveWorker" }
+        ]
       }]  
     },
     {
@@ -93,18 +107,32 @@ export default
         "coins":1,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"none",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "encounter", "faction": "Polonia"},
+          { "type": "moveWorker"}
+        ]
       },
       { 
         "power":0,
         "coins":0,
         "noplay":false,
         "powerCards":1,
+        "workers":0,
+        "mechs":1,
+        "recruitBonus":"coin",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "encounter", "faction": "Polonia"},
+          { "type": "moveWorker"}
+        ]
       }]  
     },
     {
@@ -123,18 +151,30 @@ export default
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"none",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveWorker"}
+        ]
       },
       { 
         "power":2,
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":1,
+        "mechs":0,
+        "recruitBonus":"popularity",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveWorker"}
+        ]
       }]  
     },
     {
@@ -153,18 +193,30 @@ export default
         "coins":0,
         "noplay":true,
         "powerCards":1,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"powerCard",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveWorker"}
+        ]
       },
       { 
         "power":0,
         "coins":2,
         "noplay":true,
         "powerCards":0,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"power",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveWorker"}
+        ]
       }]  
     },
     {
@@ -183,18 +235,30 @@ export default
         "coins":1,
         "noplay":false,
         "powerCards":0,
+        "workers":1,
+        "mechs":0,
+        "recruitBonus":"coin",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveWorker"}
+        ]
       },
       { 
         "power":4,
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":1,
+        "mechs":0,
+        "recruitBonus":"powerCard",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveMech"}
+        ]
       }]  
     },
     {
@@ -213,18 +277,30 @@ export default
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"none",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveWorker"}
+        ]
       },
       { 
         "power":2,
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":1,
+        "recruitBonus":"power",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveMech"}
+        ]
       }]  
     },
     {
@@ -243,18 +319,32 @@ export default
         "coins":1,
         "noplay":true,
         "powerCards":0,
+        "workers":1,
+        "mechs":0,
+        "recruitBonus":"popularity",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "attack", "faction": "Saxony", "threshold":5},
+          { "type": "moveWorker"},
+        ]
       },
       { 
         "power":0,
         "coins":0,
         "noplay":true,
         "powerCards":1,
+        "workers":0,
+        "mechs":1,
+        "recruitBonus":"coin",
         "factionSpecific":{
-          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0, "mechs":1}
+        },
+        "moves":[
+          { "type": "attack", "faction": "Saxony", "threshold":5},
+          { "type": "moveMech"},
+        ]
       }]  
     },
     {
@@ -273,18 +363,31 @@ export default
         "coins":0,
         "noplay":true,
         "powerCards":0,
+        "workers":0,
+        "mechs":1,
+        "recruitBonus":"none",
         "factionSpecific":{
-          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0, "mechs":1}
+        },
+        "moves":[
+          { "type": "moveMech"},
+          { "type": "moveWorker"},
+        ]
       },
       { 
         "power":0,
         "coins":1,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":1,
+        "recruitBonus":"coin",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":1},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveMech"},
+        ]
       }]  
     },
     {
@@ -303,18 +406,33 @@ export default
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":1,
+        "mechs":1,
+        "recruitBonus":"popularity",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "encounter", "faction": "Polonia"},
+          { "type": "moveMech"},
+          { "type": "moveWorker"},
+        ]
       },
       { 
         "power":3,
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":1,
+        "mechs":0,
+        "recruitBonus":"popularity",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "encounter", "faction": "Polonia"},
+          { "type": "moveMech"}
+        ]
       }]  
     },
     {
@@ -333,18 +451,31 @@ export default
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":1,
+        "recruitBonus":"none",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveMech"},
+          { "type": "moveWorker"},
+        ]
       },
       { 
         "power":0,
         "coins":2,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":1,
+        "recruitBonus":"none",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveMech"}
+        ]
       }]  
     },
     {
@@ -363,18 +494,34 @@ export default
         "coins":1,
         "noplay":false,
         "powerCards":0,
+        "workers":1,
+        "mechs":0,
+        "recruitBonus":"none",
         "factionSpecific":{
-          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+          "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0,"workers":1}
+        },
+        "moves":[
+          { "type": "moveMech"},
+          { "type": "encounter"},
+          { "type": "moveCharacter"}
+        ]
       },
       { 
         "power":3,
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":1,
+        "mechs":0,
+        "recruitBonus":"powerCard",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveWorker", "faction":"Nordic"},
+          { "type": "encounter"},
+          { "type": "moveCharacter"}
+        ]
       }]  
     },
     {
@@ -393,18 +540,32 @@ export default
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"none",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveWorker", "faction":"Nordic"},
+          { "type": "moveMech"}
+        ]
       },
       { 
         "power":0,
         "coins":1,
         "noplay":false,
         "powerCards":1,
+        "workers":0,
+        "mechs":1,
+        "recruitBonus":"power",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "moveWorker", "faction":"Nordic"},
+          { "type": "moveMech"}
+        ]
       }]  
     },
     {
@@ -423,18 +584,34 @@ export default
         "coins":1,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"none",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "attack", "faction":"Saxony", "threshold":4},
+          { "type": "encounter"},
+          { "type": "moveCharacter"}
+        ]
       },
       { 
         "power":0,
         "coins":2,
         "noplay":false,
         "powerCards":1,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"coin",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "attack", "faction":"Saxony", "threshold":5},
+          { "type": "encounter"},
+          { "type": "moveCharacter"}
+        ]
       }]  
     },
     {
@@ -453,18 +630,33 @@ export default
         "coins":0,
         "noplay":false,
         "powerCards":1,
+        "workers":1,
+        "mechs":0,
+        "recruitBonus":"powerCard",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "encounter"},
+          { "type": "moveCharacter"}
+        ]
       },
       { 
         "power":3,
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"popularity",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "attack", "threshold":7},
+          { "type": "attackWorker"},
+          { "type": "moveMech"}
+        ]
       }]  
     },
     {
@@ -483,18 +675,34 @@ export default
         "coins":1,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"coin",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "encounter"},
+          { "type": "moveCharacter"}
+        ]
       },
       { 
         "power":0,
         "coins":1,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"powerCard",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "attack", "threshold":1},
+          { "type": "attackWorker"},
+          { "type": "encounter"},
+          { "type": "moveCharacter"}
+        ]
       }]  
     },
     {
@@ -513,18 +721,33 @@ export default
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":1,
+        "recruitBonus":"none",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "encounter"},
+          { "type": "moveCharacter"}
+        ]
       },
       { 
         "power":0,
         "coins":1,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":1,
+        "recruitBonus":"none",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":1},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "attack", "threshold":5},
+          { "type": "attackWorker"},
+          { "type": "moveMech"}
+        ]
       }]  
     },
     {
@@ -543,18 +766,33 @@ export default
         "coins":2,
         "noplay":true,
         "powerCards":0,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"power",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "attack", "threshold":6},
+          { "type": "attackWorker"},
+          { "type": "moveWorker"}
+        ]
       },
       { 
         "power":0,
         "coins":1,
         "noplay":true,
         "powerCards":0,
+        "workers":1,
+        "mechs":0,
+        "recruitBonus":"popularity",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 1, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "attack", "threshold":8},
+          { "type": "moveWorker"}
+        ]
       }]  
     },
     {
@@ -573,18 +811,32 @@ export default
         "coins":1,
         "noplay":false,
         "powerCards":0,
+        "workers":1,
+        "mechs":0,
+        "recruitBonus":"none",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "encounter"},
+          { "type": "moveCharacter"}
+        ]
       },
       { 
         "power":0,
         "coins":2,
         "noplay":false,
         "powerCards":0,
+        "workers":1,
+        "mechs":0,
+        "recruitBonus":"none",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "encounter"},
+          { "type": "moveCharacter"}
+        ]
       }]  
     },
     {
@@ -603,19 +855,33 @@ export default
         "coins":0,
         "noplay":false,
         "powerCards":0,
+        "workers":1,
+        "mechs":0,
+        "recruitBonus":"none",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
+        },
+        "moves":[
+          { "type": "attackWorker"},
+          { "type": "moveWorker"}
+        ]
       },
       { 
         "power":3,
         "coins":1,
         "noplay":false,
         "powerCards":0,
+        "workers":0,
+        "mechs":0,
+        "recruitBonus":"powerCard",
         "factionSpecific":{
           "Polonia":{ "coins": 0, "power":0},"Saxony":{ "coins": 0, "power":0},"Crimean":{ "coins": 0, "power":0},"Nordic":{ "coins": 0, "power":0},"Rusviet":{ "coins": 0, "power":0}
-        }
-      }]  
+        },
+        "moves":[
+          { "type": "attackWorker"},
+          { "type": "moveWorker"}
+        ] 
+      }]
     }
   ] 
 }
