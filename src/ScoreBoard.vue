@@ -9,7 +9,8 @@
         th Coins
         th Position
         th Cross River
-      tr(v-for='automa in automas')
+      tr(v-for='automa in automas'
+        :class='{"current-player":automa.id === currentPlayerId}')
         td {{automa.faction}} 
         td {{automa.power}} 
         td {{automa.stars}} 
@@ -22,6 +23,11 @@
 import { mapState } from 'vuex'
 import { canCrossRiver } from './player'
 export default {
+  props:{
+    currentPlayerId:{
+      type:Number
+    }
+  },
   data () {
     return { canAutomaCrossRiver: (automa) => {
         return canCrossRiver(automa);
@@ -37,3 +43,8 @@ export default {
 }
 </script>
 
+<style>
+  .current-player{
+    font-weight: bold;
+  }
+</style>

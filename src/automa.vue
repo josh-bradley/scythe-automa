@@ -1,7 +1,7 @@
 <template lang='pug'>
   div
     div
-      ScoreBoard
+      ScoreBoard(:currentPlayerId='currentPlayer.id')
     button(@click='dealNextCard' v-if='!inCombat && !isMoveInProgress && !isBuildInProgress') {{continueButtonText}}
     button(@click='completeMove' v-if='isMoveInProgress') Complete Move
     button(@click='completeBuild' v-if='isBuildInProgress') Complete Deployment
