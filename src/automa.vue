@@ -2,6 +2,8 @@
   div
     div
       ScoreBoard
+    button(@click='dealNextCard' v-if='!inCombat')
+      | {{continueButtonText}}
     div(v-if='shouldLoadState')
         | Would you like to load your last game? 
         button(@click='loadSavedGame') Yes
@@ -17,8 +19,6 @@
     div
       | Current turn {{currentTurn}}
       | {{status}}
-      button(@click='dealNextCard' v-if='!inCombat')
-        | {{continueButtonText}}
 </template>
 
 <script>

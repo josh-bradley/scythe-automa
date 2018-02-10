@@ -22,11 +22,14 @@ export const getCurrentScheme = function(){
 }
 
 export const getCurrentMoveOptions = function() {
-  const scheme = this.getCurrentScheme();
+  const player = this;
+  const scheme = player.getCurrentScheme();
   if(!scheme)
     return [];
   const moves = scheme.moves;
-  return moves.map(move => data.automaMoveData[move.type]);
+  return moves
+          .filter(move => move.faction === undefined || move.faction === player.faction)
+          .map(move => data.automaMoveData[move.type])
 }
 
 export const getCombatPosition = (player) => {
