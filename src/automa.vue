@@ -1,6 +1,8 @@
 <template lang='pug'>
   div
-    div(style="display:flex;justify-content:center")
+    div
+      ScoreBoard
+    div(style="display:flex;justify-content:center" v-if='$store.state.currentTurn > 0')
       div(v-if="inCombat")
         Combat
       div(v-for="player in players"
@@ -11,7 +13,7 @@
     div
       | Current turn {{currentTurn}}
       | {{status}}
-      button(@click='dealNextCard')
+      button(@click='dealNextCard' v-if='!inCombat')
         | {{continueButtonText}}
 </template>
 
@@ -22,6 +24,7 @@
   import * as types from './vuex/types'
   import AutomaPlayer from './AutomaPlayer.vue'
   import Combat from './Combat.vue'
+  import ScoreBoard from './ScoreBoard.vue'
   import { mapState } from 'vuex'
   import * as deck from './deck'
   import './styles/card.css'
@@ -29,10 +32,10 @@
 
 
   storeVuex.commit(types.ADD_PLAYER, { name:'Josh' });
-  storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[1].id });
-  storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[2].id });
-  storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[3].id });
-  storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[4].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[1].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[2].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[3].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[4].id });
 
   var dealtCards = [];
 
@@ -40,7 +43,8 @@
     store: storeVuex,
     components:{ 
       AutomaPlayer,
-      Combat
+      Combat,
+      ScoreBoard
     },
     computed: mapState({
       'players':'players',

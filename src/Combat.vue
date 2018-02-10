@@ -7,7 +7,9 @@
     div(class='combat-card')
       PlayerCombat(:player='this.combatInitiate')
       PlayerCombat(v-if='this.opponent' :player='this.opponent')
-    button(v-if='this.opponent' @click='startCombat')
+    button(v-if='isCombatInProgress' @click='endCombat')
+      | Finalise combat
+    button(v-if='this.opponent && isCombatInitiated' @click='startCombat')
       | Start Combat
 
 </template>
@@ -15,6 +17,7 @@
 <script>
 import { mapState } from 'vuex'
 import { DEAL_COMBAT_CARD, PROGRESS_COMBAT } from './vuex/types'
+import { COMBAT_INITIATED, COMBAT_INPROGRESS } from './vuex/gameStatus'
 import * as deck from './deck'
 import { isHuman } from './player'
 import PlayerCombat from './PlayerCombat.vue'
@@ -31,7 +34,7 @@ export default {
   methods:{
     startCombat: function(e) {
       e.preventDefault();
-      this.$store.commit(PROGRESS_COMBAT);
+      this.$store.commit(PROGRESS_COMBAT, { opponentId: this.opponent.id });
       if(!this.isCombatInitiateHuman){
         let nextCardNumber = deck.getNextCardForPlayer(this.$store.state.players[this.$store.state.combatInitiate]);
         this.$store.commit(DEAL_COMBAT_CARD, { card:nextCardNumber, playerId:this.$store.state.combatInitiate});
@@ -41,12 +44,22 @@ export default {
         this.$store.commit(DEAL_COMBAT_CARD, { card:opponentCardNumber, playerId:this.selectCombatantId});
       }
     },
+    endCombat: function(e) {
+      e.preventDefault();
+      this.$store.commit(PROGRESS_COMBAT);
+    },
     getCombatantDisplayName: function(id){
       const player = this.$store.state.players[id];
       return player.name || player.faction;
     }
   },
   computed: mapState({
+    isCombatInitiated () {
+      return this.$store.state.status === COMBAT_INITIATED;
+    },
+    isCombatInProgress () {
+      return this.$store.state.status === COMBAT_INPROGRESS;
+    },
     combatInitiate () {
       return this.$store.state.players[this.$store.state.combatInitiate]
     },

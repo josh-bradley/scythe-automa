@@ -15,6 +15,5 @@ export default (state, payload) => {
 
   const rangeId = player.power < 8 ? 0 : player.power < 14 ? 1 : 2;
   const powerSpend = data.cards[payload.card].combatPoints[rangeId];
-  player.power = Math.max(player.power - powerSpend, 0);
   state.inCombat = true;
 }

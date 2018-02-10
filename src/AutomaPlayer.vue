@@ -4,7 +4,7 @@
       | {{message}}
     div(v-if='player.name === undefined')
       img(
-        width='200' 
+        width='400' 
         :src='image' 
         style='margin-right:10px' 
         v-bind:class='{"scheme-two":!isSchemeOne}')
@@ -40,8 +40,6 @@
       dealCombatCard: function(e){
         e.preventDefault();
         this.$store.commit(types.PROGRESS_COMBAT, { playerId: this.playerId});
-        // let nextCardNumber = deck.getNextCardForPlayer(this.player);
-        // this.$store.c  ommit(types.DEAL_COMBAT_CARD, { card:nextCardNumber, playerId:this.playerId});
       }
     },
     computed: mapState({

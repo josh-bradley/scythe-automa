@@ -13,6 +13,18 @@ const getDefaultState = () => ({
   status:GAME_INITIATED
 })
 
+const getCombatInProgressState = (startingPower = 8) => {
+  let state = getDefaultState();
+  state.status = COMBAT_INPROGRESS;
+  state.combatInitiate = 0;
+  state.opponentId = 1;
+  state.players[0].power = startingPower;
+  state.players[0].dealtCombatCards.push(12);
+  state.players[1].power = startingPower;
+  state.players[1].dealtCombatCards.push(3);
+  return state;
+}
+
 describe('INIATE_COMBAT tests', () => {
   it(`should set the combat status to ${COMBAT_INITIATED}`, () => {
     let state = getDefaultState();
@@ -35,16 +47,60 @@ describe('INIATE_COMBAT tests', () => {
     state.status = COMBAT_INITIATED;
 
     mutation(state, { playerId: 0,  });
-    
+
     expect(state.status).toBe(COMBAT_INPROGRESS);
   })
 
-  it(`should set the combat status to ${GAME_INITIATED} after ${COMBAT_INPROGRESS}`, () => {
+  it(`should set the opponent id from the payload`, () => {
     let state = getDefaultState();
-    state.status = COMBAT_INPROGRESS;
+    state.status = COMBAT_INITIATED;
+
+    mutation(state, { opponentId:1 });
+
+    expect(state.opponentId).toBe(1);
+  })
+
+  it(`should set the combat status to ${GAME_INITIATED} after ${COMBAT_INPROGRESS}`, () => {
+    let state = getCombatInProgressState();
 
     mutation(state, { playerId: 0,  });
     
     expect(state.status).toBe(GAME_INITIATED);
   })
+
+  it('should subtract the correct amount of power points', () => {
+    const payload = {};
+    const state = getCombatInProgressState(8);
+
+    mutation(state, payload);
+
+    expect(state.players[0].power).toBe(3);
+  });
+
+  it('should subtract the correct amount of power points and bottom out at 0', () => {
+    const payload = {};
+    const state = getCombatInProgressState(2);
+
+    mutation(state, payload);
+
+    expect(state.players[0].power).toBe(0);
+  });
+
+  it('should the correct amout of points off the opponent.', () => {
+    const payload = {};
+    const state = getCombatInProgressState(15);
+
+    mutation(state, payload);
+
+    expect(state.players[1].power).toBe(8);
+  });
+
+  it('should the correct amout of points off the opponent and bottom out at 0.', () => {
+    const payload = {};
+    const state = getCombatInProgressState(1);
+
+    mutation(state, payload);
+
+    expect(state.players[1].power).toBe(0);
+  });
 })

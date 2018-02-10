@@ -25,7 +25,7 @@ export default {
       combatCard () {
         if(!this.player || !this.player.dealtCombatCards.length || !this.isCombatInProgress)
           return null
-        return data.cards[currentCombatCard(this.player)]
+        return currentCombatCard(this.player);
       },
       combatPoints () {
         const combatPos = this.player.power < 8 ? 0 : this.player.power < 14 ? 1 : 0; 
