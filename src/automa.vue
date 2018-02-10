@@ -3,6 +3,10 @@
     div
       ScoreBoard
     div(style="display:flex;justify-content:center" v-if='$store.state.currentTurn > 0')
+      div(v-if='shouldLoadState')
+        | Would you like to load your last game? 
+        button(@click='loadSavedGame') Yes
+        button(@click='resetGame') No
       div(v-if="inCombat")
         Combat
       div(v-for="player in players"
@@ -30,12 +34,11 @@
   import './styles/card.css'
   import { COMBAT_INITIATED, COMBAT_INPROGRESS } from './vuex/gameStatus'
 
-
   storeVuex.commit(types.ADD_PLAYER, { name:'Josh' });
-  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[1].id });
-  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[2].id });
-  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[3].id });
-  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[4].id });
+  // storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[1].id });
+  // storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[2].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:2, faction: data.factions[3].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:2, faction: data.factions[4].id });
 
   var dealtCards = [];
 
@@ -47,6 +50,7 @@
       ScoreBoard
     },
     computed: mapState({
+      'shouldLoadState':'shouldLoadState',
       'players':'players',
       'currentTurn':'currentTurn',
       'status':'status',
@@ -64,6 +68,13 @@
       }
     }),
     methods: {  
+      resetGame: function(e){
+        e.preventDefault();
+        storeVuex.commit(types.RESET_GAME);
+      },
+      loadSavedGame: function(e){
+        e.preventDefault();
+      },
       dealNextCard: function(e){
         e.preventDefault();
         let nextPlayerIndex = this.$store.state.currentTurn % this.$store.state.players.length;
