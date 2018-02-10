@@ -29,7 +29,7 @@ export default {
       },
       combatPoints () {
         const combatPos = this.player.power < 8 ? 0 : this.player.power < 14 ? 1 : 0; 
-        return this.combatCard ? this.combatCard.combatPoints[combatPos] : 0;
+        return this.combatCard ? Math.min(this.combatCard.combatPoints[combatPos], this.player.power) : 0;
       },
       powerCards () {
         return this.combatCard ? this.combatCard.combartCards : 0;
