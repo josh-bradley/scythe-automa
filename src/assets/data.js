@@ -1,5 +1,13 @@
 export default
 {
+  "automaMoveData":{
+    "moveWorker": { "description":"Move worker"},
+    "encounter": { "description":"Encounter"},
+    "moveCharacter": { "description":"Move character"},
+    "moveMech": { "description":"Move mech"},
+    "attack": { "description":"Attack move"},
+    "attackWorker": { "description":"Attack worker"},
+  },
   "factions":[
     { "id":"Polonia", "name": "Polonia"},
     { "id":"Saxony", "name": "Saxony"},

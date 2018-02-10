@@ -1,4 +1,5 @@
 import { DEAL_CARD } from './types'
+import { AUTOMA_MOVE } from './gameStatus'
 import mutations from './mutations'
 const mutation = mutations[DEAL_CARD]; 
 const payload = {
@@ -33,6 +34,14 @@ describe('DEAL_CARD mutation test tests', () => {
     const state = getDefaultState(0);
     mutation(state, {});
     expect(state.currentTurn).toBe(1);
+  })
+
+  it(`should set the status to ${AUTOMA_MOVE} for an automa's turn`, () => {
+    const state = getDefaultState();
+
+    mutation(state, payload);
+
+    expect(state.status).toBe(AUTOMA_MOVE);
   })
 
   it('should set the card to the first player on the first turn', () => {

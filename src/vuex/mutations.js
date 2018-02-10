@@ -4,6 +4,7 @@ import { AUTOMA_CARD_COUNT } from '../constants'
 import dealCombatCardMutation from './mutations/dealCombatCard'
 import intiateCombatMutation from './mutations/progressCombat'
 import resetGame from './mutations/resetGame'
+import { AUTOMA_MOVE } from './gameStatus'
 
 const totalNumberOfCards = AUTOMA_CARD_COUNT;
 const isCardStarCard = (card) => {
@@ -75,5 +76,6 @@ export default {
     currentPlayer.coins = playTurn ? automaCard.schemeSpecific[playerScheme].coins + currentPlayer.coins + factionSpecific.coins : currentPlayer.coins;
     state.currentTurn = state.currentTurn + 1;
     state.inCombat = false;
+    state.status = AUTOMA_MOVE;
   }
 }

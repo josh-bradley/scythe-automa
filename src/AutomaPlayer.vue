@@ -3,6 +3,7 @@
     div(v-if='player.name')
       | {{message}}
     div(v-if='player.name === undefined')
+      div(v-for='moveOption in player.getCurrentMoveOptions()') {{moveOption.description}}
       img(
         width='400' 
         :src='image' 
@@ -20,6 +21,7 @@
   import * as deck from './deck'
   import * as types from './vuex/types'
   import { mapState } from 'vuex'
+  import * as playerMethods from './player'
 
   export default {
     props: {
@@ -49,7 +51,7 @@
         return `./dist/${nextCardNumber.toString().padStart(2, '0')}.png`
       },
       player () {
-        return this.$store.state.players[this.playerId];
+        return Object.assign(this.$store.state.players[this.playerId], playerMethods);
       },
       starCard () {
         return `./dist/StarCard${this.$store.state.players[this.playerId].level - 1}.png`;

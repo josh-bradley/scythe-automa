@@ -2,11 +2,11 @@
   div
     div
       ScoreBoard
-    div(style="display:flex;justify-content:center" v-if='$store.state.currentTurn > 0')
-      div(v-if='shouldLoadState')
+    div(v-if='shouldLoadState')
         | Would you like to load your last game? 
         button(@click='loadSavedGame') Yes
         button(@click='resetGame') No
+    div(style="display:flex;justify-content:center" v-if='$store.state.currentTurn > 0')
       div(v-if="inCombat")
         Combat
       div(v-for="player in players"
