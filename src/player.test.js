@@ -12,6 +12,26 @@ describe('player extention tests', () => {
   })
 })
 
+describe('getCurrentMoveOptions', () => {
+  it('should return attack move when automa has the power to perform move', () => {
+    const playerData = { dealtCards: [17], starCardPosition:0, level:1, faction:'Nordic', power:6 }
+    const player = Object.assign(playerData, playerMethods);
+
+    const buildList = player.getCurrentMoveOptions();
+
+    expect(buildList.filter(x => x.description === 'Attack move').length).toBe(1);
+  })
+
+  it('should not return attack move when automa does not have the power to perform move', () => {
+    const playerData = { dealtCards: [17], starCardPosition:0, level:1, faction:'Nordic', power:5 }
+    const player = Object.assign(playerData, playerMethods);
+
+    const buildList = player.getCurrentMoveOptions();
+
+    expect(buildList.filter(x => x.description === 'Attack move').length).toBe(0);
+  })
+});
+
 describe('get build list', () => {
   it('should get number of workers correct', () => {
     const playerData = { dealtCards: [11], starCardPosition:0, level:1, faction:'Nordic' }
@@ -19,16 +39,16 @@ describe('get build list', () => {
 
     const buildList = player.getBuildList();
 
-    expect(buildList.filter(x => x === 'Build 1 workers').length).toBe(1);
+    expect(buildList.filter(x => x === 'Deploy 1 workers').length).toBe(1);
   })
   
-  it('should get number of mechs correct', () => {
+  it('should get number of characters\mechs correct', () => {
     const playerData = { dealtCards: [8], starCardPosition:0, level:1, faction:'Nordic' }
     const player = Object.assign(playerData, playerMethods);
 
     const buildList = player.getBuildList();
 
-    expect(buildList.filter(x => x === 'Build 1 mechs').length).toBe(1);
+    expect(buildList.filter(x => x === 'Deploy 1 characters\mechs').length).toBe(1);
   })
 
   it('should get number of workers correct when faction specific worker build matches', () => {
@@ -37,15 +57,15 @@ describe('get build list', () => {
 
     const buildList = player.getBuildList();
 
-    expect(buildList.filter(x => x === 'Build 2 workers').length).toBe(1);
+    expect(buildList.filter(x => x === 'Deploy 2 workers').length).toBe(1);
   })
 
-  it('should get number of mechs correct when faction matches faction specific build option', () => {
+  it('should get number of characters\mechs correct when faction matches faction specific build option', () => {
     const playerData = { dealtCards: [8], starCardPosition:0, level:1, faction:'Rusviet' }
     const player = Object.assign(playerData, playerMethods);
 
     const buildList = player.getBuildList();
 
-    expect(buildList.filter(x => x === 'Build 2 mechs').length).toBe(1);
+    expect(buildList.filter(x => x === 'Deploy 2 characters\mechs').length).toBe(1);
   })
 })

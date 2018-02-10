@@ -4,8 +4,7 @@
       | {{message}}
     div(v-if='player.name === undefined')
       div(v-if='isMoveInProgress' v-for='moveOption in player.getCurrentMoveOptions()') {{moveOption.description}}
-      div(v-if='isBuildInProgress' v-for='buildItem in player.getBuildList()') {{buildItem}} 
-        | 
+      div(v-if='isBuildInProgress' v-for='buildItem in player.getBuildList()') {{buildItem}}  
       img(
         width='400' 
         :src='image' 

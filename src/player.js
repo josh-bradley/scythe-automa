@@ -29,6 +29,7 @@ export const getCurrentMoveOptions = function() {
   const moves = scheme.moves;
   return moves
           .filter(move => move.faction === undefined || move.faction === player.faction)
+          .filter(move => move.type !== "attack" || move.threshold <= player.power)
           .map(move => data.automaMoveData[move.type])
 }
 
@@ -37,10 +38,10 @@ export const getBuildList = function(){
   const buildList = [];
   const factionSpecificWorkers = scheme.factionSpecific[this.faction].workers || 0;
   if(scheme.workers > 0 || factionSpecificWorkers > 0)
-    buildList.push(`Build ${scheme.workers + factionSpecificWorkers} workers`);
+    buildList.push(`Deploy ${scheme.workers + factionSpecificWorkers} workers`);
   const factionSpecificMechs = scheme.factionSpecific[this.faction].mechs || 0;
   if(scheme.mechs > 0 || factionSpecificMechs > 0)
-    buildList.push(`Build ${scheme.mechs + factionSpecificMechs} mechs`);
+    buildList.push(`Deploy ${scheme.mechs + factionSpecificMechs} characters\mechs`);
 
   return buildList;
 }
