@@ -10,7 +10,7 @@
       div(v-if='isBuildInProgress' v-for='buildItem in player.getBuildList()') {{buildItem}}  
       div(v-if='isAutomaFinaliseInProgress' v-for='recruitBonus in recruitBonuses') {{recruitBonus}}
       img(
-        width='400' 
+        width='200' 
         :src='image' 
         style='margin-right:10px' 
         v-bind:class='{"scheme-two":!isSchemeOne}')

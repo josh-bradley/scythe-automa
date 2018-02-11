@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import mutations from './mutations'
 import { GAME_INITIATED } from './gameStatus'
 import defaultState from './defaultState'
+import { SAVED_GAME_KEY } from '../constants'
 
 Vue.use(Vuex);
 
@@ -13,19 +14,15 @@ const isStarCard = (card) => {
           .star;
 }
 
-const stateKey = 'saved_state'
 const saveStatePlugin = store => {
   store.subscribe((mutation, state) => {
-    localStorage.setItem(stateKey, JSON.stringify(state));
+    localStorage.setItem(SAVED_GAME_KEY, JSON.stringify(state));
   });
 }
 
-const savedState = JSON.parse(localStorage.getItem(stateKey))
-if(savedState)
-  savedState.shouldLoadState = true
-const startState = savedState || defaultState;
+defaultState.savedState = JSON.parse(localStorage.getItem(SAVED_GAME_KEY))
 export default new Vuex.Store({
-  state:startState,
+  state:defaultState,
   mutations,
   plugins:[saveStatePlugin]
 })

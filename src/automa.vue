@@ -1,14 +1,23 @@
 <template lang='pug'>
-  div
+  div(class='container-main')
     div
       ScoreBoard(:currentPlayerId='currentPlayer.id')
-    button(@click='dealNextCard' v-if='!inCombat && !isMoveInProgress && !isBuildInProgress') {{continueButtonText}}
-    button(@click='completeMove' v-if='isMoveInProgress') Complete Move
-    button(@click='completeBuild' v-if='isBuildInProgress') Complete Deployment
-    div(v-if='shouldLoadState')
+    button(
+      @click='dealNextCard' 
+      v-if='!inCombat && !isMoveInProgress && !isBuildInProgress'
+      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect") {{continueButtonText}}
+    button(
+      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+      @click='completeMove' 
+      v-if='isMoveInProgress') Complete Move
+    button(
+      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+      @click='completeBuild' 
+      v-if='isBuildInProgress') Complete Deployment
+    div(v-if='savedState')
         | Would you like to load your last game? 
         button(@click='loadSavedGame') Yes
-        button(@click='resetGame') No
+        button(@click='clearSavedState') No
     div(style="display:flex;justify-content:center" v-if='$store.state.currentTurn > 0')
       div(v-if="inCombat")
         Combat
@@ -36,8 +45,8 @@
   import { AUTOMA_MOVE, AUTOMA_BUILD, COMBAT_INITIATED, COMBAT_INPROGRESS } from './vuex/gameStatus'
 
   storeVuex.commit(types.ADD_PLAYER, { name:'Josh' });
-  // storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[1].id });
-  // storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[2].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[1].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[3].id });
   storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[2].id });
   storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[4].id });
 
@@ -51,7 +60,7 @@
       ScoreBoard
     },
     computed: mapState({
-      'shouldLoadState':'shouldLoadState',
+      'savedState':'savedState',
       'players':'players',
       'currentTurn':'currentTurn',
       'status':'status',
@@ -75,12 +84,13 @@
       }
     }),
     methods: {  
-      resetGame: function(e){
+      clearSavedState: function(e){
         e.preventDefault();
-        storeVuex.commit(types.RESET_GAME);
+        storeVuex.commit(types.CLEAR_SAVED_GAME);
       },
       loadSavedGame: function(e){
         e.preventDefault();
+        storeVuex.commit(types.LOAD_SAVED_GAME);
       },
       completeMove: function(e){
         e.preventDefault();
@@ -100,3 +110,9 @@
     },
   };
 </script>
+
+<style>
+  .container-main {
+    text-align: center;
+  }
+</style>
