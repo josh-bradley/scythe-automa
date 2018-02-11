@@ -21,6 +21,10 @@ export const getCurrentScheme = function(){
   return currentCard.schemeSpecific[schemeId];
 }
 
+export const getFactionSpecific = function(){
+  return this.getCurrentScheme().factionSpecific[this.faction];
+}
+
 export const getCurrentMoveOptions = function() {
   const player = this;
   const scheme = player.getCurrentScheme();
@@ -49,6 +53,8 @@ export const getBuildList = function(){
 }
 
 export const getRecruitBonus = function (){
+  if(this.name || this.dealtCards.length === 0)
+    return '';
   const recruitBonus = this.getCurrentScheme().recruitBonus;
   return data.recruitBonusData[recruitBonus];
 }
