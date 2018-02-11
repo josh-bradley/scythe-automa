@@ -1,6 +1,9 @@
-import { DEAL_CARD } from './types'
-import { AUTOMA_MOVE } from './gameStatus'
-import mutations from './mutations'
+import { DEAL_CARD } from '../types'
+import { AUTOMA_MOVE } from '../gameStatus'
+import mutations from '../mutations'
+
+const cardWithNoPlayBothSchemesAndStar = 7;
+const cardWithStarNoPlay1 = 8;
 const mutation = mutations[DEAL_CARD]; 
 const payload = {
   card: 11
@@ -15,19 +18,6 @@ const getDefaultState = (turn = 1) => ({
   ],
   currentTurn:turn
 })
-
-const cardWithOnePowerScheme1 = 1;
-const cardWithNoPowerScheme1 = 2;
-const cardWithPowerScheme2 = 19;
-const cardWithCoinScheme1 = 15;
-const cardWithCoinsScheme2 = 10;
-const cardWithNoCoinsScheme1 = 6;
-const cardWithNoPlayBothSchemesAndStar = 7;
-const cardWithCoinScheme1NoPlay = 7;
-const cardWithStarNoPlay1 = 8;
-const cardsWithBonusCoinForCrimea = 4;
-const cardWithSpecialPowerRewardForSaxony = 16;
-
 
 describe('DEAL_CARD mutation test tests', () => {
   it('should up the turn count by 1 for a human player', () => {

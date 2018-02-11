@@ -6,15 +6,11 @@ import intiateCombatMutation from './mutations/progressCombat'
 import resetGame from './mutations/resetGame'
 import completeMove from './mutations/completeMove'
 import completeBuild from './mutations/completeBuild'
+import dealCard from './mutations/dealCard'
+import addPlayer from './mutations/addPlayer'
 import { AUTOMA_MOVE } from './gameStatus'
 
 const totalNumberOfCards = AUTOMA_CARD_COUNT;
-const isCardStarCard = (card) => {
-  return data
-          .cards
-          .filter(x => x.id === card)[0]
-          .star;
-}
 
 export default {
   [types.PROGRESS_COMBAT]: intiateCombatMutation,
@@ -22,61 +18,6 @@ export default {
   [types.RESET_GAME]: resetGame,
   [types.COMPLETE_MOVE]: completeMove,
   [types.COMPLETE_BUILD]: completeBuild,
-  [types.ADD_PLAYER]: (state, payload) => {
-    if(state.currentTurn === 0 && state.players.length < 6){
-      const id = state.players.length;
-      if(payload.name){
-        state.players.push({
-          id:id,
-          name:payload.name
-        });
-      } else {
-        state.players.push({
-          id:id,
-          dealtCards: [],
-          dealtCombatCards:[],
-          starCardPosition:0,
-          level: payload.level,
-          faction: payload.faction,
-          power: data.factionMats[payload.faction].power,
-          stars:0,
-          coins:5
-        });
-      }
-    }           
-  },
-  [types.DEAL_CARD]: (state, payload) => {
-    const currentPlayerIdx = state.currentTurn % state.players.length;
-    const currentPlayer = state.players[currentPlayerIdx];
-    if(currentPlayer.name) {
-      state.currentTurn = state.currentTurn + 1;
-      return;
-    }
-    const discardedCards = currentPlayer.dealtCards.concat(currentPlayer.dealtCombatCards);
-    const isReShuffle = discardedCards.length >= totalNumberOfCards - 1;
-    const cardAlreadyDealt = discardedCards.some((x) => x === payload.card);
-    if(!isReShuffle && cardAlreadyDealt)
-      return;
-    currentPlayer.dealtCards =  isReShuffle
-                          ? [payload.card]
-                          : [...currentPlayer.dealtCards, payload.card];
-    currentPlayer.dealtCombatCards = isReShuffle
-                                      ? []
-                                      : currentPlayer.dealtCombatCards;
-    const isStarCard = isCardStarCard(payload.card);
-    const automaCard = data
-                        .cards
-                        .filter(x => x.id === payload.card)[0];
-    const playerLevel = state.players[currentPlayerIdx].level;
-    const starCard = data.starCards[playerLevel];
-    const playerScheme = starCard.schemePosition > currentPlayer.starCardPosition ? 0 : 1;
-
-    const playTurn = currentPlayer.level > 1 ||  !automaCard.schemeSpecific[playerScheme].noplay;
-    const starCardPosition = isStarCard && playTurn ? currentPlayer.starCardPosition + 1 : currentPlayer.starCardPosition;
-    currentPlayer.starCardPosition = starCardPosition;
-    currentPlayer.stars = starCard.starPositions.indexOf(starCardPosition) < 0 || !isStarCard || !playTurn ? currentPlayer.stars : currentPlayer.stars + 1;
-    state.currentTurn = state.currentTurn + 1;
-    state.inCombat = false;
-    state.status = AUTOMA_MOVE;
-  }
+  [types.ADD_PLAYER]: addPlayer,
+  [types.DEAL_CARD]: dealCard
 }

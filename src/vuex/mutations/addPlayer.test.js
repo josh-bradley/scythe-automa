@@ -1,6 +1,6 @@
-import * as types from './types'
-import mutations from './mutations'
-import { GAME_INITIATED } from './gameStatus' 
+import * as types from '../types'
+import mutations from '../mutations'
+import { GAME_INITIATED } from '../gameStatus' 
 
 const payload = {
     level: 1,

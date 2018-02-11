@@ -38,8 +38,8 @@
   storeVuex.commit(types.ADD_PLAYER, { name:'Josh' });
   // storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[1].id });
   // storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[2].id });
-  storeVuex.commit(types.ADD_PLAYER, { level:2, faction: data.factions[3].id });
-  storeVuex.commit(types.ADD_PLAYER, { level:2, faction: data.factions[4].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[2].id });
+  storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[4].id });
 
   var dealtCards = [];
 
