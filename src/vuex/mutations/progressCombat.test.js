@@ -1,23 +1,24 @@
 import { PROGRESS_COMBAT } from '../types'
 import mutations from '../mutations'
-import { COMBAT_INITIATED, GAME_INITIATED, COMBAT_INPROGRESS } from '../gameStatus'
+import { COMBAT_INITIATED, GAME_INITIATED, COMBAT_INPROGRESS, AUTOMA_MOVE } from '../gameStatus'
 const mutation = mutations[PROGRESS_COMBAT];
 
-const getDefaultState = () => ({
+const getDefaultState = (currentTurn = 0) => ({
   players: [
     { level: 1, dealtCards: [], dealtCombatCards:[], starCardPosition:0, stars:0, coins:5, power:3, faction:"Nordic"},
     { level: 1, dealtCards: [], dealtCombatCards:[], starCardPosition:0, stars:0, coins:5, power:3, faction:"Polonia"},
     { level: 1, dealtCards: [], dealtCombatCards:[], starCardPosition:0, stars:0, coins:5, power:3, faction:"Crimean"},
+    { name: 'bob'},
   ],
-  currentTurn:0,
+  currentTurn:currentTurn,
   status:GAME_INITIATED
 })
 
-const getCombatInProgressState = (startingPower = 8) => {
-  let state = getDefaultState();
+const getCombatInProgressState = (startingPower = 8, currentTurn=0) => {
+  let state = getDefaultState(currentTurn);
   state.status = COMBAT_INPROGRESS;
   state.combatInitiate = 0;
-  state.opponentId = 1;
+  state.opponentId = 1; 
   state.players[0].power = startingPower;
   state.players[0].dealtCombatCards.push(12);
   state.players[1].power = startingPower;
@@ -46,7 +47,7 @@ describe('INIATE_COMBAT tests', () => {
     let state = getDefaultState();
     state.status = COMBAT_INITIATED;
 
-    mutation(state, { playerId: 0,  });
+    mutation(state, { playerId: 0  });
 
     expect(state.status).toBe(COMBAT_INPROGRESS);
   })
@@ -60,12 +61,20 @@ describe('INIATE_COMBAT tests', () => {
     expect(state.opponentId).toBe(1);
   })
 
-  it(`should set the combat status to ${GAME_INITIATED} after ${COMBAT_INPROGRESS}`, () => {
+  it(`should set the co mbat status to ${GAME_INITIATED} after ${COMBAT_INPROGRESS}`, () => {
+    let state = getCombatInProgressState(8,4);
+
+    mutation(state, { playerId: 4  });
+
+    expect(state.status).toBe(GAME_INITIATED);
+  })
+
+  it(`should set the combat status to ${AUTOMA_MOVE} after ${COMBAT_INPROGRESS} for automa`, () => {
     let state = getCombatInProgressState();
 
-    mutation(state, { playerId: 0,  });
+    mutation(state, { playerId: 0  });
     
-    expect(state.status).toBe(GAME_INITIATED);
+    expect(state.status).toBe(AUTOMA_MOVE);
   })
 
   it('should subtract the correct amount of power points', () => {

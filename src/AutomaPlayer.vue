@@ -8,6 +8,7 @@
     div(v-if='player.name === undefined')
       div(v-if='isMoveInProgress' v-for='moveOption in player.getCurrentMoveOptions()') {{moveOption.description}}
       div(v-if='isBuildInProgress' v-for='buildItem in player.getBuildList()') {{buildItem}}  
+      div(v-if='isAutomaFinaliseInProgress' v-for='recruitBonus in recruitBonuses') {{recruitBonus}}
       img(
         width='400' 
         :src='image' 
@@ -23,7 +24,7 @@
   import * as types from './vuex/types'
   import { mapState } from 'vuex'
   import * as playerMethods from './player'
-  import { AUTOMA_MOVE, AUTOMA_BUILD } from './vuex/gameStatus'
+  import { AUTOMA_MOVE, AUTOMA_BUILD, AUTOMA_FINALISE } from './vuex/gameStatus'
 
   export default {
     props: {
@@ -35,7 +36,6 @@
     methods: {
       dealCombatCard: function(e){
         e.preventDefault();
-        console.log(`player ${this.playerId} is starting a fight`)
         this.$store.commit(types.PROGRESS_COMBAT, { playerId: this.playerId});
       }
     },
@@ -79,6 +79,18 @@
       },
       isBuildInProgress: function(){
         return this.$store.state.status === AUTOMA_BUILD;
+      },
+      isAutomaFinaliseInProgress: function(){
+        return this.$store.state.status === AUTOMA_FINALISE;
+      },
+      recruitBonuses: function() {
+        const recruitBonus = this.player.getRecruitBonus();
+        if(!recruitBonus.description)
+          return [];
+        const players = this.$store.state.players;
+        const adjacentPlayers = [players[(this.playerId + players.length - 1) % players.length],
+                                  players[(this.playerId + 1) % players.length]];
+        return adjacentPlayers.map(player => player.name ? `${player.name} check for ${recruitBonus.description}`:'');
       }
     }),
   }

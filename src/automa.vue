@@ -95,7 +95,6 @@
         let nextPlayerIndex = this.$store.state.currentTurn % this.$store.state.players.length;
         const player = this.$store.state.players[nextPlayerIndex];
         let nextCardNumber = player.name ? 0 : deck.getNextCardForPlayer(player);
-        console.log(nextCardNumber);
         this.$store.commit(types.DEAL_CARD, { card:nextCardNumber});
       }
     },

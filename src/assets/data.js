@@ -8,6 +8,13 @@ export default
     "attack": { "type":"attack", "description":"Attack move"},
     "attackWorker": { "type":"attackWorker", "description":"Attack worker"},
   },
+  "recruitBonusData":{
+    "none":{"type":"none", "description":""},
+    "coin":{"type":"coin", "description":"coin recruit bonus"},
+    "popularity":{"type":"popularity", "description":"popularity recruit bonus"},
+    "power":{"type":"power", "description":"power recruit bonus"},
+    "powerCard":{"type":"powerCard", "description":"power card recruit bonus"}
+  },
   "factions":[
     { "id":"Polonia", "name": "Polonia"},
     { "id":"Saxony", "name": "Saxony"},

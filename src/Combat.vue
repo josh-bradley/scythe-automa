@@ -80,7 +80,6 @@ export default {
     combatantCombatCardImage () {
       if(this.selectCombatantId === null)
         return './dist/20.png'
-      console.log("totally updating the combatants combat card.")
       let dealtCards = this.$store.state.players[this.selectCombatantId].dealtCombatCards;
       let nextCardNumber = dealtCards.length > 0 ? dealtCards[dealtCards.length - 1] : '20';
       return `./dist/${nextCardNumber.toString().padStart(2, '0')}.png`

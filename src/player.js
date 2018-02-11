@@ -48,6 +48,11 @@ export const getBuildList = function(){
   return buildList;
 }
 
+export const getRecruitBonus = function (){
+  const recruitBonus = this.getCurrentScheme().recruitBonus;
+  return data.recruitBonusData[recruitBonus];
+}
+
 export const getCombatPosition = (player) => {
   return player.power < 8 ? 0 : player.power < 14 ? 1 : 2;
 }

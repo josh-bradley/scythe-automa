@@ -23,5 +23,4 @@ export default (state, payload) => {
                     : COMBAT_INPROGRESS;  
   state.opponentId = state.status === COMBAT_INPROGRESS ? payload.opponentId : state.opponentId;
   state.combatInitiate = state.status === COMBAT_INITIATED ? payload.playerId : state.combatInitiate;
-  console.log(state)
 }

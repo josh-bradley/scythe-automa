@@ -69,3 +69,23 @@ describe('get build list', () => {
     expect(buildList.filter(x => x === 'Deploy 2 characters\mechs').length).toBe(1);
   })
 })
+
+describe('get recruit bonus', () => {
+  it('should return none when there is no bonus', () => {
+    const playerData = { dealtCards: [16], starCardPosition:0, level:1, faction:'Rusviet' }
+    const player = Object.assign(playerData, playerMethods);
+
+    const result = player.getRecruitBonus();
+
+    expect(result.type).toBe('none');
+  });
+    
+  it('should return coin when there is coin bonus', () => {
+    const playerData = { dealtCards: [15], starCardPosition:0, level:1, faction:'Rusviet' }
+    const player = Object.assign(playerData, playerMethods);
+
+    const result = player.getRecruitBonus();
+
+    expect(result.type).toBe('coin');
+  });
+})
