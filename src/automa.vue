@@ -2,9 +2,30 @@
   div(class='container-main')
     div
       ScoreBoard(:currentPlayerId='currentPlayer.id')
+    div(
+      class='mdl-typography--title flex-container-centre pad-sides-med'
+      v-if='savedState')
+        | Would you like to load your last game? 
+        br
+        br
+        div
+          button(
+            class='mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect'
+            @click='loadSavedGame') Yes
+          button(
+            class='mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect'
+            @click='clearSavedState') No
+    div(style="display:flex;justify-content:center;flex-grow:1" v-if='$store.state.currentTurn > 0')
+      div(v-if="inCombat")
+        Combat
+      div(v-for="player in players"
+          v-if="!inCombat"
+          class="automa-player"
+          :class="{current: currentPlayer === player}")
+        AutomaPlayer(:playerId="player.id")
     button(
       @click='dealNextCard' 
-      v-if='!inCombat && !isMoveInProgress && !isBuildInProgress'
+      v-if='!inCombat && !isMoveInProgress && !isBuildInProgress && !savedState'
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect") {{continueButtonText}}
     button(
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
@@ -14,18 +35,6 @@
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
       @click='completeBuild' 
       v-if='isBuildInProgress') Complete Deployment
-    div(v-if='savedState')
-        | Would you like to load your last game? 
-        button(@click='loadSavedGame') Yes
-        button(@click='clearSavedState') No
-    div(style="display:flex;justify-content:center" v-if='$store.state.currentTurn > 0')
-      div(v-if="inCombat")
-        Combat
-      div(v-for="player in players"
-          v-if="!inCombat"
-          class="automa-player"
-          :class="{current: currentPlayer === player}")
-        AutomaPlayer(:playerId="player.id")
     div
       | Current turn {{currentTurn}}
       | {{status}}
@@ -114,5 +123,8 @@
 <style>
   .container-main {
     text-align: center;
+    height:100%;
+    display:flex;
+    flex-direction: column;
   }
 </style>

@@ -1,21 +1,18 @@
 <template lang='pug'>
-  div
+  div(style='flex;flex-direction:column;')
     div(v-if='player.name')
       | {{message}}
-    div(v-if='canInitiateCombat')
-      button(@click='dealCombatCard')
+    div(v-if='player.name === undefined' class='automa-instructions')
+      ul
+        li(class='mdl-list__item' v-if='isMoveInProgress' v-for='moveOption in player.getCurrentMoveOptions()') {{moveOption.description}}
+        li(class='mdl-list__item' v-if='isBuildInProgress' v-for='buildItem in player.getBuildList()') {{buildItem}}  
+        li(class='mdl-list__item' v-if='isAutomaFinaliseInProgress' v-for='recruitBonus in recruitBonuses') {{recruitBonus}}
+        div(v-if='canInitiateCombat')
+    button(
+      style='flex-grow:1'
+      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+      @click='dealCombatCard')
         | Initiate combat
-    div(v-if='player.name === undefined')
-      div(v-if='isMoveInProgress' v-for='moveOption in player.getCurrentMoveOptions()') {{moveOption.description}}
-      div(v-if='isBuildInProgress' v-for='buildItem in player.getBuildList()') {{buildItem}}  
-      div(v-if='isAutomaFinaliseInProgress' v-for='recruitBonus in recruitBonuses') {{recruitBonus}}
-      img(
-        width='200' 
-        :src='image' 
-        style='margin-right:10px' 
-        v-bind:class='{"scheme-two":!isSchemeOne}')
-      div
-        | {{factionName}}
 </template>
 
 <script>
@@ -95,3 +92,15 @@
     }),
   }
 </script>
+
+<style>
+.automa-instructions{
+  height:400px;
+}
+ul {
+  padding:0;
+}
+li.mdl-list__item {
+  display:inline-block;
+}
+</style>

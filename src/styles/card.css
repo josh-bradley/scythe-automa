@@ -14,3 +14,14 @@
 .hide {
   display:none;
 }
+
+.flex-container-centre{
+  flex-direction: column;
+  height:100%;
+  display:flex;
+  justify-content: center;
+}
+
+.pad-sides-med {
+  padding:0   20px;
+}

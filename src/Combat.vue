@@ -7,9 +7,15 @@
     div(class='combat-card')
       PlayerCombat(:player='this.combatInitiate')
       PlayerCombat(v-if='this.opponent' :player='this.opponent')
-    button(v-if='isCombatInProgress' @click='endCombat')
+    button(
+      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+      v-if='isCombatInProgress' 
+      @click='endCombat')
       | Finalise combat
-    button(v-if='this.opponent && isCombatInitiated' @click='startCombat')
+    button(
+      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+      v-if='this.opponent && isCombatInitiated' 
+      @click='startCombat')
       | Start Combat
 
 </template>
