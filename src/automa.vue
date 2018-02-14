@@ -15,11 +15,11 @@
           button(
             class='mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect'
             @click='clearSavedState') No
-    div(style="display:flex;justify-content:center;flex-grow:1" v-if='$store.state.currentTurn > 0')
+    div(style="display:flex;justify-content:center;flex-grow:1")
       div(v-if="inCombat")
         Combat
       div(v-for="player in players"
-          v-if="!inCombat"
+          v-if="!inCombat && $store.state.currentTurn > 0"
           class="automa-player"
           :class="{current: currentPlayer === player}")
         AutomaPlayer(:playerId="player.id")
