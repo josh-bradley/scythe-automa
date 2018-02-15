@@ -6,11 +6,6 @@
   display:none;
 }
 
-.automa-player.current {
-  display:inline-block;
-  margin:0 auto;
-}
-
 .hide {
   display:none;
 }

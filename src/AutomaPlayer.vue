@@ -1,18 +1,12 @@
 <template lang='pug'>
-  div(style='flex;flex-direction:column;')
-    div(v-if='player.name')
-      | {{message}}
+  div(style='display:flex;flex;flex-direction:column;justify-content: center;')
+    h4(v-if='player.name') {{message}}
     div(v-if='player.name === undefined' class='automa-instructions')
+      h4 {{automaStepName}}
       ul
         li(class='mdl-list__item' v-if='isMoveInProgress' v-for='moveOption in player.getCurrentMoveOptions()') {{moveOption.description}}
         li(class='mdl-list__item' v-if='isBuildInProgress' v-for='buildItem in player.getBuildList()') {{buildItem}}  
         li(class='mdl-list__item' v-if='isAutomaFinaliseInProgress' v-for='recruitBonus in recruitBonuses') {{recruitBonus}}
-        div(v-if='canInitiateCombat')
-    button(
-      style='flex-grow:1'
-      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-      @click='dealCombatCard')
-        | Initiate combat
 </template>
 
 <script>
@@ -30,17 +24,9 @@
         required: true
       }
     },
-    methods: {
-      dealCombatCard: function(e){
-        e.preventDefault();
-        this.$store.commit(types.PROGRESS_COMBAT, { playerId: this.playerId});
-      }
-    },
     computed: mapState({
-      canInitiateCombat () {
-        return this.player.name ||
-                (this.$store.state.status === AUTOMA_MOVE &&
-                  this.player.getCurrentMoveOptions().filter(move => move.type === "attack").length > 0);
+      automaStepName () {
+        return this.isMoveInProgress ? 'Automa Move Step' : this.isBuildInProgress ? 'Automa Deploy Step' : 'Finalise Automa Turn';
       },
       currentTurn () {
         return this.$store.state.currentTurn;
@@ -69,7 +55,7 @@
         return starCard.schemePosition > this.player.starCardPosition;
       },
       message: function(){
-        return `Play card ${this.player.name}`
+        return `Take your turn ${this.player.name}`
       },
       isMoveInProgress: function(){
         return this.$store.state.status === AUTOMA_MOVE;
@@ -98,9 +84,10 @@
   height:400px;
 }
 ul {
+  width:100%;
   padding:0;
 }
 li.mdl-list__item {
-  display:inline-block;
+  border-bottom: 1px solid grey;
 }
 </style>

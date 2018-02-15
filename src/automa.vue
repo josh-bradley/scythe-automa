@@ -24,6 +24,11 @@
           :class="{current: currentPlayer === player}")
         AutomaPlayer(:playerId="player.id")
     button(
+      v-if='canInitiateCombat'
+      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+      @click='dealCombatCard')
+        | Initiate combat
+    button(
       @click='dealNextCard' 
       v-if='!inCombat && !isMoveInProgress && !isBuildInProgress && !savedState'
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect") {{continueButtonText}}
@@ -90,9 +95,18 @@
       },
       continueButtonText: function(){
         return !this.hasGameStarted ? 'Start game' : this.currentPlayer.name !== undefined ? 'Finished turn' : 'Deal Automa Card';
+      },
+      canInitiateCombat () {
+        return this.hasGameStarted && (this.currentPlayer.name ||
+                (this.$store.state.status === AUTOMA_MOVE &&
+                  this.currentPlayer.getCurrentMoveOptions().filter(move => move.type === "attack").length > 0));
       }
     }),
-    methods: {  
+    methods: {
+      dealCombatCard: function(e){
+        e.preventDefault();
+        this.$store.commit(types.PROGRESS_COMBAT, { playerId: this.currentPlayer.id});
+      },
       clearSavedState: function(e){
         e.preventDefault();
         storeVuex.commit(types.CLEAR_SAVED_GAME);
@@ -126,5 +140,14 @@
     height:100%;
     display:flex;
     flex-direction: column;
+  }
+
+  .automa-player.current {
+    display:flex;
+    width:100%;
+  }
+
+  .automa-player.current div {
+    width:100%;
   }
 </style>
