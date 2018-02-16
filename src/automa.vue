@@ -2,19 +2,7 @@
   div(class='container-main')
     div
       ScoreBoard(:currentPlayerId='currentPlayer.id')
-    div(
-      class='mdl-typography--title flex-container-centre pad-sides-med'
-      v-if='savedState')
-        | Would you like to load your last game? 
-        br
-        br
-        div
-          button(
-            class='mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect'
-            @click='loadSavedGame') Yes
-          button(
-            class='mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect'
-            @click='clearSavedState') No
+    LoadGame
     div(style="display:flex;justify-content:center;flex-grow:1")
       div(v-if="inCombat")
         Combat
@@ -53,6 +41,7 @@
   import AutomaPlayer from './AutomaPlayer.vue'
   import Combat from './Combat.vue'
   import ScoreBoard from './ScoreBoard.vue'
+  import LoadGame from './LoadGame.vue'
   import { mapState } from 'vuex'
   import * as deck from './deck'
   import './styles/card.css'
@@ -71,7 +60,8 @@
     components:{ 
       AutomaPlayer,
       Combat,
-      ScoreBoard
+      ScoreBoard,
+      LoadGame
     },
     computed: mapState({
       'savedState':'savedState',
@@ -106,14 +96,6 @@
       dealCombatCard: function(e){
         e.preventDefault();
         this.$store.commit(types.PROGRESS_COMBAT, { playerId: this.currentPlayer.id});
-      },
-      clearSavedState: function(e){
-        e.preventDefault();
-        storeVuex.commit(types.CLEAR_SAVED_GAME);
-      },
-      loadSavedGame: function(e){
-        e.preventDefault();
-        storeVuex.commit(types.LOAD_SAVED_GAME);
       },
       completeMove: function(e){
         e.preventDefault();
