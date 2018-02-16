@@ -73,7 +73,9 @@
         const players = this.$store.state.players;
         const adjacentPlayers = [players[(this.playerId + players.length - 1) % players.length],
                                   players[(this.playerId + 1) % players.length]];
-        return adjacentPlayers.map(player => player.name ? `${player.name} check for ${recruitBonus.description}`:'');
+        return adjacentPlayers
+                .filter(player => player.name)
+                .map(player => `${player.name} check for ${recruitBonus.description}`);
       }
     }),
   }
