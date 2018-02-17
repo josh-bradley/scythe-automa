@@ -77,9 +77,7 @@
         return this.status === AUTOMA_BUILD;
       },
       currentPlayer: function(){
-        const currentPlayer = this.players[Math.max(this.currentTurn -1, 0) % this.players.length];
-        console.log(currentPlayer)
-        return currentPlayer;
+        return this.players[Math.max(this.currentTurn -1, 0) % this.players.length];
       },
       hasGameStarted: function(){
         return this.currentTurn > 0;
@@ -88,7 +86,7 @@
         return !this.hasGameStarted ? 'Start game' : this.currentPlayer.name !== undefined ? 'Finished turn' : 'Deal Automa Card';
       },
       canInitiateCombat () {
-        return this.hasGameStarted && (this.currentPlayer.name ||
+        return !this.inCombat && this.hasGameStarted && (this.currentPlayer.name ||
                 (this.$store.state.status === AUTOMA_MOVE &&
                   this.currentPlayer.getCurrentMoveOptions().filter(move => move.type === "attack").length > 0));
       },

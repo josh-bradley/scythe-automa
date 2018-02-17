@@ -91,7 +91,7 @@ export default {
       return `./dist/${nextCardNumber.toString().padStart(2, '0')}.png`
     },
     combatants:function(){
-      return this
+      const combatants = this
               .$store
               .state
               .players
@@ -101,6 +101,8 @@ export default {
               .map((player) =>{
                 return player.id;
               })
+      this.selectCombatantId = combatants[0];
+      return combatants;
     }
   })
 }
