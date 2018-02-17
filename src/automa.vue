@@ -21,7 +21,7 @@
         | Initiate combat
     button(
       @click='dealNextCard' 
-      v-if='!inCombat && !isMoveInProgress && !isBuildInProgress && !savedState'
+      v-if='this.$store.state.players.length > 1 && !inCombat && !isMoveInProgress && !isBuildInProgress && !savedState'
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect") 
         | {{continueButtonText}}
     button(
@@ -51,10 +51,6 @@
   import * as deck from './deck'
   import './styles/card.css'
   import { AUTOMA_MOVE, AUTOMA_BUILD, COMBAT_INITIATED, COMBAT_INPROGRESS, GAME_SETUP } from './vuex/gameStatus'
-
-  storeVuex.commit(types.ADD_PLAYER, { name:'Josh' });
-  
-  var dealtCards = [];
 
   export default {  
     store: storeVuex,
