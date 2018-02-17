@@ -10,6 +10,7 @@
       div(v-if="inCombat")
         Combat
       div(v-for="player in players"
+          :key="player.id"
           v-if="!inCombat && $store.state.currentTurn > 0"
           class="automa-player"
           :class="{current: currentPlayer === player}")
@@ -76,7 +77,9 @@
         return this.status === AUTOMA_BUILD;
       },
       currentPlayer: function(){
-        return this.players[Math.max(this.currentTurn -1, 0) % this.players.length];
+        const currentPlayer = this.players[Math.max(this.currentTurn -1, 0) % this.players.length];
+        console.log(currentPlayer)
+        return currentPlayer;
       },
       hasGameStarted: function(){
         return this.currentTurn > 0;
@@ -111,6 +114,7 @@
       },
       dealNextCard: function(e){
         e.preventDefault();
+        this.$store.commit(types.START_GAME);
         let nextPlayerIndex = this.$store.state.currentTurn % this.$store.state.players.length;
         const player = this.$store.state.players[nextPlayerIndex];
         let nextCardNumber = player.name ? 0 : deck.getNextCardForPlayer(player);

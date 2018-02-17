@@ -4,10 +4,12 @@ export default (state, payload) => {
   if(state.currentTurn === 0 && state.players.length < 6){
     const id = state.players.length;
     if(payload.name){
-      state.players.push({
-        id:id,
-        name:payload.name
-      });
+      const humans = state.players.filter(x => x.name);
+      state.players = [
+        ...humans,
+        {id:id,name:payload.name},
+        ...state.players.filter(x => !x.name)
+      ];
     } else {
       state.players.push({
         id:id,
