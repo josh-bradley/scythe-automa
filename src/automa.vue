@@ -1,7 +1,7 @@
 <template lang='pug'>
   div(class='container-main')
-    div
-      ScoreBoard(:currentPlayerId='currentPlayer.id')
+    ScoreBoard(:currentPlayerId='currentPlayer.id')
+    GameSetup
     LoadGame
     div(style="display:flex;justify-content:center;flex-grow:1")
       div(v-if="inCombat")
@@ -42,17 +42,14 @@
   import Combat from './Combat.vue'
   import ScoreBoard from './ScoreBoard.vue'
   import LoadGame from './LoadGame.vue'
+  import GameSetup from './GameSetup.vue'
   import { mapState } from 'vuex'
   import * as deck from './deck'
   import './styles/card.css'
   import { AUTOMA_MOVE, AUTOMA_BUILD, COMBAT_INITIATED, COMBAT_INPROGRESS } from './vuex/gameStatus'
 
   storeVuex.commit(types.ADD_PLAYER, { name:'Josh' });
-  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[1].id });
-  storeVuex.commit(types.ADD_PLAYER, { level:1, faction: data.factions[3].id });
-  storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[2].id });
-  storeVuex.commit(types.ADD_PLAYER, { level:3, faction: data.factions[4].id });
-
+  
   var dealtCards = [];
 
   export default {  
@@ -61,7 +58,8 @@
       AutomaPlayer,
       Combat,
       ScoreBoard,
-      LoadGame
+      LoadGame,
+      GameSetup
     },
     computed: mapState({
       'savedState':'savedState',

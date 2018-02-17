@@ -1,7 +1,7 @@
-import { GAME_INITIATED } from './gameStatus'
+import { GAME_SETUP } from './gameStatus'
 export default {
   players:[],
   currentTurn:0,
   inCombat:false,
-  status: GAME_INITIATED
+  status: GAME_SETUP
 }

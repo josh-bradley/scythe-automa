@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import mutations from './mutations'
-import { GAME_INITIATED } from './gameStatus'
 import defaultState from './defaultState'
 import { SAVED_GAME_KEY } from '../constants'
 

@@ -15,7 +15,7 @@ const getDefaultState = (turn = 1) => ({
 
 describe('Complete move action tests', () => {
   it(`should set the game status ${AUTOMA_FINALISE} after ${AUTOMA_BUILD}`, () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
 
     mutation(state);
 
@@ -41,13 +41,13 @@ describe('Power and coin resolutions', () => {
       card:cardWithOnePowerScheme1
     }
 
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     mutation(state, payload);
     expect(state.players[1].power).toBe(4);
   });
 
   it('should not increment power when power on scheme 2 but player in scheme 1.', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].dealtCards.push(cardWithPowerScheme2)
 
     mutation(state);
@@ -56,7 +56,7 @@ describe('Power and coin resolutions', () => {
   })
 
   it('should increment power when power on scheme 2 and player in scheme 2.', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].dealtCards.push(cardWithPowerScheme2);
     state.players[1].starCardPosition = 10;
 
@@ -66,7 +66,7 @@ describe('Power and coin resolutions', () => {
   })
 
   it('should not increment power when not on card.', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].dealtCards.push(cardWithNoPowerScheme1);
 
     mutation(state);
@@ -75,7 +75,7 @@ describe('Power and coin resolutions', () => {
   })
 
   it('should increment coin.', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].dealtCards.push(cardWithCoinScheme1);
 
     mutation(state);
@@ -84,7 +84,7 @@ describe('Power and coin resolutions', () => {
   })
 
   it('should not increment coins when coins on scheme 2 but player in scheme 1.', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].dealtCards.push(cardWithCoinsScheme2);
 
     mutation(state);
@@ -93,7 +93,7 @@ describe('Power and coin resolutions', () => {
   })
 
   it('should increment coins when coins on scheme 2 and player in scheme 2.', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].dealtCards.push(cardWithCoinsScheme2);
     state.players[1].starCardPosition = 10;
 
@@ -103,7 +103,7 @@ describe('Power and coin resolutions', () => {
   })
 
   it('should not increment coins when not on card.', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].dealtCards.push(cardWithNoCoinsScheme1);
     
     mutation(state);
@@ -112,7 +112,7 @@ describe('Power and coin resolutions', () => {
   })
 
   it('should not increment coins when on card but noplay card.', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].dealtCards.push(cardWithCoinScheme1NoPlay);
 
     mutation(state);
@@ -121,7 +121,7 @@ describe('Power and coin resolutions', () => {
   })
 
   it('should reward additional coins when faction of player lines up with special reward but a noplay and player level 2 or above', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].dealtCards.push(cardsWithBonusCoinForCrimea);
     const player = state.players[1];
     player.faction = "Crimean";
@@ -133,7 +133,7 @@ describe('Power and coin resolutions', () => {
   });
 
   it('should not reward additional coins when faction of player lines up with special reward but a noplay', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].dealtCards.push(cardsWithBonusCoinForCrimea);
     state.players[1].faction = "Crimean";
 
@@ -143,7 +143,7 @@ describe('Power and coin resolutions', () => {
   });
 
   it('should not reward additional coins when faction of player does not line up with special reward', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].dealtCards.push(cardsWithBonusCoinForCrimea);
     state.players[1].faction = "Nordic";
 
@@ -153,7 +153,7 @@ describe('Power and coin resolutions', () => {
   });
 
   it('should reward additional power when faction of player lines up with special reward', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].dealtCards.push(cardWithSpecialPowerRewardForSaxony);
     const player = state.players[1];
     player.faction = "Saxony";
@@ -165,7 +165,7 @@ describe('Power and coin resolutions', () => {
   });
 
   it('should not reward additional power when faction of player does not line up with special reward', () => {
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].dealtCards.push(cardWithSpecialPowerRewardForSaxony);
     const player = state.players[1];
     player.faction = "Nordic";
