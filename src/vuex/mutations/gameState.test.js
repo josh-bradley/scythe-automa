@@ -25,13 +25,3 @@ describe('reset game mutation', () => {
     expect(state.status).toBe(GAME_SETUP);
   })
 });
-
-describe('game start mutation', () => {
-  it(`should set the state to ${GAME_INITIATED}`, () => {
-    let state = {};
-
-    startGameMutation(state);
-
-    expect(state.status).toBe(GAME_INITIATED);
-  })
-});

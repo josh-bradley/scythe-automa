@@ -4,7 +4,6 @@
       select(v-model='selectedFactionId')
         option(v-for='faction in factions' :value='faction.id') {{faction.name}}
     button(@click='addPlayer') Add
-    button(@click='startGame') Start Game
 </template>
 
 <script>
@@ -20,9 +19,6 @@ export default {
   methods: {
     addPlayer: function(){
       this.$store.commit(ADD_PLAYER, { faction:this.selectedFactionId, level:1 });
-    },
-    startGame: function(){
-      this.$store.commit(START_GAME);
     }
   },
   computed: {

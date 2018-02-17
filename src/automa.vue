@@ -1,9 +1,12 @@
 <template lang='pug'>
   div(class='container-main')
-    ScoreBoard(:currentPlayerId='currentPlayer.id')
     GameSetup(v-if='isGameSetup')
     LoadGame
-    div(style="display:flex;justify-content:center;flex-grow:1")
+    ScoreBoard(
+        v-if='isInGame'
+        :currentPlayerId='currentPlayer.id')
+    div(
+      style="display:flex;justify-content:center;flex-grow:1")
       div(v-if="inCombat")
         Combat
       div(v-for="player in players"
@@ -19,7 +22,8 @@
     button(
       @click='dealNextCard' 
       v-if='!inCombat && !isMoveInProgress && !isBuildInProgress && !savedState'
-      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect") {{continueButtonText}}
+      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect") 
+        | {{continueButtonText}}
     button(
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
       @click='completeMove' 
@@ -90,7 +94,10 @@
                   this.currentPlayer.getCurrentMoveOptions().filter(move => move.type === "attack").length > 0));
       },
       isGameSetup () {
-        return !this.savedState && this.status === GAME_SETUP;
+        return !this.savedState && this.currentTurn === 0;
+      },
+      isInGame () {
+        return this.currentTurn > 0;
       }
     }),
     methods: {
