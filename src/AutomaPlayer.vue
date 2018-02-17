@@ -75,6 +75,7 @@
                                   players[(this.playerId + 1) % players.length]];
         return adjacentPlayers
                 .filter(player => player.name)
+                .filter((value, idx, self) => self.indexOf(value) === idx)
                 .map(player => `${player.name} check for ${recruitBonus.description}`);
       }
     }),
