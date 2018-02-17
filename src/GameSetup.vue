@@ -1,7 +1,6 @@
 <template lang="pug">
   div
     h3 Players
-    div(v-for='player in players') {{player.name||player.faction}}
     div
       label Add human player:
       input(type='text' v-model='playerName')
@@ -13,6 +12,7 @@
       label Level:
       input(type='number' v-model='automaLevel' min='1' max='4')
       button(@click='addPlayer') Add
+    div(v-for='player in players') {{player.name||player.faction}}
 </template>
 
 <script>
@@ -45,7 +45,7 @@ export default {
   computed: mapState({
     players:'players',
     factions: function(){
-      return data
+      const factions = data
               .factions
               .slice(0,5)
               .filter(x => !this
@@ -53,6 +53,8 @@ export default {
                             .state
                             .players
                             .find(player=> player.faction === x.id));
+      this.selectedFactionId = factions[0].id;
+      return factions;
     }
   })
 }
