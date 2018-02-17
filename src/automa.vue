@@ -1,7 +1,7 @@
 <template lang='pug'>
   div(class='container-main')
     ScoreBoard(:currentPlayerId='currentPlayer.id')
-    GameSetup
+    GameSetup(v-if='isGameSetup')
     LoadGame
     div(style="display:flex;justify-content:center;flex-grow:1")
       div(v-if="inCombat")
@@ -46,7 +46,7 @@
   import { mapState } from 'vuex'
   import * as deck from './deck'
   import './styles/card.css'
-  import { AUTOMA_MOVE, AUTOMA_BUILD, COMBAT_INITIATED, COMBAT_INPROGRESS } from './vuex/gameStatus'
+  import { AUTOMA_MOVE, AUTOMA_BUILD, COMBAT_INITIATED, COMBAT_INPROGRESS, GAME_SETUP } from './vuex/gameStatus'
 
   storeVuex.commit(types.ADD_PLAYER, { name:'Josh' });
   
@@ -88,6 +88,9 @@
         return this.hasGameStarted && (this.currentPlayer.name ||
                 (this.$store.state.status === AUTOMA_MOVE &&
                   this.currentPlayer.getCurrentMoveOptions().filter(move => move.type === "attack").length > 0));
+      },
+      isGameSetup () {
+        return !this.savedState && this.status === GAME_SETUP;
       }
     }),
     methods: {

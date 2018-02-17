@@ -1,4 +1,4 @@
-import { GAME_INITIATED } from '../gameStatus'
+import { GAME_INITIATED, GAME_SETUP } from '../gameStatus'
 import mutations from '../mutations'
 import * as types from '../types'
 
@@ -17,12 +17,12 @@ describe('load saved game mutation', () => {
 });
 
 describe('reset game mutation', () => {
-  it(`should set the state to ${GAME_INITIATED}`, () => {
-    let state = {};
+  it(`should not change state from ${GAME_SETUP}`, () => {
+    let state = { status:GAME_SETUP};
 
     clearGameMutation(state);
 
-    expect(state.status).toBe(GAME_INITIATED);
+    expect(state.status).toBe(GAME_SETUP);
   })
 });
 

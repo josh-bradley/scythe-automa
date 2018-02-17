@@ -15,7 +15,6 @@ export const loadSavedGame = (state) => {
 
 export const clearSavedGame = (state) => {
   state.savedState = null;
-  state.status = GAME_INITIATED;
 }
 
 export const startGame = (state) => {
