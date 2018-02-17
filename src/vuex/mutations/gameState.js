@@ -15,6 +15,7 @@ export const loadSavedGame = (state) => {
 
 export const clearSavedGame = (state) => {
   state.savedState = null;
+  localStorage.setItem(SAVED_GAME_KEY, null);
 }
 
 export const startGame = (state) => {

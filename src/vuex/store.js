@@ -15,7 +15,8 @@ const isStarCard = (card) => {
 
 const saveStatePlugin = store => {
   store.subscribe((mutation, state) => {
-    localStorage.setItem(SAVED_GAME_KEY, JSON.stringify(state));
+    if(state.currentTurn > 0)
+      localStorage.setItem(SAVED_GAME_KEY, JSON.stringify(state));
   });
 }
 
