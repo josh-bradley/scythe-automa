@@ -18,6 +18,7 @@ describe('load saved game mutation', () => {
 
 describe('reset game mutation', () => {
   it(`should not change state from ${GAME_SETUP}`, () => {
+    localStorage = { setItem: () => {} }
     let state = { status:GAME_SETUP};
 
     clearGameMutation(state);
