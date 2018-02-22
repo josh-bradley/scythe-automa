@@ -42,7 +42,7 @@
         return `./dist/${nextCardNumber.toString().padStart(2, '0')}.png`
       },
       player () {
-        return Object.assign(this.$store.state.players[this.playerId], playerMethods);
+        return Object.assign(this.$store.state.players.find(p => p.id === this.playerId), playerMethods);
       },
       starCard () {
         return `./dist/StarCard${this.$store.state.players[this.playerId].level - 1}.png`;
