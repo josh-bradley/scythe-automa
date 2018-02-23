@@ -48,6 +48,8 @@ export const getBuildList = function(){
   const factionSpecificMechs = scheme.factionSpecific[this.faction].mechs || 0;
   if(scheme.mechs > 0 || factionSpecificMechs > 0)
     buildList.push(`Deploy ${scheme.mechs + factionSpecificMechs} characters\mechs`);
+  if(scheme.powerCards > 0)
+    buildList.push(`Pick up ${scheme.powerCards} power card.`)
 
   return buildList;
 }

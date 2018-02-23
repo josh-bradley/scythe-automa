@@ -68,6 +68,15 @@ describe('get build list', () => {
 
     expect(buildList.filter(x => x === 'Deploy 2 characters\mechs').length).toBe(1);
   })
+
+  it('should get number of power cards correct.', () => {
+    const playerData = { dealtCards: [4], starCardPosition:0, level:1, faction:'Rusviet' }
+    const player = Object.assign(playerData, playerMethods);
+
+    const buildList = player.getBuildList();
+
+    expect(buildList.filter(x => x === 'Pick up 1 power card.').length).toBe(1);
+  })
 })
 
 describe('get recruit bonus', () => {
