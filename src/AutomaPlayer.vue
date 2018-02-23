@@ -3,6 +3,7 @@
     h4(v-if='player.name') {{message}}
     div(v-if='player.name === undefined' class='automa-instructions')
       h4 {{automaStepName}}
+      div Automa card reference {{player.getCurrentCard().id}}
       ul
         li(class='mdl-list__item' v-if='isMoveInProgress' v-for='moveOption in player.getCurrentMoveOptions()') {{moveOption.description}}
         li(class='mdl-list__item' v-if='isBuildInProgress' v-for='buildItem in player.getBuildList()') {{buildItem}}  
