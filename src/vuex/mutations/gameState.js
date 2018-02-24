@@ -11,8 +11,12 @@ export const resetGame = (state) => {
 }
 
 export const loadSavedGame = (state) => {
-  if(state.savedState)
-    Object.assign(state, state.savedState);
+  if(state.savedState) {
+    state.players = state.savedState.players;
+    state.currentTurn = state.savedState.currentTurn;
+    state.status = state.savedState.status;
+    state.inCombat = state.savedState.inCombat;
+  }
   state.savedState = null;
 }
 

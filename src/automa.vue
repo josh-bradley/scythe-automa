@@ -4,7 +4,7 @@
     LoadGame
     FinishedGame(v-if='isGameOver')
     ScoreBoard(
-        v-if='isInGame'
+        v-if='isInGame || isGameOver'
         :currentPlayerId='currentPlayer.id')
     div(
       style="display:flex;justify-content:center;flex-grow:1")
