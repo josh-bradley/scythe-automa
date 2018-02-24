@@ -2,6 +2,7 @@
   div(class='container-main')
     GameSetup(v-if='isGameSetup')
     LoadGame
+    FinishedGame(v-if='isGameOver')
     ScoreBoard(
         v-if='isInGame'
         :currentPlayerId='currentPlayer.id')
@@ -11,7 +12,7 @@
         Combat
       div(v-for="player in players"
           :key="player.id"
-          v-if="!inCombat && $store.state.currentTurn > 0"
+          v-if="!inCombat && isInGame"
           class="automa-player"
           :class="{current: currentPlayer === player}")
         AutomaPlayer(:playerId="player.id")
@@ -22,9 +23,13 @@
         | Initiate combat
     button(
       @click='dealNextCard' 
-      v-if='this.$store.state.players.length > 1 && !inCombat && !isMoveInProgress && !isBuildInProgress && !savedState'
+      v-if='this.$store.state.players.length > 1 && !inCombat && !isMoveInProgress && !isBuildInProgress && !savedState && !isGameOver'
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect") 
         | {{continueButtonText}}
+    button(
+      @click='finishGame'
+      v-if='isGameOver'
+      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect")  Finish Game
     button(
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
       @click='completeMove' 
@@ -48,10 +53,11 @@
   import ScoreBoard from './ScoreBoard.vue'
   import LoadGame from './LoadGame.vue'
   import GameSetup from './GameSetup.vue'
+  import FinishedGame from './FinishedGame.vue'
   import { mapState } from 'vuex'
   import * as deck from './deck'
   import './styles/card.css'
-  import { AUTOMA_MOVE, AUTOMA_BUILD, COMBAT_INITIATED, COMBAT_INPROGRESS, GAME_SETUP } from './vuex/gameStatus'
+  import { AUTOMA_MOVE, AUTOMA_BUILD, COMBAT_INITIATED, COMBAT_INPROGRESS, GAME_SETUP, GAME_FINISHED } from './vuex/gameStatus'
 
   export default {  
     store: storeVuex,
@@ -60,7 +66,8 @@
       Combat,
       ScoreBoard,
       LoadGame,
-      GameSetup
+      GameSetup,
+      FinishedGame
     },
     computed: mapState({
       'savedState':'savedState',
@@ -94,7 +101,10 @@
         return !this.savedState && this.currentTurn === 0;
       },
       isInGame () {
-        return this.currentTurn > 0;
+        return this.currentTurn > 0 && !this.isGameOver;
+      },
+      isGameOver () {
+        return this.status === GAME_FINISHED;
       }
     }),
     methods: {
@@ -117,6 +127,11 @@
         const player = this.$store.state.players[nextPlayerIndex];
         let nextCardNumber = player.name ? 0 : deck.getNextCardForPlayer(player);
         this.$store.commit(types.DEAL_CARD, { card:nextCardNumber});
+      },
+      finishGame: function(e) {
+        e.preventDefault();
+        console.log('hi')
+        this.$store.commit(types.RESET_GAME);
       }
     },
   };
