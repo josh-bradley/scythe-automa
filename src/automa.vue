@@ -58,6 +58,7 @@
   import * as deck from './deck'
   import './styles/card.css'
   import { AUTOMA_MOVE, AUTOMA_BUILD, COMBAT_INITIATED, COMBAT_INPROGRESS, GAME_SETUP, GAME_FINISHED } from './vuex/gameStatus'
+  import * as playerMethods from './player'
 
   export default {  
     store: storeVuex,
@@ -84,7 +85,7 @@
         return this.status === AUTOMA_BUILD;
       },
       currentPlayer: function(){
-        return this.players[Math.max(this.currentTurn -1, 0) % this.players.length];
+        return Object.assign(this.players[Math.max(this.currentTurn -1, 0) % this.players.length], playerMethods);
       },
       hasGameStarted: function(){
         return this.currentTurn > 0;

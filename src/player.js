@@ -12,6 +12,11 @@ export const getCurrentCard = function(){
   return this.dealtCards.length === 0 ? null : data.cards[this.dealtCards[this.dealtCards.length - 1]];
 }
 
+export const getCurrentCardId = function(){
+  const card = this.getCurrentCard();
+  return card ? card.id : '';
+}
+
 export const getCurrentScheme = function(){
   const currentCard = this.getCurrentCard();
   if(!currentCard)
