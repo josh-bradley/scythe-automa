@@ -3,7 +3,7 @@
     div(class='automa-summary-title') star/power/coins
     div(class='automa-summary')
       div(v-for='automa in automas' v-bind:class='automa.faction')
-        | {{automa.stars}}/{{automa.power}}/{{automa.coins}}
+        | {{automa.stars}}/{{automa.power}}/{{automa.coins}}/{{automa.starCardPosition}}
 </template>
 
 <script>
