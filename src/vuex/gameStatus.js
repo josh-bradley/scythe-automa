@@ -6,3 +6,4 @@ export const COMBAT_INITIATED = 'COMBAT_INITIATED';
 export const COMBAT_INPROGRESS = 'COMBAT_INPROGRESS';
 export const COMPLETE = 'COMPLETE';
 export const GAME_SETUP = 'GAME_SETUP';
+export const GAME_FINISHED = 'GAME_FINISHED';

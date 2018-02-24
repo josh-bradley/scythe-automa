@@ -1,5 +1,5 @@
 import { DEAL_CARD } from '../types'
-import { AUTOMA_MOVE } from '../gameStatus'
+import { AUTOMA_MOVE, GAME_FINISHED } from '../gameStatus'
 import mutations from '../mutations'
 
 const cardWithNoPlayBothSchemesAndStar = 7;
@@ -191,14 +191,16 @@ describe('DEAL_CARD mutation test tests', () => {
     expect(state.players[1].stars).toBe(0);
   })
 
-  // it('should set the ', () => {
-  //   const payload = {
-  //     card:1,
-  //   }
+  it(`should set the state of game to ${GAME_FINISHED} when automa gets 6th star`, () => {
+    const payload = {
+      card:1,
+    }
     
-  //   let state = getDefaultState(2);
-  //   state.players[1].stars = 6;
-  //   mutation(state, payload);
-  //   expect(state.players[1].starCardPosition).toBe(1);
-  // })
+    let state = getDefaultState(2);
+    state.players[1].dealtCards.push(1);
+    state.players[1].stars = 5;
+    state.players[1].starCardPosition = 9;
+    mutation(state, payload);
+    expect(state.status).toBe(GAME_FINISHED);
+  })
 })

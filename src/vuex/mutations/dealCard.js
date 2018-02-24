@@ -1,5 +1,5 @@
 import { AUTOMA_CARD_COUNT } from '../../constants'
-import { AUTOMA_MOVE } from '../gameStatus'
+import { AUTOMA_MOVE, GAME_FINISHED } from '../gameStatus'
 import data from '../../assets/data'
 import * as playerMethods from '../../player'
 const totalNumberOfCards = AUTOMA_CARD_COUNT;
@@ -10,8 +10,13 @@ export default (state, payload) => {
   
   let prevPlayer = state.players[(currentPlayerIdx + state.players.length - 1) % state.players.length];
   prevPlayer = Object.assign(prevPlayer, playerMethods);
-  if(!prevPlayer.name)
+  if(!prevPlayer.name) {
     updateStarTrackPosition(prevPlayer);
+    if(prevPlayer.stars === 6){
+      state.status = GAME_FINISHED;
+      return;
+    }
+  }
   
   if(currentPlayer.name) {
     state.currentTurn = state.currentTurn + 1;
