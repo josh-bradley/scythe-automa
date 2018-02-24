@@ -95,7 +95,8 @@ describe('DEAL_CARD mutation test tests', () => {
       card:1,
     }
     
-    let state = getDefaultState();
+    let state = getDefaultState(2);
+    state.players[1].dealtCards.push(1);
     mutation(state, payload);
     expect(state.players[1].starCardPosition).toBe(1);
   })
@@ -105,7 +106,8 @@ describe('DEAL_CARD mutation test tests', () => {
       card:cardWithStarNoPlay1,
     }
     
-    let state = getDefaultState();
+    let state = getDefaultState(2);
+    state.players[1].dealtCards.push(cardWithStarNoPlay1);
     
     mutation(state, payload);
     expect(state.players[1].starCardPosition).toBe(0);
@@ -116,7 +118,8 @@ describe('DEAL_CARD mutation test tests', () => {
       card:cardWithNoPlayBothSchemesAndStar,
     }
     
-    let state = getDefaultState();
+    let state = getDefaultState(2);
+    state.players[1].dealtCards.push(cardWithNoPlayBothSchemesAndStar);
     state.players[1].starCardPosition = 10;
     mutation(state, payload);
     expect(state.players[1].starCardPosition).toBe(10);
@@ -127,7 +130,8 @@ describe('DEAL_CARD mutation test tests', () => {
       card:cardWithStarNoPlay1,
     }
     
-    let state = getDefaultState();
+    let state = getDefaultState(2);
+    state.players[1].dealtCards.push(cardWithStarNoPlay1);
     state.players[1].level = 2;
     mutation(state, payload);
     expect(state.players[1].starCardPosition).toBe(1);
@@ -138,7 +142,8 @@ describe('DEAL_CARD mutation test tests', () => {
       card:cardWithStarNoPlay1,
     }
     
-    let state = getDefaultState();
+    let state = getDefaultState(2);
+    state.players[1].dealtCards.push(cardWithStarNoPlay1);
     state.players[1].starCardPosition = 10;
     mutation(state, payload);
     expect(state.players[1].starCardPosition).toBe(11);
@@ -148,7 +153,8 @@ describe('DEAL_CARD mutation test tests', () => {
     const payload ={
         card:4,
     }
-    let state = getDefaultState();
+    let state = getDefaultState(2);
+    state.players[1].dealtCards.push(4);
     mutation(state, payload);
     expect(state.players[1].starCardPosition).toBe(0)
   })
@@ -157,7 +163,8 @@ describe('DEAL_CARD mutation test tests', () => {
     const payload = {
       card:1
     }
-    let state = getDefaultState();
+    let state = getDefaultState(2);
+    state.players[1].dealtCards.push(1);
     mutation(state, payload);
     expect(state.players[1].stars).toBe(0);
   })
@@ -166,19 +173,32 @@ describe('DEAL_CARD mutation test tests', () => {
     const payload = {
       card:1
     }
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].starCardPosition = 9;
+    state.players[1].dealtCards.push(1);
     mutation(state, payload);
     expect(state.players[1].stars).toBe(1);
   })
 
   it('should not add a star to count when star card card position stays on star', () => {
     const payload = {
-      card:4
+      card:1
     }
-    let state = getDefaultState();
+    let state = getDefaultState(2);
     state.players[1].starCardPosition = 10;
+    state.players[1].dealtCards.push(4);
     mutation(state, payload);
     expect(state.players[1].stars).toBe(0);
   })
+
+  // it('should set the ', () => {
+  //   const payload = {
+  //     card:1,
+  //   }
+    
+  //   let state = getDefaultState(2);
+  //   state.players[1].stars = 6;
+  //   mutation(state, payload);
+  //   expect(state.players[1].starCardPosition).toBe(1);
+  // })
 })

@@ -1,18 +1,18 @@
 import { AUTOMA_CARD_COUNT } from '../../constants'
 import { AUTOMA_MOVE } from '../gameStatus'
 import data from '../../assets/data'
+import * as playerMethods from '../../player'
 const totalNumberOfCards = AUTOMA_CARD_COUNT;
-
-const isCardStarCard = (card) => {
-  return data
-          .cards
-          .filter(x => x.id === card)[0]
-          .star;
-}
 
 export default (state, payload) => {
   const currentPlayerIdx = state.currentTurn % state.players.length;
-  const currentPlayer = state.players[currentPlayerIdx];
+  const currentPlayer = Object.assign(state.players[currentPlayerIdx], playerMethods);
+  
+  let prevPlayer = state.players[(currentPlayerIdx + state.players.length - 1) % state.players.length];
+  prevPlayer = Object.assign(prevPlayer, playerMethods);
+  if(!prevPlayer.name)
+    updateStarTrackPosition(prevPlayer);
+  
   if(currentPlayer.name) {
     state.currentTurn = state.currentTurn + 1;
     return;
@@ -28,19 +28,21 @@ export default (state, payload) => {
   currentPlayer.dealtCombatCards = isReShuffle
                                     ? []
                                     : currentPlayer.dealtCombatCards;
-  const isStarCard = isCardStarCard(payload.card);
-  const automaCard = data
-                      .cards
-                      .filter(x => x.id === payload.card)[0];
-  const playerLevel = state.players[currentPlayerIdx].level;
-  const starCard = data.starCards[playerLevel];
-  const playerScheme = starCard.schemePosition > currentPlayer.starCardPosition ? 0 : 1;
 
-  const playTurn = currentPlayer.level > 1 ||  !automaCard.schemeSpecific[playerScheme].noplay;
-  const starCardPosition = isStarCard && playTurn ? currentPlayer.starCardPosition + 1 : currentPlayer.starCardPosition;
-  currentPlayer.starCardPosition = starCardPosition;
-  currentPlayer.stars = starCard.starPositions.indexOf(starCardPosition) < 0 || !isStarCard || !playTurn ? currentPlayer.stars : currentPlayer.stars + 1;
   state.currentTurn = state.currentTurn + 1;
   state.inCombat = false;
   state.status = AUTOMA_MOVE;
+}
+
+let updateStarTrackPosition = function(player) {
+  if(player.dealtCards.length === 0)
+    return;
+  const starCard = data.starCards[player.level];
+  const automaCard = player.getCurrentCard();
+  const schemeSpecific = player.getCurrentScheme();
+  const playTurn = player.level > 1 ||  !schemeSpecific.noplay;
+  const isStarCard = automaCard.star;
+  const starCardPosition = isStarCard && playTurn ? player.starCardPosition + 1 : player.starCardPosition;
+  player.starCardPosition = starCardPosition;
+  player.stars = (starCard.starPositions.indexOf(starCardPosition) < 0 || !isStarCard || !playTurn) ? player.stars : player.stars + 1;
 }
