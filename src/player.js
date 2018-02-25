@@ -9,7 +9,7 @@ export const currentCombatCard = (player) => {
 }
 
 export const getCurrentCard = function(){
-  return this.dealtCards.length === 0 ? null : data.cards[this.dealtCards[this.dealtCards.length - 1]];
+  return this.lastPlayedCard ? data.cards[this.lastPlayedCard] : null;
 }
 
 export const getCurrentCardId = function(){
@@ -45,7 +45,7 @@ export const getCurrentMoveOptions = function() {
 export const getBuildList = function(){
   const scheme = this.getCurrentScheme();
   const buildList = [];
-  if(this.name || this.dealtCards.length === 0)
+  if(this.name || !scheme)
     return buildList;
   const factionSpecificWorkers = scheme.factionSpecific[this.faction].workers || 0;
   if(scheme.workers > 0 || factionSpecificWorkers > 0)
@@ -60,7 +60,7 @@ export const getBuildList = function(){
 }
 
 export const getRecruitBonus = function (){
-  if(this.name || this.dealtCards.length === 0)
+  if(this.name || !this.lastPlayedCard)
     return '';
   const recruitBonus = this.getCurrentScheme().recruitBonus;
   return data.recruitBonusData[recruitBonus];

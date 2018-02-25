@@ -30,6 +30,7 @@ export default (state, payload) => {
   currentPlayer.dealtCards =  isReShuffle
                         ? [payload.card]
                         : [...currentPlayer.dealtCards, payload.card];
+  currentPlayer.lastPlayedCard = payload.card;
   currentPlayer.dealtCombatCards = isReShuffle
                                     ? []
                                     : currentPlayer.dealtCombatCards;
@@ -46,8 +47,12 @@ let updateStarTrackPosition = function(player) {
   const automaCard = player.getCurrentCard();
   const schemeSpecific = player.getCurrentScheme();
   const playTurn = player.level > 1 ||  !schemeSpecific.noplay;
-  const isStarCard = automaCard.star;
-  const starCardPosition = isStarCard && playTurn ? player.starCardPosition + 1 : player.starCardPosition;
+  const isCurrentCardStarCard = automaCard.star;
+  const starCardPosition = isCurrentCardStarCard && playTurn ? player.starCardPosition + 1 : player.starCardPosition;
   player.starCardPosition = starCardPosition;
-  player.stars = (starCard.starPositions.indexOf(starCardPosition) < 0 || !isStarCard || !playTurn) ? player.stars : player.stars + 1;
+  player.stars = (starCard.starPositions.indexOf(starCardPosition) < 0 || !isCurrentCardStarCard || !playTurn) ? player.stars : player.stars + 1;
+  if(isCurrentCardStarCard && starCardPosition === starCard.schemePosition) {
+    player.dealtCards = [];
+    player.dealtCombatCards = [];
+  }
 }

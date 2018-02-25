@@ -40,6 +40,12 @@ describe('DEAL_CARD mutation test tests', () => {
     expect(state.players[1].dealtCards[0]).toBe(11);
   })
 
+  it('should set the lastPlayedCard to the first player on the first turn', () => {
+    let state = getDefaultState();
+    mutation(state, payload);
+    expect(state.players[1].lastPlayedCard).toBe(11);
+  })
+
   it('should up the turn count by 1 for a sucessful turn', () => {
     let state = getDefaultState(1);
     mutation(state, payload);
@@ -60,21 +66,21 @@ describe('DEAL_CARD mutation test tests', () => {
   })
 
   it('should not add the same card twice', () => {
-    const players = [{ level:1, dealtCards:[11]}]
+    const players = [{ level:1, lastPlayedCard:11, dealtCards:[11]}]
     const state = Object.assign(getDefaultState(), { currentTurn:2, players:players})
     mutation(state, payload);
     expect(state.players[0].dealtCards.length).toBe(1);
   })
 
   it('should not add card if it has been added in dealt as a combat card', () => {
-    const players = [{ level:1, dealtCards:[12],dealtCombatCards:[11]}]
+    const players = [{ level:1, lastPlayedCard:12, dealtCards:[12],dealtCombatCards:[11]}]
     const state = Object.assign(getDefaultState(), { currentTurn:2, players:players})
     mutation(state, payload);
     expect(state.players[0].dealtCards.length).toBe(1);
   })
 
   it('should return the card count to 0 once all cards have been dealt', () => {
-    const players = [{level:1, dealtCards:[...Array.from(Array(19).keys())].map(x => ++x)}]
+    const players = [{level:1, lastPlayedCard:1, dealtCards:[...Array.from(Array(19).keys())].map(x => ++x)}]
     const state = Object.assign(getDefaultState(), {players:players, currentTurn:20});
     mutation(state, payload);
     expect(state.players[0].dealtCards.length).toBe(1);
@@ -82,7 +88,7 @@ describe('DEAL_CARD mutation test tests', () => {
   })
 
   it('should return the card count to 0 once all cards have been dealt across both discard piles', () => {
-    const players = [{level:1, dealtCards:[...Array.from(Array(18).keys())].map(x => ++x),dealtCombatCards:[19]}]
+    const players = [{level:1, lastPlayedCard:1, dealtCards:[...Array.from(Array(18).keys())].map(x => ++x),dealtCombatCards:[19]}]
     const state = Object.assign(getDefaultState(), {players:players, currentTurn:20});
     mutation(state, payload);
     expect(state.players[0].dealtCards.length).toBe(1);
@@ -96,6 +102,7 @@ describe('DEAL_CARD mutation test tests', () => {
     }
     
     let state = getDefaultState(2);
+    state.players[1].lastPlayedCard = 1;
     state.players[1].dealtCards.push(1);
     mutation(state, payload);
     expect(state.players[1].starCardPosition).toBe(1);
@@ -107,6 +114,7 @@ describe('DEAL_CARD mutation test tests', () => {
     }
     
     let state = getDefaultState(2);
+    state.players[1].lastPlayedCard = cardWithStarNoPlay1;
     state.players[1].dealtCards.push(cardWithStarNoPlay1);
     
     mutation(state, payload);
@@ -119,6 +127,7 @@ describe('DEAL_CARD mutation test tests', () => {
     }
     
     let state = getDefaultState(2);
+    state.players[1].lastPlayedCard = cardWithNoPlayBothSchemesAndStar;
     state.players[1].dealtCards.push(cardWithNoPlayBothSchemesAndStar);
     state.players[1].starCardPosition = 10;
     mutation(state, payload);
@@ -131,6 +140,7 @@ describe('DEAL_CARD mutation test tests', () => {
     }
     
     let state = getDefaultState(2);
+    state.players[1].lastPlayedCard = cardWithStarNoPlay1;
     state.players[1].dealtCards.push(cardWithStarNoPlay1);
     state.players[1].level = 2;
     mutation(state, payload);
@@ -143,6 +153,7 @@ describe('DEAL_CARD mutation test tests', () => {
     }
     
     let state = getDefaultState(2);
+    state.players[1].lastPlayedCard = cardWithStarNoPlay1;
     state.players[1].dealtCards.push(cardWithStarNoPlay1);
     state.players[1].starCardPosition = 10;
     mutation(state, payload);
@@ -154,6 +165,7 @@ describe('DEAL_CARD mutation test tests', () => {
         card:4,
     }
     let state = getDefaultState(2);
+    state.players[1].lastPlayedCard = 4;
     state.players[1].dealtCards.push(4);
     mutation(state, payload);
     expect(state.players[1].starCardPosition).toBe(0)
@@ -164,6 +176,7 @@ describe('DEAL_CARD mutation test tests', () => {
       card:1
     }
     let state = getDefaultState(2);
+    state.players[1].lastPlayedCard = 1;
     state.players[1].dealtCards.push(1);
     mutation(state, payload);
     expect(state.players[1].stars).toBe(0);
@@ -175,6 +188,7 @@ describe('DEAL_CARD mutation test tests', () => {
     }
     let state = getDefaultState(2);
     state.players[1].starCardPosition = 9;
+    state.players[1].lastPlayedCard = 1;
     state.players[1].dealtCards.push(1);
     mutation(state, payload);
     expect(state.players[1].stars).toBe(1);
@@ -185,7 +199,8 @@ describe('DEAL_CARD mutation test tests', () => {
       card:1
     }
     let state = getDefaultState(2);
-    state.players[1].starCardPosition = 10;
+    state.players[1].starCardPosition  = 10;
+    state.players[1].lastPlayedCard = 4;
     state.players[1].dealtCards.push(4);
     mutation(state, payload);
     expect(state.players[1].stars).toBe(0);
@@ -197,10 +212,61 @@ describe('DEAL_CARD mutation test tests', () => {
     }
     
     let state = getDefaultState(2);
+    state.players[1].lastPlayedCard = 1;
     state.players[1].dealtCards.push(1);
     state.players[1].stars = 5;
     state.players[1].starCardPosition = 9;
     mutation(state, payload);
     expect(state.status).toBe(GAME_FINISHED);
   })
+
+  it('should reshuffle deck when the automa reaches scheme 2', () => {
+    const payload = {
+      card:1
+    }
+    let state = getDefaultState(2);
+    state.players[1].starCardPosition = 9;
+    state.players[1].lastPlayedCard = 1;
+    state.players[1].dealtCards.push(1);
+    mutation(state, payload);
+    expect(state.players[1].dealtCards.length).toBe(0);  
+  });
+
+  it('should not reshuffle deck when the automa was already on scheme 2', () => {
+    const payload = {
+      card:1
+    }
+    let state = getDefaultState(2);
+    state.players[1].starCardPosition = 10;
+    state.players[1].lastPlayedCard = 4;
+    state.players[1].dealtCards.push(4);
+    mutation(state, payload);
+    expect(state.players[1].dealtCards.length).toBe(1);  
+  });
+
+  it('should reshuffle deck and clear combat cards dealt when the automa reaches scheme 2', () => {
+    const payload = {
+      card:1
+    }
+    let state = getDefaultState(2);
+    state.players[1].starCardPosition = 9;
+    state.players[1].lastPlayedCard = 1;
+    state.players[1].dealtCards.push(1);
+    state.players[1].dealtCombatCards = [5];
+    mutation(state, payload);
+    expect(state.players[1].dealtCombatCards.length).toBe(0);  
+  });
+
+  it('should not reshuffle deck when the automa was already on scheme 2', () => {
+    const payload = {
+      card:1
+    }
+    let state = getDefaultState(2);
+    state.players[1].starCardPosition = 10;
+    state.players[1].lastPlayedCard = 4;
+    state.players[1].dealtCards.push(4);
+    state.players[1].dealtCombatCards = [5];
+    mutation(state, payload);
+    expect(state.players[1].dealtCombatCards.length).toBe(1);  
+  });
 })

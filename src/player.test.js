@@ -14,7 +14,7 @@ describe('player extention tests', () => {
 
 describe('getCurrentMoveOptions', () => {
   it('should return attack move when automa has the power to perform move', () => {
-    const playerData = { dealtCards: [17], starCardPosition:0, level:1, faction:'Nordic', power:6 }
+    const playerData = { lastPlayedCard: 17, dealtCards: [17], starCardPosition:0, level:1, faction:'Nordic', power:6 }
     const player = Object.assign(playerData, playerMethods);
 
     const buildList = player.getCurrentMoveOptions();
@@ -23,7 +23,7 @@ describe('getCurrentMoveOptions', () => {
   })
 
   it('should not return attack move when automa does not have the power to perform move', () => {
-    const playerData = { dealtCards: [17], starCardPosition:0, level:1, faction:'Nordic', power:5 }
+    const playerData = { lastPlayedCard: 17, dealtCards: [17], starCardPosition:0, level:1, faction:'Nordic', power:5 }
     const player = Object.assign(playerData, playerMethods);
 
     const buildList = player.getCurrentMoveOptions();
@@ -34,7 +34,7 @@ describe('getCurrentMoveOptions', () => {
 
 describe('get build list', () => {
   it('should get number of workers correct', () => {
-    const playerData = { dealtCards: [11], starCardPosition:0, level:1, faction:'Nordic' }
+    const playerData = { lastPlayedCard: 11, dealtCards: [11], starCardPosition:0, level:1, faction:'Nordic' }
     const player = Object.assign(playerData, playerMethods);
 
     const buildList = player.getBuildList();
@@ -43,7 +43,7 @@ describe('get build list', () => {
   })
   
   it('should get number of characters\mechs correct', () => {
-    const playerData = { dealtCards: [8], starCardPosition:0, level:1, faction:'Nordic' }
+    const playerData = { lastPlayedCard: 8, dealtCards: [8], starCardPosition:0, level:1, faction:'Nordic' }
     const player = Object.assign(playerData, playerMethods);
 
     const buildList = player.getBuildList();
@@ -52,7 +52,7 @@ describe('get build list', () => {
   })
 
   it('should get number of workers correct when faction specific worker build matches', () => {
-    const playerData = { dealtCards: [11], starCardPosition:0, level:1, faction:'Rusviet' }
+    const playerData = { lastPlayedCard: 11, dealtCards: [11], starCardPosition:0, level:1, faction:'Rusviet' }
     const player = Object.assign(playerData, playerMethods);
 
     const buildList = player.getBuildList();
@@ -61,7 +61,7 @@ describe('get build list', () => {
   })
 
   it('should get number of characters\mechs correct when faction matches faction specific build option', () => {
-    const playerData = { dealtCards: [8], starCardPosition:0, level:1, faction:'Rusviet' }
+    const playerData = { lastPlayedCard: 8, dealtCards: [8], starCardPosition:0, level:1, faction:'Rusviet' }
     const player = Object.assign(playerData, playerMethods);
 
     const buildList = player.getBuildList();
@@ -70,7 +70,7 @@ describe('get build list', () => {
   })
 
   it('should get number of power cards correct.', () => {
-    const playerData = { dealtCards: [4], starCardPosition:0, level:1, faction:'Rusviet' }
+    const playerData = { lastPlayedCard: 4, dealtCards: [4], starCardPosition:0, level:1, faction:'Rusviet' }
     const player = Object.assign(playerData, playerMethods);
 
     const buildList = player.getBuildList();
@@ -81,7 +81,7 @@ describe('get build list', () => {
 
 describe('get recruit bonus', () => {
   it('should return none when there is no bonus', () => {
-    const playerData = { dealtCards: [16], starCardPosition:0, level:1, faction:'Rusviet' }
+    const playerData = { lastPlayedCard: 16, dealtCards: [16], starCardPosition:0, level:1, faction:'Rusviet' }
     const player = Object.assign(playerData, playerMethods);
 
     const result = player.getRecruitBonus();
@@ -90,7 +90,7 @@ describe('get recruit bonus', () => {
   });
     
   it('should return coin when there is coin bonus', () => {
-    const playerData = { dealtCards: [15], starCardPosition:0, level:1, faction:'Rusviet' }
+    const playerData = { lastPlayedCard: 15, dealtCards: [15], starCardPosition:0, level:1, faction:'Rusviet' }
     const player = Object.assign(playerData, playerMethods);
 
     const result = player.getRecruitBonus();

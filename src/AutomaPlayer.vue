@@ -32,16 +32,6 @@
       currentTurn () {
         return this.$store.state.currentTurn;
       },
-      image () {
-        let dealtCards = this.$store.state.players[this.playerId].dealtCards;
-        let nextCardNumber = dealtCards.length > 0 ? dealtCards[dealtCards.length - 1] : '20';
-        return `./dist/${nextCardNumber.toString().padStart(2, '0')}.png`
-      },
-      combatCardImage () {
-        let dealtCards = this.$store.state.players[this.playerId].dealtCombatCards;
-        let nextCardNumber = dealtCards.length > 0 ? dealtCards[dealtCards.length - 1] : '20';
-        return `./dist/${nextCardNumber.toString().padStart(2, '0')}.png`
-      },
       player () {
         return Object.assign(this.$store.state.players.find(p => p.id === this.playerId), playerMethods);
       },
