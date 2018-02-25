@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import mutations from './mutations'
 import defaultState from './defaultState'
 import { SAVED_GAME_KEY } from '../constants'
+import * as getters from './getters'
 
 Vue.use(Vuex);
 
@@ -23,6 +24,7 @@ const saveStatePlugin = store => {
 defaultState.savedState = JSON.parse(localStorage.getItem(SAVED_GAME_KEY))
 export default new Vuex.Store({
   state:defaultState,
+  getters,
   mutations,
   plugins:[saveStatePlugin]
 })
