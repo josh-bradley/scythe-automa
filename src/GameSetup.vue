@@ -3,7 +3,7 @@
     h3 Players
     div(
       style='width:200px'
-      class='mdl-textfield mdl-js-textfield mdl-textfield--floating-label')
+      class='mdl-textfield mdl-js-textfield mdl-textfield--floating-label person-name')
       input(
         id='humanPlayerName'
         class='mdl-textfield__input'
@@ -82,6 +82,13 @@ export default {
         window.getmdlSelect.init('.getmdl-select');
       return factions;
     }
-  })
+  }),
+  mounted: () => {
+    window.MaterialTextfield && new window.MaterialTextfield(document.querySelector('.person-name'));
+    window &&
+        window.getmdlSelect &&
+        window.getmdlSelect.init &&
+        window.getmdlSelect.init('.getmdl-select');
+  }
 }
 </script>
