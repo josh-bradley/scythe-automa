@@ -24,7 +24,6 @@ const saveStatePlugin = store => {
 defaultState.savedState = JSON.parse(localStorage.getItem(SAVED_GAME_KEY))
 export default new Vuex.Store({
   state:defaultState,
-  getters,
   mutations,
   plugins:[saveStatePlugin]
 })
