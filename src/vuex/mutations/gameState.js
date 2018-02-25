@@ -10,16 +10,6 @@ export const resetGame = (state) => {
   state.savedState = null;
 }
 
-export const loadSavedGame = (state) => {
-  if(state.savedState) {
-    state.players = state.savedState.players;
-    state.currentTurn = state.savedState.currentTurn;
-    state.status = state.savedState.status;
-    state.inCombat = state.savedState.inCombat;
-  }
-  state.savedState = null;
-}
-
 export const clearSavedGame = (state) => {
   state.savedState = null;
   localStorage.setItem(SAVED_GAME_KEY, null);

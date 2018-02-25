@@ -1,7 +1,7 @@
 import * as types from './types'
 import dealCombatCardMutation from './mutations/dealCombatCard'
 import intiateCombatMutation from './mutations/progressCombat'
-import { resetGame, loadSavedGame, clearSavedGame, startGame } from './mutations/gameState'
+import { resetGame, clearSavedGame, startGame } from './mutations/gameState'
 import completeMove from './mutations/completeMove'
 import completeBuild from './mutations/completeBuild'
 import dealCard from './mutations/dealCard'
@@ -15,7 +15,6 @@ export default {
   [types.COMPLETE_BUILD]: completeBuild,
   [types.ADD_PLAYER]: addPlayer,
   [types.DEAL_CARD]: dealCard,
-  [types.LOAD_SAVED_GAME]: loadSavedGame,
   [types.START_GAME]: startGame,
   [types.CLEAR_SAVED_GAME]: clearSavedGame,
 }

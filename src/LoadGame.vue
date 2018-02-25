@@ -29,7 +29,8 @@ export default {
     },
     loadSavedGame: function(e){
       e.preventDefault();
-      this.$store.commit(types.LOAD_SAVED_GAME);
+      this.$store.replaceState(this.$store.state.savedState);
+      this.$store.commit(types.CLEAR_SAVED_GAME);
     }
   }
 }
