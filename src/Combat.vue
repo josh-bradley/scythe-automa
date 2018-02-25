@@ -26,7 +26,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { DEAL_COMBAT_CARD, PROGRESS_COMBAT, CANCEL_COMBAT } from './vuex/types'
+import { DEAL_COMBAT_CARD, PROGRESS_COMBAT } from './vuex/types'
 import { COMBAT_INITIATED, COMBAT_INPROGRESS } from './vuex/gameStatus'
 import * as deck from './deck'
 import { isHuman } from './player'
@@ -60,7 +60,7 @@ export default {
     },
     cancelCombat: function(e) {
       e.preventDefault();
-      this.$store.commit(CANCEL_COMBAT);
+      this.$emit('cancelCombat')
     },
     getCombatantDisplayName: function(id){
       const player = this.$store.state.players[id];

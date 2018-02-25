@@ -9,7 +9,7 @@
     div(
       style="display:flex;justify-content:center;flex-grow:1")
       div(v-if="inCombat")
-        Combat
+        Combat(@cancelCombat='cancelCurrentCombat')
       div(v-for="player in players"
           :key="player.id"
           v-if="!inCombat && isInGame"
@@ -59,8 +59,10 @@
   import './styles/card.css'
   import { AUTOMA_MOVE, AUTOMA_BUILD, COMBAT_INITIATED, COMBAT_INPROGRESS, GAME_SETUP, GAME_FINISHED } from './vuex/gameStatus'
   import * as playerMethods from './player'
+  import historyMixin from './vuex/historyMixin'
 
   export default {  
+    mixins:[historyMixin],
     store: storeVuex,
     components:{ 
       AutomaPlayer,
