@@ -7,3 +7,4 @@ export const COMPLETE_MOVE = 'COMPLETE_MOVE';
 export const COMPLETE_BUILD = 'COMPLETE_BUILD';
 export const CLEAR_SAVED_GAME = 'CLEAR_SAVED_GAME';
 export const START_GAME = 'START_GAME';
+export const END_GAME = 'END_GAME';

@@ -1,8 +1,9 @@
-import { GAME_INITIATED, GAME_SETUP, COMBAT_INITIATED, COMBAT_INPROGRESS, AUTOMA_MOVE } from '../gameStatus'
+import { GAME_INITIATED, GAME_SETUP, COMBAT_INITIATED, COMBAT_INPROGRESS, AUTOMA_MOVE, GAME_FINISHED } from '../gameStatus'
 import mutations from '../mutations'
 import * as types from '../types'
 
 const clearGameMutation = mutations[types.CLEAR_SAVED_GAME];
+const finishGameMutation = mutations[types.END_GAME];
 
 describe('reset game mutation', () => {
   it(`should not change state from ${GAME_SETUP}`, () => {
@@ -14,3 +15,13 @@ describe('reset game mutation', () => {
     expect(state.status).toBe(GAME_SETUP);
   })
 });
+
+describe('finish game', () => {
+  it(`should set the state to ${GAME_FINISHED}`, () => {
+    let state = {status:GAME_INITIATED};
+
+    finishGameMutation(state);
+
+    expect(state.status).toBe(GAME_FINISHED);
+  })
+})

@@ -27,9 +27,9 @@
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect") 
         | {{continueButtonText}}
     button(
-      @click='finishGame'
+      @click='completeGame'
       v-if='isGameOver'
-      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect")  Finish Game
+      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect")  Done
     button(
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
       @click='completeMove' 
@@ -38,6 +38,11 @@
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
       @click='completeBuild' 
       v-if='isBuildInProgress') Complete Deployment
+    button(
+      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+      @click='endGame' 
+      v-if='isInGame'
+      ) End Game
     div
       | Current turn {{currentTurn}}
       | {{status}}
@@ -96,7 +101,7 @@
         return !this.hasGameStarted ? 'Start game' : this.currentPlayer.name !== undefined ? 'Finished turn' : 'Deal Automa Card';
       },
       canInitiateCombat () {
-        return !this.inCombat && this.hasGameStarted && (this.currentPlayer.name ||
+        return !this.isGameOver && !this.inCombat && this.hasGameStarted && (this.currentPlayer.name ||
                 (this.$store.state.status === AUTOMA_MOVE &&
                   this.currentPlayer.getCurrentMoveOptions().filter(move => move.type === "attack").length > 0));
       },
@@ -131,10 +136,13 @@
         let nextCardNumber = player.name ? 0 : deck.getNextCardForPlayer(player);
         this.$store.commit(types.DEAL_CARD, { card:nextCardNumber});
       },
-      finishGame: function(e) {
+      completeGame: function(e) {
         e.preventDefault();
-        console.log('hi')
         this.$store.commit(types.RESET_GAME);
+      },
+      endGame: function(e) {
+        e.preventDefault();
+        this.$store.commit(types.END_GAME);
       }
     },
   };

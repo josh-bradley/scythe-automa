@@ -1,6 +1,6 @@
 import defaultState from '../defaultState'
 import { SAVED_GAME_KEY } from '../../constants'
-import { GAME_INITIATED, GAME_SETUP, AUTOMA_MOVE } from '../gameStatus'
+import { GAME_INITIATED, GAME_SETUP, AUTOMA_MOVE, GAME_FINISHED } from '../gameStatus'
 
 export const resetGame = (state) => {
   state.players = [];
@@ -22,4 +22,8 @@ export const startGame = (state) => {
 export const cancelCombat = (state) => {
   const currentPlayer = state.players[Math.max(state.currentTurn -1, 0) % state.players.length];
   state.status = currentPlayer.name ? GAME_INITIATED : AUTOMA_MOVE;
+}
+
+export const finishGame = (state) => {
+  state.status = GAME_FINISHED;
 }
