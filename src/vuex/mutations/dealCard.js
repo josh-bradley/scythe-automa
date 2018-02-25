@@ -22,7 +22,7 @@ export default (state, payload) => {
     state.currentTurn = state.currentTurn + 1;
     return;
   }
-  const discardedCards = currentPlayer.dealtCards.concat(currentPlayer.dealtCombatCards);
+  const discardedCards = currentPlayer.getDiscardedCards();
   const isReShuffle = discardedCards.length >= totalNumberOfCards - 1;
   const cardAlreadyDealt = discardedCards.some((x) => x === payload.card);
   if(!isReShuffle && cardAlreadyDealt)

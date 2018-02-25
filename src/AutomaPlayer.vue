@@ -20,8 +20,8 @@
 
   export default {
     props: {
-      playerId:{
-        type: Number,
+      player:{
+        type: Object,
         required: true
       }
     },
@@ -31,12 +31,6 @@
       },
       currentTurn () {
         return this.$store.state.currentTurn;
-      },
-      player () {
-        return Object.assign(this.$store.state.players.find(p => p.id === this.playerId), playerMethods);
-      },
-      starCard () {
-        return `./dist/StarCard${this.$store.state.players[this.playerId].level - 1}.png`;
       },
       factionName () {
         return data.factions.filter(x => this.player.faction === x.id)[0].name;
@@ -61,9 +55,9 @@
         const recruitBonus = this.player.getRecruitBonus();
         if(!recruitBonus.description)
           return [];
-        const players = this.$store.state.players;
-        const adjacentPlayers = [players[(this.playerId + players.length - 1) % players.length],
-                                  players[(this.playerId + 1) % players.length]];
+        const players = this.$store.getters.wrappedPlayers;
+        const adjacentPlayers = [players[(this.player.id + players.length - 1) % players.length],
+                                  players[(this.player.id + 1) % players.length]];
         return adjacentPlayers
                 .filter(player => player.name)
                 .filter((value, idx, self) => self.indexOf(value) === idx)

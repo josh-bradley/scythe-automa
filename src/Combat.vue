@@ -46,7 +46,7 @@ export default {
       e.preventDefault();
       this.$store.commit(PROGRESS_COMBAT, { opponentId: this.opponent.id });
       if(!this.isCombatInitiateHuman){
-        let nextCardNumber = deck.getNextCardForPlayer(this.$store.state.players[this.$store.state.combatInitiate]);
+        let nextCardNumber = deck.getNextCardForPlayer(this.$store.getters.wrappedPlayers[this.$store.state.combatInitiate]);
         this.$store.commit(DEAL_COMBAT_CARD, { card:nextCardNumber, playerId:this.$store.state.combatInitiate});
       }
       if(!this.isOpponentHuman) {
@@ -63,7 +63,7 @@ export default {
       this.$emit('cancelCombat')
     },
     getCombatantDisplayName: function(id){
-      const player = this.$store.state.players[id];
+      const player = this.$store.getters.wrappedPlayers[id];
       return player.name || player.faction;
     }
   },
@@ -75,13 +75,13 @@ export default {
       return this.$store.state.status === COMBAT_INPROGRESS;
     },
     combatInitiate () {
-      return this.$store.state.players[this.$store.state.combatInitiate]
+      return this.$store.getters.wrappedPlayers[this.$store.state.combatInitiate]
     },
     isCombatInitiateHuman () {
       return isHuman(this.combatInitiate);
     },
     opponent (){
-      return this.$store.state.players[this.selectCombatantId];
+      return this.$store.getters.wrappedPlayers[this.selectCombatantId];
     },
     isOpponentHuman (){
       return this.opponent && isHuman(this.opponent);

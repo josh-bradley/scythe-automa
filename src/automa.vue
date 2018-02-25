@@ -15,7 +15,7 @@
           v-if="!inCombat && isInGame"
           class="automa-player"
           :class="{current: currentPlayer === player}")
-        AutomaPlayer(:playerId="player.id")
+        AutomaPlayer(:player="player")
     button(
       v-if='canInitiateCombat'
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
@@ -23,7 +23,7 @@
         | Initiate combat
     button(
       @click='dealNextCard' 
-      v-if='this.$store.state.players.length > 1 && !inCombat && !isMoveInProgress && !isBuildInProgress && !savedState && !isGameOver'
+      v-if='this.players.length > 1 && !inCombat && !isMoveInProgress && !isBuildInProgress && !savedState && !isGameOver'
       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect") 
         | {{continueButtonText}}
     button(
@@ -79,9 +79,11 @@
     },
     computed: mapState({
       'savedState':'savedState',
-      'players':'players',
       'currentTurn':'currentTurn',
       'status':'status',
+      players: function() {
+        return this.$store.getters.wrappedPlayers;
+      },
       inCombat: function(){
         return this.status === COMBAT_INITIATED || this.status === COMBAT_INPROGRESS;
       },
@@ -92,7 +94,7 @@
         return this.status === AUTOMA_BUILD;
       },
       currentPlayer: function(){
-        return Object.assign(this.players[Math.max(this.currentTurn -1, 0) % this.players.length], playerMethods);
+        return this.$store.getters.currentPlayer;
       },
       hasGameStarted: function(){
         return this.currentTurn > 0;
@@ -131,8 +133,8 @@
       dealNextCard: function(e){
         e.preventDefault();
         this.$store.commit(types.START_GAME);
-        let nextPlayerIndex = this.$store.state.currentTurn % this.$store.state.players.length;
-        const player = this.$store.state.players[nextPlayerIndex];
+        let nextPlayerIndex = this.currentTurn % this.players.length;
+        const player = this.players[nextPlayerIndex];
         let nextCardNumber = player.name ? 0 : deck.getNextCardForPlayer(player);
         this.$store.commit(types.DEAL_CARD, { card:nextCardNumber});
       },

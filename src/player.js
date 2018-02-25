@@ -74,3 +74,7 @@ export const canCrossRiver = (player) => {
   const starCard = data.starCards[player.level];
   return player.starCardPosition >= starCard.riverCrossingPos;
 }
+
+export const getDiscardedCards = function() {
+  return this.dealtCards.concat(this.dealtCombatCards);
+}

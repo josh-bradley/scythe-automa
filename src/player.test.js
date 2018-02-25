@@ -77,7 +77,7 @@ describe('get build list', () => {
 
     expect(buildList.filter(x => x === 'Pick up 1 power card.').length).toBe(1);
   })
-})
+});
 
 describe('get recruit bonus', () => {
   it('should return none when there is no bonus', () => {
@@ -97,4 +97,17 @@ describe('get recruit bonus', () => {
 
     expect(result.type).toBe('coin');
   });
-})
+});
+
+describe('get discarded cards', () => {
+  it('should combine dealtCards and dealtCombatCards', () => {
+    const playerData = { lastPlayedCard: 15, dealtCards: [15], dealtCombatCards:[1], starCardPosition:0, level:1, faction:'Rusviet' }
+    const player = Object.assign(playerData, playerMethods);
+
+    const result = player.getDiscardedCards();
+
+    expect(result.length).toBe(2);
+    expect(result.filter(x => x === 1 || x === 15).length).toBe(2);
+  });
+
+});
