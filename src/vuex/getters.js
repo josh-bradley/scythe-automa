@@ -1,4 +1,5 @@
 import * as playerMethods from  '../player'
+import playerGetters from '../playerGetters'
 
 export const currentPlayer = function(state){
     return state.players.length > 0 ? 
@@ -7,7 +8,11 @@ export const currentPlayer = function(state){
 }
 
 export const wrappedPlayers = (state) => {
-  return state
+  const players = state
           .players
           .map(player => Object.assign(player, playerMethods));
+  players.forEach(player => Object.getOwnPropertyNames(playerGetters).forEach(propName => {
+    Object.defineProperty(player, propName, { get: playerGetters[propName] });
+  }));
+  return players;
 }

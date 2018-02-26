@@ -4,8 +4,11 @@ export const isHuman = (player) => {
   return player.name;
 }
 
-export const currentCombatCard = (player) => {
-  return data.cards[player.dealtCombatCards[player.dealtCombatCards.length - 1]];
+export const currentCombatCard = function(player){
+  player = player || this;
+  return player.dealtCombatCards.length > 0 ?
+     data.cards[player.dealtCombatCards[player.dealtCombatCards.length - 1]] :
+     null;
 }
 
 export const getCurrentCard = function(){

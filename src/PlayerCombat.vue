@@ -23,9 +23,9 @@ export default {
         return this.$store.state.status === COMBAT_INPROGRESS;
       },
       combatCard () {
-        if(!this.player || !this.player.dealtCombatCards.length || !this.isCombatInProgress)
+        if(!this.player || !this.isCombatInProgress)
           return null
-        return currentCombatCard(this.player);
+        return this.player.currentCombatCard();
       },
       combatPoints () {
         const combatPos = this.player.power < 8 ? 0 : this.player.power < 14 ? 1 : 0; 

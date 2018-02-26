@@ -32,13 +32,6 @@
       currentTurn () {
         return this.$store.state.currentTurn;
       },
-      factionName () {
-        return data.factions.filter(x => this.player.faction === x.id)[0].name;
-      },
-      isSchemeOne () {
-        const starCard = data.starCards[this.player.level];
-        return starCard.schemePosition > this.player.starCardPosition;
-      },
       message: function(){
         return `Take your turn ${this.player.name}`
       },

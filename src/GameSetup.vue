@@ -34,7 +34,7 @@
       button(
         class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
         @click='addPlayer') Add
-    div(v-for='player in players') {{player.name||player.faction}}
+    div(v-for='player in players') {{player.name||player.factionName}}
 </template>
 
 <script>
@@ -65,7 +65,9 @@ export default {
     }
   },
   computed: mapState({
-    players:'players',
+    players: function() {
+      return this.$store.getters.wrappedPlayers;
+    },
     factions: function(){
       const factions = data
               .factions
