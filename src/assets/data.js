@@ -19,7 +19,7 @@ export default
     "coin":{"type":"coin", "description":"coin recruit bonus"},
     "popularity":{"type":"popularity", "description":"popularity recruit bonus"},
     "power":{"type":"power", "description":"power recruit bonus"},
-    "powerCard":{"type":"powerCard", "description":"power card recruit bonus"}
+    "powerCard":{"type":  "powerCard", "description":"power card recruit bonus"}
   },
   "factions":[
     { "id":"Polonia", "name": "Polonia"},
