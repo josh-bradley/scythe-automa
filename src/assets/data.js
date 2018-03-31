@@ -1,5 +1,11 @@
 export default
 {
+  "automaLevels":[
+    { "name": "Autometta", "level":1 },
+    { "name": "Automa", "level":2 },
+    { "name": "Automata", "level":3 },
+    { "name": "Ultramata", "level":4 },
+  ],
   "automaMoveData":{
     "moveWorker": { "type":"moveWorker", "description":"Move worker"},
     "encounter": { "type":"encounter", "description":"Encounter"},
