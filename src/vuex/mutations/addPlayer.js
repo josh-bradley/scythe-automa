@@ -7,7 +7,7 @@ export default (state, payload) => {
       const humans = state.players.filter(x => x.name);
       state.players = [
         ...humans,
-        {id:id,name:payload.name},
+        {id:id,name:payload.name,faction:payload.faction},
         ...state.players.filter(x => !x.name)
       ];
     } else {

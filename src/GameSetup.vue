@@ -2,9 +2,17 @@
   div(style='margin:0 auto')
     h3 Game setup
     div(class='add-player-section')
-      h4 Add human player
+      h4 Add player
       div
+        div
+          label(class='mdl-radio mdl-js-radio mdl-js-ripple-effect' for='option-1')
+            input(type='radio' id='option-1' class='mdl-radio__button' name='options' value='1' v-model='playerType')
+            span(class='mdl-radio__label') Human
+          label(class='mdl-radio mdl-js-radio mdl-js-ripple-effect' for='option-2')
+            input(type='radio' id='option-2' class='mdl-radio__button' name='options' value='2' v-model='playerType')
+            span(class='mdl-radio__label') Automa
         div(
+          v-show='playerType == 1'
           style='width:200px'
           class='mdl-textfield mdl-js-textfield mdl-textfield--floating-label person-name')
           input(
@@ -15,27 +23,22 @@
             class='mdl-textfield__label'
             for='humanPlayerName'
           ) Name
-        div
-          button(
-            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
-            @click='addHumanPlayer') Add
-    div(class='add-player-section')
-      h4 Add Automa
-      div(class="mdl-textfield mdl-js-textfield getmdl-select" style='width:200px')
-        input(type="text" value='' class="mdl-textfield__input" id="sample2" readonly)
-        input(type="hidden" id='selectedFaction'  name="sample2")
-        i(class="mdl-icon-toggle__label material-icons") keyboard_arrow_down
-        label(for="sample2" class="mdl-textfield__label") Faction
-        ul(for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu")
-          li(v-for='faction in factions' :data-val='faction.id' class="mdl-menu__item") {{faction.name}}
+      div(v-show='playerType == 2')
+        div(class="mdl-textfield mdl-js-textfield getmdl-select" style='width:200px')
+          input(type="text" value='' class="mdl-textfield__input" id="automaLevel" readonly)
+          input(type="hidden" id='selectedAutomaLevel'  name="automaLevel")
+          i(class="mdl-icon-toggle__label material-icons") keyboard_arrow_down
+          label(for="automaLevel" class="mdl-textfield__label") Automa Level
+          ul(for="automaLevel" class="mdl-menu mdl-menu--bottom-left mdl-js-menu")
+            li(v-for='automaLevel in automaLevels' :data-val='automaLevel.level' class="mdl-menu__item") {{automaLevel.name}}
       div
         div(class="mdl-textfield mdl-js-textfield getmdl-select" style='width:200px')
-          input(type="text" value='' class="mdl-textfield__input" id="automaLevelSelect" readonly)
-          input(type="hidden" id='selectedAutomaLevel'  name="automaLevelSelect")
+          input(type="text" value='' class="mdl-textfield__input" id="sample2" readonly)
+          input(type="hidden" id='selectedFaction'  name="sample2")
           i(class="mdl-icon-toggle__label material-icons") keyboard_arrow_down
-          label(for="automaLevelSelect" class="mdl-textfield__label") Automa level
-          ul(for="automaLevelSelect" class="mdl-menu mdl-menu--bottom-left mdl-js-menu")
-            li(v-for='automaLevel in automaLevels' :data-val='automaLevel.level' class="mdl-menu__item") {{automaLevel.name}}
+          label(for="sample2" class="mdl-textfield__label") Faction
+          ul(for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu")
+            li(v-for='faction in factions' :data-val='faction.id' class="mdl-menu__item") {{faction.name}}
       button(
         class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
         @click='addPlayer') Add
@@ -50,6 +53,7 @@ import { mapState } from 'vuex'
 export default {
   data: function (){
     return {
+      playerType:'1',
       automaLevel:'',
       playerName:'',
       automaLevels: data
@@ -59,6 +63,13 @@ export default {
   },
   methods: {
     addPlayer: function(){
+      if(this.playerType == 1) {
+        this.addHumanPlayer()
+      } else {
+        this.addAutomaPlayer();
+      }
+    },
+    addAutomaPlayer: function(){
       this.$store.commit(ADD_PLAYER, {
         faction: document.getElementById('selectedFaction').value,
         level: document.getElementById('selectedAutomaLevel').value
@@ -66,6 +77,7 @@ export default {
     },
     addHumanPlayer: function(){
       this.$store.commit(ADD_PLAYER, {
+        faction: document.getElementById('selectedFaction').value,
         name:this.playerName
       });
       this.playerName = '';
