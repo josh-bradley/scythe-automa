@@ -42,9 +42,9 @@
       button(
         class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
         @click='addPlayer') Add
-    ul(class='mdl-list player-list')
+    ul(class='mdl-list player-list' v-show='players.length > 0')
       li(class='mdl-list__item' v-for='player in players') 
-        span(class='mdl-list__item-primary-content') {{player.name||player.factionName}}
+        span(class='mdl-list__item-primary-content') {{playerListDisplay(player)}}
 </template>
 
 <script>
@@ -64,12 +64,19 @@ export default {
     }
   },
   methods: {
+    playerListDisplay: (player) => {
+      var playerName = player.name || player.automaLevelName;
+      return `${playerName} (${player.factionName})`;
+    },
     addPlayer: function(){
       if(this.playerType == 1) {
         this.addHumanPlayer()
       } else {
         this.addAutomaPlayer();
       }
+      this.resetSelects();
+      var playerTextField = document.querySelector('.person-name').MaterialTextfield;
+      setTimeout(playerTextField.checkDirty.bind(playerTextField), 0);
     },
     addAutomaPlayer: function(){
       this.$store.commit(ADD_PLAYER, {
@@ -89,6 +96,10 @@ export default {
         window.getmdlSelect &&
         window.getmdlSelect.init &&
         window.getmdlSelect.init('.getmdl-select');
+
+      document
+        .querySelectorAll('.getmdl-select')
+        .forEach(x => x.MaterialTextfield && x.MaterialTextfield.checkDirty());
     }
   },
   computed: mapState({
