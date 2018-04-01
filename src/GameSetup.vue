@@ -5,7 +5,7 @@
       h4 Add player
       div
         div
-          label(class='mdl-radio mdl-js-radio mdl-js-ripple-effect' for='option-1')
+          label(class='mdl-radio mdl-js-radio mdl-js-ripple-effect' for='option-1' style='margin-right:5px;')
             input(type='radio' id='option-1' class='mdl-radio__button' name='options' value='1' v-model='playerType')
             span(class='mdl-radio__label') Human
           label(class='mdl-radio mdl-js-radio mdl-js-ripple-effect' for='option-2')
@@ -42,7 +42,9 @@
       button(
         class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
         @click='addPlayer') Add
-    div(v-for='player in players') {{player.name||player.factionName}}
+    ul(class='mdl-list player-list')
+      li(class='mdl-list__item' v-for='player in players') 
+        span(class='mdl-list__item-primary-content') {{player.name||player.factionName}}
 </template>
 
 <script>
@@ -117,6 +119,10 @@ export default {
   h4 {
     color: hsl(0, 0%, 45%);
     font-size:1.4em;
+  }
+
+  .player-list {
+    background-color:hsl(0, 0%, 97%);
   }
 
   .add-player-section{
